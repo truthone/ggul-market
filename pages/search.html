@@ -10,9 +10,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Search</title>
+  <link rel="stylesheet" href="../css/reset.css">
 </head>
 <body>
-
+  <header class="top-search-nav">
+    <h1 class="txt-hide">감귤 마켓 계정 검색</h1>
+    <button class="btn-back">뒤로가기</button>
+    <form class="form-search">
+      <fieldset>
+        <legend>계정 검색</legend>
+        <label for="search-id"></label>
+        <input type="text" placeholder="계정 검색">
+      </fieldset>
+    </form>
+  </header>
+  <section class="res-search">
+    <h2 class="txt-hide">계정 검색 결과</h2>
+    <ul class="wrap-user">
+      <li class="lst-img">
+        <img src="#" alt="계정 이미지" class="img-user">
+      </li>
+      <li class="wrap-cont">
+        <ul class="cont-user">
+          <li class="name-user"><span class="key-selected">애월읍</span> 위니브 감귤농장</li>
+          <li class="id-user">@ weniv_Mandarin</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <footer class="tab-menu">
+    <ul class="wrap-menu">
+      <li>홈</li>
+      <li>채팅</li>
+      <li>게시물 작성</li>
+      <li>프로필</li>
+    </ul>
+  </footer>
 </body>
 </html>

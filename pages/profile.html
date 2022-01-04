@@ -1,0 +1,130 @@
+<!-- **6. 사용자 프로필 페이지**
+
+- 사용자 프로필 페이지에서는 사용자 이름, 계정 ID, 소개, 팔로워 및 팔로잉 수, 판매 상품, 그리고 사용자가 업로드한 게시글을 확인할 수 있습니다.
+- 사용자 정보 하단에는 팔로우 버튼이 있습니다. 팔로우 버튼을 클릭하면 언팔로우 버튼으로 바뀌어야 합니다. 단, 팔로우 기능은 구현하지 않습니다. 버튼의 변화만 구현하세요.
+- 팔로워 및 팔로잉 수를 클릭하면 팔로워, 팔로잉 사용자 목록이 표시됩니다.
+- 판매 중인 상품 섹션은 등록한 상품이 없을 경우에는 표시되지 않습니다.
+- 게시글 섹션에서는 목록형과 앨범형으로 게시글들을 확인할 수 있습니다. 기본형은 목록형이며, 이미지가 없는 게시글을 경우에는 앨범형에서는 표시되지 않습니다.
+- 또한 사용자가 올린 게시글이 없을 경우에는 게시글이 나타나지 않습니다.
+- 나의 프로필 페이지일 경우
+    - 프로필 수정 버튼과 상품 등록 버튼이 표시됩니다.
+    - 판매 중인 상품을 클릭하면 하단에 상품 삭제, 수정, 웹사이트에서 상품 보기 버튼이 포함된 메뉴가 나타납니다. (단, 나의 프로필 페이지가 아닐 경우 상품을 클릭하면 바로 상품 판매 사이트로 이동됩니다.) -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+<body>
+  <header class="top-basic-nav">
+    <h1 class="txt-hide">감귤 마켓</h1>
+    <button class="btn-back">뒤로가기</button>
+    <button class="btn-more">더보기</button>
+  </header>
+  <section class="main-profile">
+    <h2 class="txt-hide">계정 프로필</h2>
+    <article class="wrap-profile">
+      <h3 class="txt-hide">프로필 기본 정보</h3>
+      <div class="cont-followers">
+        <p>2950</p>
+        <p>followers</p>
+      </div>
+      <img src="#" alt="계정 이미지">
+      <div class="cont-followings">
+        <p>128</p>
+        <p>followings</p>
+      </div>
+    </article>
+    <strong class="name-user">애월읍 위니브 감귤농장</strong>
+    <small class="id-user">@ weniv_Mandarin</small>
+    <p class="desc-user">애월읍 감귤 전국 배송, 귤따기, 체험, 감귤 농장</p>
+    <article class="my_profile">
+      <h3 class="txt-hide">내 프로필</h3>
+      <button type="button" class="btn-chat">채팅</button>
+      <button type="button" class="btn-follow">팔로우</button>
+      <button type="button" class="btn-unfollow">언팔로우</button>
+      <button type="button" class="btn-share">공유</button>
+    </article>
+    <article class="other_profile">
+      <h3 class="txt-hide">다른 유저의 프로필</h3>
+      <button type="button" class="btn-edit">프로필 수정</button>
+      <button type="button" class="btn-post">상품 등록</button>
+    </article>
+  </section>
+  <section class="wrap-items">
+    <h2 class="txt-hide">판매 중인 상품</h2>
+    <ul class="sliders-items">
+      <li class="item">
+        <img src="#" alt="상품 사진">
+        <p class="item-name">애월음 노지 감귤</p>
+        <p class="item-price">35,000원</p>
+      </li>
+    </ul>
+  </section>
+  <section class="feed">
+    <h2 class="txt-hide">게시글 목록</h2>
+    <header class="wrap-view">
+      <button type="button" class="view-list">목록형</button>
+      <button type="button" class="view-grid">앨범형</button>
+    </header>
+    <article class="list-post">
+      <h2 class="txt-hide">목록형 게시글</h2>
+      <header>
+        <ul class="info-writer">
+          <li class="basic-profile"><img src="#" alt="계정 이미지"></li>
+          <li>
+            <ul>
+              <li class="name-user">애월읍 위니브 감귤농장</li>
+              <li><small class="id-user">@weniv_Mandarin</small></li>
+            </ul>
+          </li>
+        </ul>
+        <button class="btn-more">더보기</button>
+        <article class="modal">
+          <h5 class="txt-hide">더보기 모달창</h5>
+          <ul>
+            <li class="btn-delete">삭제</li>
+            <li class="btn-edit">수정</li>
+            <li class="btn-web">웹사이트에서 상품 보기</li>
+          </ul>
+        </article>
+        <article class="modal">
+          <h5 class="txt-hide">삭제 모달창</h5>
+          <p class="delete delete-post">게시글을 삭제할까요?</p>
+          <p class="delete delete-item">상품을 삭제할까요?</p>
+          <ul class="check-delete">
+            <li class="btn-cancel">취소</li>
+            <li class="btn-delete">삭제</li>
+          </ul>
+        </article>
+      </header>
+      <p class="desc-feed">옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의
+        힘있다.</p>
+      <img src="#" alt="피드 사진" class="img-feed">
+      <footer>
+        <div class="wrap-reaction">
+          <img src="#" alt="좋아요"> <span>58</span>
+          <img src="#" alt="댓글"> <span>12</span>
+        </div>
+        <small class="date-feed">2020년 10월 21일</small>
+      </footer>
+    </article>
+    <article class="grid-post">
+      <h2 class="txt-hide">앨범형 게시글</h2>
+      <img src="#" alt="피드 이미지">
+    </article>
+  </section>
+  <footer class="tab-menu">
+    <ul class="wrap-menu">
+      <li>홈</li>
+      <li>채팅</li>
+      <li>게시물 작성</li>
+      <li>프로필</li>
+    </ul>
+  </footer>
+</body>
+</html>

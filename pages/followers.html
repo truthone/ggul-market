@@ -1,0 +1,49 @@
+<!-- **7. 팔로워, 팔로잉 목록**
+
+- 사용자 프로필 페이지에서 팔로워 및 팔로잉 수를 클릭하면 나타나는 페이지입니다.
+- 목록은 사용자 프로필 사진, 이름, 계정 ID, 팔로우(또는 취소) 버튼으로 구성됩니다.
+- 내가 팔로우 한 사용자일 경우 취소 버튼이, 내가 팔로우 하지 않은 사용자일 경우에는 팔로우 버튼이 표시됩니다. 단, 팔로우 기능은 구현하지 않습니다. 버튼의 변화만 구현하세요. -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Followers</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+<body>
+  <header class="top-basic-nav">
+    <button class="btn-back">뒤로가기</button>
+    <h1>Followers</h1>
+  </header>
+  <h2 class="txt-hide">Followers 목록</h2>
+  <section class="lst-follower">
+    <h3 class="txt-hide">Follower</h3>
+    <ul class="user-follow">
+      <li>
+        <img src="#" alt="계정 이미지" class="basic-profile">
+      </li>
+      <li>
+        <ul class="user-desc">
+          <li class="tit-user">애월음 한라봉 최고 맛집</li>
+          <li class="desc-user">정성을 다해 농사짓는 한라봉</li>
+        </ul>
+      </li>
+      <li class="btn-follow">
+        <button class="btn-follow">팔로우</button>
+        <button class="btn-unfollow">취소</button>
+      </li>
+    </ul>
+  </section>
+  <footer class="tab-menu">
+    <ul class="wrap-menu">
+      <li>홈</li>
+      <li>채팅</li>
+      <li>게시물 작성</li>
+      <li>프로필</li>
+    </ul>
+  </footer>
+</body>
+</html>
