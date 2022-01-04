@@ -1,0 +1,13 @@
+/* 아직 더보기 항목 나타나는 것만 구현.  */
+.cont-select {
+    position: relative;
+}
+
+.list-member {
+    display: none;
+    position: absolute;
+}
+
+.btn-select.on+.list-member {
+    display: block;
+}

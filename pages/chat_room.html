@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat_room</title>
+    <link rel="stylesheet" href="../css/reset.css">
+</head>
+<body>
+    <header class="top-chat-nav">
+        <a href="#채팅목록"><img src="../images/icon/icon-arrow-left.png" alt="뒤로가기 버튼"></a>
+        <h1>애월읍 위니브 감귤농장</h1>
+        <!-- 아래 버튼은 만들어둔 모달로 바꿀 예정 -->
+        <button type="button"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼"></button>
+    </header>
+    <!-- 채팅들 태그 고민 -->
+    <main>
+        <section>
+            <!-- h태그 css로 숨김처리해야함 -->
+            <h2>채팅창</h2>
+            <ul class="chat-space">
+                <li class="chat-partner">
+                    <img src="../images/Ellipse 6.png" alt="프로필 이미지">
+                    <p class="chat-box">옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣은 풍부하게 뛰노는 인생의 힘있다.</p>
+                    <p class="chat-time">12:39</p>
+                </li>
+                <li class="chat-partner">
+                    <img src="../images/Ellipse 6.png" alt="프로필 이미지">
+                    <p class="chat-box">안녕하세요. 감귤 사고싶어요요요요요</p>
+                    <p class="chat-time">12:41</p>
+                </li>
+                <li class="chat-mine">
+                    <p class="chat-time">12:50</p>
+                    <p >네 말씀하세요.</p>
+                </li>
+                <li class="chat-mine">
+                    <p class="chat-time">12:51</p>
+                    <img src="../images/chat-exapmle.png" alt="강아지 사진">
+                </li>
+            </ul>
+        </section>
+        <section class="chat-input">
+            <h2>메세지입력창</h2>
+            <button type="button"><img src="../images/img-button.png" alt="이미지 업로드 버튼"></button>
+            <input type="text" required placeholder="댓글 입력하기...">
+            <button>전송</button>
+        </section>
+    </main>
+</body>
+</html>
