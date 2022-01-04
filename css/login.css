@@ -1,10 +1,10 @@
 /* splash */
-#app {
+#appSplash {
   position: relative;
   width: 100vw;
   height: 100vh;
 }
-#app .main-logo {
+#appSplash .main-logo {
   position: absolute;
   top: 50%;
   left: 50%;
