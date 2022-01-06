@@ -1,0 +1,111 @@
+/* 지승 모듈css 시작 */
+.home-post {
+  position: relative;
+}
+
+.home-post .wrap-profile{
+  display: flex;
+}
+
+.home-post .wrap-profile .img-writer {
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+}
+
+.home-post .wrap-profile .wrap-right {
+  padding-top: 4px;
+  height: 38px;
+  width: 100%;
+}
+
+.home-post .wrap-profile .wrap-right .user-name {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.home-post .wrap-profile .wrap-right .user-id {
+  font-size: 12px;
+  margin-top: 2px;
+  line-height: 14px;
+  color: #767676;
+}
+
+.home-post .wrap-profile .wrap-right .btn-more {
+  height: 17px;
+}
+
+.home-post .main-feed {
+  position: relative;
+  margin-top: 16px;
+  margin-left: 54px;
+}
+
+.home-post .main-feed .txt-feed {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.home-post .main-feed .img-feed {
+  margin-top: 16px;
+  width: 304px;
+  height: 228px;
+  border-radius: 10px;
+  background:#C4C4C4;
+  border: 0.5px solid #DBDBDB;
+}
+
+.home-post .main-feed .wrap-reaction {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 18px;
+}
+
+.home-post .main-feed .wrap-reaction li {
+  display: flex;
+  align-items: center;
+  height: 15px;
+}
+
+.home-post .main-feed .wrap-reaction li img {
+  width: 15px;
+  margin-right: 8px;
+}
+
+.home-post .main-feed .wrap-reaction li span {
+  color: #767676;
+  font-size: 12px;
+  margin-right: 18px;
+}
+
+.home-post .main-feed .txt-date {
+  font-size: 10px;
+  line-height: 12px;
+  color: #767676;
+}
+
+.product .img-product {
+  width: 140px;
+  height: 90px;
+  border-radius: 8px;
+  background: #C4C4C4;
+  border: 0.5px solid #DBDBDB;
+}
+
+.product .tit-product {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.product .price-product {
+  margin-top: 4px;
+  color: #F26E22;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+/* 지승 모듈css 끝 */
