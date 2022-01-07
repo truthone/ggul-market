@@ -61,3 +61,8 @@ a {
   margin: -1px;
   overflow: hidden;
 }
+
+button {
+  border: none;
+  cursor: pointer;
+}
