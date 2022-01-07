@@ -1,0 +1,37 @@
+.profile {
+  display: inline-block;
+  margin-left: 16px;
+  margin-top: 20px;
+
+}
+
+.container {
+  display: inline-block;
+  position: relative;
+  height: fit-content;
+}
+
+input {
+  border: 0;
+}
+
+.box-img {
+  position: absolute;
+  max-width: 304px;
+  max-height: 224px;
+}
+
+.btn-close {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  top: 11.5px;
+  right: 11.5px;
+}
+
+.btn-upload {
+  position: sticky;
+  display: block;
+  background-image: url("../assets/upload-file.png");
+}
+
