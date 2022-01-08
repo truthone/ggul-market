@@ -13,37 +13,37 @@ body {
   position: relative;
 }
 
-.home-post .wrap-profile{
+.wrap-profile{
   display: flex;
 }
 
-.home-post .wrap-profile .basic-profile{
+.wrap-profile .basic-profile{
   width: 42px;
   height: 42px;
   margin-right: 12px;
 }
 
-.home-post .wrap-profile .wrap-right {
+.wrap-profile .wrap-right {
   padding-top: 4px;
   height: 38px;
   /* width: 304px; */
 }
 
-.home-post .wrap-profile .wrap-right .user-name {
+.wrap-profile .wrap-right .user-name {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
   line-height: 18px;
 }
 
-.home-post .wrap-profile .wrap-right .user-id {
+.wrap-profile .wrap-right .user-id {
   font-size: 12px;
   margin-top: 2px;
   line-height: 14px;
   color: #767676;
 }
 
-.home-post .wrap-profile .wrap-right .s-icon-more-vertical {
+.wrap-profile .wrap-right .s-icon-more-vertical {
   position: absolute;
   right: 0;
   height: 17px;
