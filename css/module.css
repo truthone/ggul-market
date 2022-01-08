@@ -277,6 +277,10 @@ body {
   line-height: 15px;
 }
 
+.basic-profile-img {
+  width: 110px; height: 110px;
+}
+
 .basic-profile {
   width: 36px; height: 36px;
 }
