@@ -308,12 +308,10 @@ body {
 
 /* 진실 모듈 시작 */
 /* top-main-nav */
-.top-main-nav {
-  width: 100%;
-  height: 48px; 
+.top-nav .wrap-top-nav {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   align-content: center;
 }
 
@@ -327,39 +325,20 @@ body {
   height: 24px;
   display: inline-block;
   margin: 12px 16px;
-  background-image: url("../assets/icon/icon-search.png");
 }
 
 /* top-main-nav */
-.top-upload-nav {
-  width: 100%;
-  height: 48px; 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  align-content: center;
-}
 
 .btn-back {
   width: 24px;
   height: 24px;
   display: inline-block;
   margin: 12px 16px;
-  background-image: url("../assets/icon/icon-arrow-left.png");
-}
-
-.btn-save, .btn-follow{
-  width: 30%;
-  height: 32px;
-  border-radius: 44px;
-  margin: 0 16px;
-  background-color: #F26E22;
-  color: white;
 }
 
 /* comment */
 .wrap-comment {
-  width: 100%; 
+  width: 390px; 
   display: flex;
   align-items: center;
   align-content: center;
@@ -371,10 +350,16 @@ body {
 }
 
 .form-comment{
-  display: inline-flex;
+  display: flex;
+  width: inherit;
+  align-items: center;
+  justify-content: space-between;
+
 }
 
-.input-comment .input-email {
+.input-email {
+  padding: 0 0 2px 0;
+  border-width: 0 0 1px 0;
   border-bottom-color: rgba(219, 219, 219, 1);
 }
 
@@ -383,13 +368,10 @@ body {
 }
 
 .input-comment .active {
-  padding: 0 0 8px 0;
   border-bottom-color: rgba(242, 110, 34, 1);
 }
 
 .btn-send {
-  width: 24px;
-  height: 24px;
   display: block;
   color: rgba(196, 196, 196, 1);
 }
