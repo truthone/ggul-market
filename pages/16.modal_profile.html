@@ -1,0 +1,27 @@
+<!-- 프로필(설정 및 개인정보, 로그아웃), 게시물(삭제, 수정 / 신고하기), 댓글(삭제 / 신고하기), 채팅방(채팅방 나가기), 확인 메세지(로그아웃 / 삭제 / 신고버튼)모달 존재 -->
+<!-- 모달창의 위치 확실히하기 -->
+<!-- jquery나 ajax로 다른 문서에서 불러오는 식으로 사용? -->
+<!-- 모달 문서 여러개 나누는게 최선일까?? -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>modal</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/modal.css">
+</head>
+<body>
+  <article class="cont-select">
+    <!-- h태그 숨김처리 해야함-->
+    <h1>모달 버튼</h1>
+    <button type="button" class="btn-select"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼"></button>
+    <ul class="list-member">
+      <li><a href="#">설정 및 개인정보</a></li>
+      <li><a href="modal_message.html">로그아웃</a></li>
+    </ul>
+  </article>
+  <script src="../scripts/modal.js"></script>
+</body>
+</html>
