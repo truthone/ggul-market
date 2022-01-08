@@ -121,6 +121,7 @@ body {
 }
 
 /* 지승 모듈css 끝 */
+
 /* 현호 모듈css 시작 */
 .top-nav {
   position: relative;
@@ -235,3 +236,164 @@ body {
   color: #F26E22;
 }
 /* 현호 모듈css 끝 */
+
+/* 효순 모듈css 시작 */
+.btn {
+  /* position: absolute; */
+  width: 322px; height: 44px;
+  left: 0%; right: 0%; top: 0%; bottom: 0%;
+  background-color: #F26E22;
+  border-radius: 44px;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17.53px;
+}
+
+.disabled {
+  background-color: #FFC7A7;
+}
+
+.activ {
+  background-color: #FFFFFF;
+  border: 1px solid #DBDBDB;
+  box-sizing: border-box;
+  color: #767676;
+}
+
+.M-button, .M-Disabled-button, .M-Activ-button {
+  width: 120px; height: 34px;
+}
+
+.Ms-button, .Ms-Disabled-button {
+  width: 90px; height: 32px;
+}
+
+.S-button, .S-Activ-button {
+  width: 56px; height: 28px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.basic-profile {
+  width: 36px; height: 36px;
+}
+
+.img-button {
+  width: 36px; height: 36px;
+  background: url("../images/img-button.png");
+}
+
+.upload-file {
+  width: 50px; height: 50px;
+  background: url("../images/upload-file.png");
+}
+
+.x {
+  width: 11px; height: 11px;
+}
+
+.chat-icon-message-circle {
+  width: 20px; height: 20px;
+}
+/* 효순 모듈 끝 */
+
+
+/* 진실 모듈 시작 */
+/* top-main-nav */
+.top-main-nav {
+  width: 100%;
+  height: 48px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.title-menu {
+  font-weight: bold;
+  margin: 13px 16px;
+}
+
+.btn-search {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin: 12px 16px;
+  background-image: url("../assets/icon/icon-search.png");
+}
+
+/* top-main-nav */
+.top-upload-nav {
+  width: 100%;
+  height: 48px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.btn-back {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin: 12px 16px;
+  background-image: url("../assets/icon/icon-arrow-left.png");
+}
+
+.btn-save, .btn-follow{
+  width: 30%;
+  height: 32px;
+  border-radius: 44px;
+  margin: 0 16px;
+  background-color: #F26E22;
+  color: white;
+}
+
+/* comment */
+.wrap-comment {
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.profile-comment {
+  margin-left: 16px;
+}
+
+.form-comment{
+  display: inline-flex;
+}
+
+.input-comment .input-email {
+  border-bottom-color: rgba(219, 219, 219, 1);
+}
+
+.input-comment {
+  margin-left: 18px;
+}
+
+.input-comment .active {
+  padding: 0 0 8px 0;
+  border-bottom-color: rgba(242, 110, 34, 1);
+}
+
+.btn-send {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: rgba(196, 196, 196, 1);
+}
+
+/* test-input */
+.form-email {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(118, 118, 118, 1);
+}
+
+
+/* 진실 모듈 끝 */
