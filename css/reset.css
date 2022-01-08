@@ -77,4 +77,6 @@ input {
   border-right-width:0;
   border-top-width:   0;
   border-bottom-width: 1;
+  border: none;
+  cursor: pointer;
 }
