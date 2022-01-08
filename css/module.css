@@ -201,7 +201,7 @@ body {
 .modal-alert {
   position: relative;
   width: 252px;
-  height: 88px;
+  /* height: 88px; */
   font-weight: 500;
   border-radius: 10px;
 }
