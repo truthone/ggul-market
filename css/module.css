@@ -9,6 +9,7 @@ body {
 
 /* 지승 모듈css 시작 */
 .home-post {
+  width: 358px;
   position: relative;
 }
 
@@ -16,7 +17,7 @@ body {
   display: flex;
 }
 
-.home-post .wrap-profile .img-writer {
+.home-post .wrap-profile .basic-profile{
   width: 42px;
   height: 42px;
   margin-right: 12px;
@@ -25,7 +26,7 @@ body {
 .home-post .wrap-profile .wrap-right {
   padding-top: 4px;
   height: 38px;
-  width: 304px;
+  /* width: 304px; */
 }
 
 .home-post .wrap-profile .wrap-right .user-name {
@@ -42,13 +43,15 @@ body {
   color: #767676;
 }
 
-.home-post .wrap-profile .wrap-right .btn-more {
+.home-post .wrap-profile .wrap-right .s-icon-more-vertical {
+  position: absolute;
+  right: 0;
   height: 17px;
 }
 
 .home-post .main-feed {
   position: relative;
-  width: 304px;
+  /* width: 304px; */
   margin-top: 16px;
   margin-left: 54px;
 }
@@ -69,8 +72,7 @@ body {
 
 .home-post .main-feed .wrap-reaction {
   display: flex;
-  margin-top: 15px;
-  margin-bottom: 18px;
+  margin: 15px 0px 18px 2px;
 }
 
 .home-post .main-feed .wrap-reaction li {
@@ -80,7 +82,6 @@ body {
 }
 
 .home-post .main-feed .wrap-reaction li img {
-  width: 15px;
   margin-right: 8px;
 }
 
@@ -275,6 +276,10 @@ body {
   width: 56px; height: 28px;
   font-size: 12px;
   line-height: 15px;
+}
+
+.basic-profile-img {
+  width: 110px; height: 110px;
 }
 
 .basic-profile {
