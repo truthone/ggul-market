@@ -72,4 +72,56 @@ if (itemPost.length == 0){
 
 // - 나의 프로필 페이지일 경우
 //     - 프로필 수정 버튼과 상품 등록 버튼이 표시됩니다.
-//     - 판매 중인 상품을 클릭하면 하단에 상품 삭제, 수정, 웹사이트에서 상품 보기 버튼이 포함된 메뉴가 나타납니다. (단, 나의 프로필 페이지가 아닐 경우 상품을 클릭하면 바로 상품 판매 사이트로 이동됩니다.)
+//     - 판매 중인 상품을 클릭하면 하단에 상품 삭제, 수정, 웹사이트에서 상품 보기 버튼이 포함된 메뉴가 나타납니다. 
+
+// (단, 나의 프로필 페이지가 아닐 경우 상품을 클릭하면 바로 상품 판매 사이트로 이동됩니다.)
+
+const btnMoreModal = document.querySelector('#btn-more-modal')
+const postModal = document.querySelector('.post-modal')
+const productModal = document.querySelector('.product-modal')
+btnMoreModal.addEventListener('click', () => {
+  postModal.classList.toggle('open');
+  if (postModal.classList.contains('open')) {
+    postModal.style.bottom = '-92px';
+  }
+  else {
+    postModal.style.bottom = '-240px';
+  }
+})
+
+products.forEach(product => product.addEventListener('click', () => {
+  productModal.classList.toggle('open');
+  if (productModal.classList.contains('open')) {
+    productModal.style.bottom = '-52px';
+  }
+  else {
+    productModal.style.bottom = '-240px';
+  }
+}))
+
+const btnRemove = document.querySelector('#btn-remove')
+const btnEdit = document.querySelector('#btn-edit')
+const viewModal = document.querySelector('.modal-alert')
+const msgConfirm = document.querySelector('.msg-confirm')
+const btnCancel = document.querySelector('.btn-cancel')
+const btnRemovePost = document.querySelector('.btn-remove_post')
+
+btnRemove.addEventListener('click', () => {
+  postModal.style.bottom = '-240px';
+  viewModal.style.display = 'block';
+})
+
+btnEdit.addEventListener('click', () => {
+  postModal.style.bottom = '-240px';
+  viewModal.style.display = 'block';
+  msgConfirm.textContent = '게시글을 삭제할까요?';
+})
+
+btnCancel.addEventListener('click', () => {
+  viewModal.style.display = "none";
+})
+
+btnRemovePost.addEventListener('click', () => {
+  viewModal.style.display = "none";
+})
+
