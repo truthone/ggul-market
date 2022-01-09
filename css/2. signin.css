@@ -8,11 +8,56 @@
 }
 
 #emailLogin .tit-name {
-  /* 왜 margin: 0 auto가 안될까 */
-  padding-left: calc(50% - 40px);
+  text-align: center;
   font-weight: 500;
   font-size: 24px;
   line-height: 30px;
-  
+  margin-bottom: 40px;
 }
 
+.form-user {
+  width: 100%;
+}
+
+.form-user .input-name {
+  line-height: 15px;
+}
+
+.form-user .input-txt {
+  display: block;
+  font-size: 14px;
+  width: 100%;
+  margin: 10px 0 16px 0;
+}
+.form-user .input-txt:focus {
+  border-color: #F26E22;
+}
+
+#login-cont-pwd {
+  margin-bottom: 6px;
+}
+
+.login-pwd {
+  margin-bottom: 30px;
+}
+.login-pwd .login-warn {
+  display: none;
+  color: #EB5757;
+}
+.login-warn.on {
+  display: block;
+}
+
+.btn {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.join-membership {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  color: #767676;
+  font-size: 12px;
+  line-height: 15px;
+}
