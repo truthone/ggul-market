@@ -5,7 +5,7 @@ body {
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0em;
-  padding: 47.5px 0px;
+  padding: 47.5px 0px 60px 0px;
 }
 
 /* 지승 모듈css 시작 */
@@ -185,6 +185,7 @@ body {
   /* position: relative; */
   position: fixed;
   bottom: 0;
+  background-color: #FFFFFF;
   padding: 12px 6px 6px 6px;
   width: 378px;
   height: 41px;
