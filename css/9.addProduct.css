@@ -1,0 +1,27 @@
+.container {
+  height: 100vh;
+  background-color: #ffffff;
+  padding: 0 34px; 
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  width: 100%;
+}
+
+.box-input {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.box-img {
+  width: 100%;
+  height: 204px;
+  margin-top: 18px;
+  border: 0.5px solid #DBDBDB;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
