@@ -12,7 +12,7 @@ body {
 /* 지승 모듈css 시작 */
 .home-post {
   background-color: #FFFFFF;
-  width: 358px;
+  /* width: 358px; */
   position: relative;
 }
 

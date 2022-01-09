@@ -79,3 +79,7 @@ input {
   border-bottom-width: 0;
   cursor: pointer;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
