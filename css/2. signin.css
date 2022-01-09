@@ -1,5 +1,5 @@
 /* login-email */
-#emailLogin {
+#emailLogin, #emailJoinin {
   width: 100%;
   background-color: #FFFFFF;
   padding: 0;
@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-#emailLogin .tit-name {
+#emailLogin .tit-name, #emailJoinin .tit-name {
   text-align: center;
   font-weight: 500;
   font-size: 24px;
@@ -33,19 +33,20 @@
   border-color: #F26E22;
 }
 
-#login-cont-pwd {
+#login-cont-pwd, #join-cont-email, #join-cont-pwd  {
   margin-bottom: 6px;
 }
 
-.login-pwd {
+.login-pwd, .join-pwd {
   margin-bottom: 30px;
 }
-.login-pwd .login-warn {
+.login-warn {
   display: none;
-  color: #EB5757;
 }
 .login-warn.on {
   display: block;
+  color: #EB5757;
+  margin-bottom: 16px;
 }
 
 .btn {
@@ -61,3 +62,20 @@
   font-size: 12px;
   line-height: 15px;
 }
+
+/* join-email */
+.join-next {
+  display: block;
+  text-align: center;
+  padding-top: 9px;
+  box-sizing: border-box;
+}
+
+.join-pwd .login-warn.on {
+  margin-bottom: 30px;
+}
+
+.join-pwd {
+  margin-top: 16px;
+}
+
