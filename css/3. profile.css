@@ -1,0 +1,76 @@
+/* 3-2. join_membership */
+#setProfile {
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 0;
+  padding: 54px 34px;
+  box-sizing: border-box;
+}
+
+#setProfile .tit-name {
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  margin-bottom: 12px;
+}
+
+.cont-profile .set-profile-notice {
+  font-size: 14px;
+  color: #767676;
+  text-align: center;
+}
+.cont-profile .profile-img {
+  position: relative;
+  display: block;
+  margin: 30px auto 30px;
+
+}
+
+/* upload-file 반응형 크기 맞추는거 넘 어렵따.. */
+.img-position .upload-file {
+  position: absolute;
+  width: 36px; height: 36px;
+  background-size: cover;
+  top: 25.5%; left: 53.5%;
+  cursor:pointer;
+}
+
+/* form */
+.form-user {
+  width: 100%;
+}
+
+.form-user .input-txt {
+  display: block;
+  font-size: 14px;
+  width: 100%;
+  margin: 10px 0 16px 0;
+}
+.form-user .input-txt:focus {
+  border-color: #F26E22;
+}
+#user-name {
+  margin-bottom: 16px;
+}
+
+#user-id, #user-intro {
+  margin-bottom: 6px;
+}
+
+.profile-warn {
+  display: none;
+}
+.profile-warn.on {
+  display: block;
+  color: #EB5757;
+}
+
+.profile-intro {
+  margin-top: 16px;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 30px;
+}
