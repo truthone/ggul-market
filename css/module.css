@@ -106,6 +106,7 @@ body {
 .product {
   background-color: #FFFFFF;
   width: 140px;
+  text-align: inherit;
 }
 
 .product .img-product {
