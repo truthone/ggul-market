@@ -1,0 +1,21 @@
+.page-404 {
+    position: relative;
+    width: 390px;
+    height: 820px;
+    text-align: center;
+}
+
+.page-404 .icon-404 {
+    margin: 202px 0 32px 0;
+}
+.page-404 p {
+    color: #767676;
+    margin-bottom: 20px;
+}
+
+.page-404 .M-button {
+    width: 120px;
+    height: 44px;
+    font-weight: 500;
+}
+
