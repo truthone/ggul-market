@@ -6,15 +6,18 @@ body {
   font-weight: 400;
   letter-spacing: 0em;
   padding: 47.5px 0px 60px 0px;
+  background-color: #F2F2F2;
 }
 
 /* 지승 모듈css 시작 */
 .home-post {
+  background-color: #FFFFFF;
   width: 358px;
   position: relative;
 }
 
 .wrap-profile{
+  background-color: #FFFFFF;
   display: flex;
 }
 
@@ -54,7 +57,7 @@ body {
   position: relative;
   /* width: 304px; */
   margin-top: 16px;
-  margin-left: 54px;
+  padding-left: 54px;
 }
 
 .home-post .main-feed .txt-feed {
@@ -99,6 +102,7 @@ body {
 }
 
 .product {
+  background-color: #FFFFFF;
   width: 140px;
 }
 
@@ -128,6 +132,7 @@ body {
 
 /* 현호 모듈css 시작 */
 .top-nav {
+  background-color: #FFFFFF;
   /* position: relative; */
   position: fixed;
   top: 0;
@@ -208,6 +213,7 @@ body {
 }
 
 .modal-alert {
+  background-color: #FFFFFF;
   position: relative;
   width: 252px;
   /* height: 88px; */
@@ -344,6 +350,7 @@ body {
 
 /* comment */
 .wrap-comment {
+  background-color: #FFFFFF;
   width: 390px; 
   display: flex;
   align-items: center;
@@ -370,6 +377,7 @@ body {
 }
 
 .input-comment {
+  background-color: #FFFFFF;
   margin-left: 18px;
 }
 
