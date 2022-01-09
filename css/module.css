@@ -127,7 +127,9 @@ body {
 
 /* 현호 모듈css 시작 */
 .top-nav {
-  position: relative;
+  /* position: relative; */
+  position: fixed;
+  top: 0;
   width: 390px;
   height: 47.5px;
   border-bottom: 0.5px solid #DBDBDB;
@@ -179,7 +181,9 @@ body {
 }
 
 .tab-menu {
-  position: relative;
+  /* position: relative; */
+  position: fixed;
+  bottom: 0;
   padding: 12px 6px 6px 6px;
   width: 378px;
   height: 41px;
