@@ -404,7 +404,7 @@ body {
 
 }
 
-.input-email {
+.input-txt {
   padding: 0 0 2px 0;
   border-width: 0 0 1px 0;
   border-bottom-color: rgba(219, 219, 219, 1);
@@ -425,12 +425,15 @@ body {
 }
 
 /* test-input */
-.form-email {
+.form-user {
   display: block;
   font-size: 12px;
   font-weight: 500;
   color: rgba(118, 118, 118, 1);
 }
 
+.input-txt {
+  outline: none;
+}
 
 /* 진실 모듈 끝 */
