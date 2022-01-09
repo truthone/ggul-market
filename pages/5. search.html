@@ -15,38 +15,62 @@
   <link rel="stylesheet" href="../css/module.css">
 </head>
 <body>
-  <header class="top-search-nav">
+  <header class="top-nav">
     <h1 class="txt-hide">감귤 마켓 계정 검색</h1>
-    <button class="btn-back">뒤로가기</button>
-    <form class="form-search">
+    <nav class="wrap-top-nav">
+      <a href="#" class="btn-back">
+        <img src="../images/icon/icon-arrow-left.png" alt="뒤로가기 버튼" class="icon-arrow-left">
+      </a>
+    <form>
       <fieldset>
-        <legend>계정 검색</legend>
+        <legend class="txt-hide">계정 검색</legend>
         <label for="search-id"></label>
-        <input type="text" placeholder="계정 검색">
+        <input type="text" placeholder="계정 검색" class="top-search">
       </fieldset>
     </form>
+    </nav>
   </header>
   <section class="res-search">
     <h2 class="txt-hide">계정 검색 결과</h2>
-    <ul class="wrap-user">
-      <li class="lst-img">
-        <img src="#" alt="계정 이미지" class="img-user">
+    <ul class="wrap-profile">
+      <li>
+        <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
       </li>
-      <li class="wrap-cont">
-        <ul class="cont-user">
-          <li class="name-user"><span class="key-selected">애월읍</span> 위니브 감귤농장</li>
-          <li class="id-user">@ weniv_Mandarin</li>
-        </ul>
-      </li>
+      <ul class="wrap-right">
+        <li class="user-name">애월읍 위니브 감귤농장</li>
+        <li class="user-id">@ weniv_Mandarin</li>
+      </ul>
     </ul>
   </section>
   <footer class="tab-menu">
-    <ul class="wrap-menu">
-      <li>홈</li>
-      <li>채팅</li>
-      <li>게시물 작성</li>
-      <li>프로필</li>
-    </ul>
+    <nav>
+      <ul class="wrap-tab-menu">
+        <li>
+          <a href="#" class="tab-menu-home">
+            <img src="../images/icon/icon-home.svg" alt="홈 아이콘" class="icon-home tab-icon">
+            <p class="tab-text">홈</p>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="../images/icon/icon-message-circle.svg" alt="채팅 아이콘" class="icon-message-circle tab-icon ">
+            <p class="tab-text">채팅</p>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="../images/icon/icon-edit.svg" alt="게시물 아이콘" class="icon-edit tab-icon">
+            <p class="tab-text">게시물 작성</p>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="../images/icon/icon-user.svg" alt="프로필 아이콘" class="icon-user tab-icon">
+            <p class="tab-text">프로필</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </footer>
 </body>
 </html>

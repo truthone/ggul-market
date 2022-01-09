@@ -21,10 +21,16 @@
   <link rel="stylesheet" href="../css/module.css">
 </head>
 <body>
-  <header class="top-basic-nav">
+  <header class="top-nav">
     <h1 class="txt-hide">감귤 마켓</h1>
-    <button class="btn-back">뒤로가기</button>
-    <button class="btn-more">더보기</button>
+    <nav class="wrap-top-nav">
+      <a href="#" class="btn-back">
+        <img src="../images/icon/icon-arrow-left.png" alt="뒤로가기 버튼" class="icon-arrow-left">
+      </a>
+      <button type="button" class="top-btn-more">
+        <img src="../images/icon/icon-more-vertical.png" alt="더보기 버튼" class="icon-more-vertical">
+      </button>
+    </nav>
   </header>
   <section class="main-profile">
     <h2 class="txt-hide">계정 프로필</h2>
@@ -34,7 +40,7 @@
         <p>2950</p>
         <p>followers</p>
       </div>
-      <img src="#" alt="계정 이미지">
+      <img src="../images/basic-profile-img.png" alt="기본프로필" class="basic-profile-img">
       <div class="cont-followings">
         <p>128</p>
         <p>followings</p>
@@ -45,10 +51,12 @@
     <p class="desc-user">애월읍 감귤 전국 배송, 귤따기, 체험, 감귤 농장</p>
     <article class="my_profile">
       <h3 class="txt-hide">내 프로필</h3>
-      <button type="button" class="btn-chat">채팅</button>
-      <button type="button" class="btn-follow">팔로우</button>
-      <button type="button" class="btn-unfollow">언팔로우</button>
-      <button type="button" class="btn-share">공유</button>
+      <button type="button" class="btn-chat"> <img src="../images/icon/icon-message-circle.png" alt="" class="chat-icon-message-circle">
+      </button>
+      <button type="button" class="M-button btn">팔로우</button>
+      <!-- <button type="button" class="M-Activ-button btn activ">언팔로우</button> -->
+      <button type="button" class="btn-share">  <img src="../images/icon/icon-share.png" alt="" class="icon-share">
+      </button>
     </article>
     <article class="other_profile">
       <h3 class="txt-hide">다른 유저의 프로필</h3>
@@ -58,74 +66,85 @@
   </section>
   <section class="wrap-items">
     <h2 class="txt-hide">판매 중인 상품</h2>
-    <ul class="sliders-items">
-      <li class="item">
-        <img src="#" alt="상품 사진">
-        <p class="item-name">애월음 노지 감귤</p>
-        <p class="item-price">35,000원</p>
-      </li>
-    </ul>
+    <article class="product">
+      <h5 class="txt-hide">상품 썸네일</h5>
+      <img src="../images/product-img-example.png" alt="상품 이미지" class="img-product">
+      <p class="tit-product">애월읍 노지 감귤</p>
+      <p class="price-product">35,000원</p>
   </section>
   <section class="feed">
     <h2 class="txt-hide">게시글 목록</h2>
     <header class="wrap-view">
-      <button type="button" class="view-list">목록형</button>
-      <button type="button" class="view-grid">앨범형</button>
+      <img src="../images/icon/icon-post-list-on.png" alt="" class="icon-post-list-on">
+      <!-- <img src="../images/icon/icon-post-list-off.png" alt="" class="icon-post-list-off"> -->
+      <!-- <img src="../images/icon/icon-post-album-on.png" alt="" class="icon-post-album-on"> -->
+      <img src="../images/icon/icon-post-album-off.png" alt="" class="icon-post-album-off">
     </header>
     <article class="list-post">
       <h2 class="txt-hide">목록형 게시글</h2>
-      <header>
-        <ul class="info-writer">
-          <li class="basic-profile"><img src="#" alt="계정 이미지"></li>
+      <article class="home-post">
+        <h5 class="txt-hide">피드 게시글</h5>
+        <ul class="wrap-profile">
           <li>
-            <ul>
-              <li class="name-user">애월읍 위니브 감귤농장</li>
-              <li><small class="id-user">@weniv_Mandarin</small></li>
-            </ul>
+            <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
           </li>
+          <ul class="wrap-right">
+            <li class="user-name">애월읍 위니브 감귤농장<img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></li>
+            <li class="user-id">@ weniv_Mandarin</li>
+          </ul>
         </ul>
-        <button class="btn-more">더보기</button>
-        <article class="modal">
-          <h5 class="txt-hide">더보기 모달창</h5>
-          <ul>
-            <li class="btn-delete">삭제</li>
-            <li class="btn-edit">수정</li>
-            <li class="btn-web">웹사이트에서 상품 보기</li>
+    
+        <div class="main-feed">
+          <p class="txt-feed">
+            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
+          </p>
+          <img src="../images/post-img-example.png" alt="피드 이미지" class="img-feed">
+          <ul class="wrap-reaction">
+            <li>
+              <img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart icon-heart-active"><span>58</span>
+            </li>
+            <li>
+              <img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"><span>12</span>
+            </li>
           </ul>
-        </article>
-        <article class="modal">
-          <h5 class="txt-hide">삭제 모달창</h5>
-          <p class="delete delete-post">게시글을 삭제할까요?</p>
-          <p class="delete delete-item">상품을 삭제할까요?</p>
-          <ul class="check-delete">
-            <li class="btn-cancel">취소</li>
-            <li class="btn-delete">삭제</li>
-          </ul>
-        </article>
-      </header>
-      <p class="desc-feed">옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의
-        힘있다.</p>
-      <img src="#" alt="피드 사진" class="img-feed">
-      <footer>
-        <div class="wrap-reaction">
-          <img src="#" alt="좋아요"> <span>58</span>
-          <img src="#" alt="댓글"> <span>12</span>
+          <small class="txt-date">2020년 10월 21일</small>
         </div>
-        <small class="date-feed">2020년 10월 21일</small>
-      </footer>
+      </article>
     </article>
     <article class="grid-post">
       <h2 class="txt-hide">앨범형 게시글</h2>
-      <img src="#" alt="피드 이미지">
+      <!-- <img src="#" alt="피드 이미지"> -->
     </article>
   </section>
   <footer class="tab-menu">
-    <ul class="wrap-menu">
-      <li>홈</li>
-      <li>채팅</li>
-      <li>게시물 작성</li>
-      <li>프로필</li>
-    </ul>
+    <nav>
+      <ul class="wrap-tab-menu">
+        <li>
+          <a href="#" class="tab-menu-home">
+            <img src="../images/icon/icon-home.svg" alt="홈 아이콘" class="icon-home tab-icon">
+            <p class="tab-text">홈</p>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="../images/icon/icon-message-circle.svg" alt="채팅 아이콘" class="icon-message-circle tab-icon ">
+            <p class="tab-text">채팅</p>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="../images/icon/icon-edit.svg" alt="게시물 아이콘" class="icon-edit tab-icon">
+            <p class="tab-text">게시물 작성</p>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="../images/icon/icon-user.svg" alt="프로필 아이콘" class="icon-user tab-icon">
+            <p class="tab-text">프로필</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </footer>
 </body>
 </html>
