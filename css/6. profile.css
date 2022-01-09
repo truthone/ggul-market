@@ -72,6 +72,10 @@
   border-radius: 30px;
 }
 
+.other_profile {
+  display: none;
+}
+
 .main-profile .btn {
   width: 120px;
   height: 34px;
@@ -85,7 +89,7 @@
 
 .wrap-items {
   background-color: #FFFFFF;
-  margin: 6px 0px;
+  margin-top: 6px;
   padding: 20px 0px 20px 20px;
 }
 
@@ -107,6 +111,7 @@
 }
 
 .feed {
+  margin-top: 6px;
   background-color: #FFFFFF;
 }
 
@@ -117,8 +122,12 @@
   border-bottom: 0.5px solid #DBDBDB;
 }
 
-.feed .wrap-view img {
+.feed .wrap-view button {
   margin-left: 20px;
+}
+
+.feed .wrap-view .off-view {
+  display: none;
 }
 
 .feed .list-post, .feed .grid-post {
@@ -127,7 +136,7 @@
 
 .feed .grid-post {
   padding: 16px;
-  display: grid;
+  display: none;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
