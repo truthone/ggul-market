@@ -3,10 +3,13 @@ body {
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0em;
+  background-color: #ffffff;
 }
 
 .chat {
   margin: 26px 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .wrap-profile {
