@@ -12,24 +12,37 @@
   <title>Profile modification</title>
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/module.css">
+  <link rel="stylesheet" href="../css/8. profile_modification.css">
 </head>
-<body>
-  <header>
-    <h1>프로필 수정</h1>
-    <button>뒤로가기</button>
-    <button>저장</button>
+<body id="setProfile">
+  <header class="top-nav">
+    <h1 class="txt-hide">프로필 수정</h1>
+    <nav class="wrap-top-nav .space-between">
+      <button class="btn-back"><img src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></button>
+      <button type="button" class="Ms-button btn">저장</button>
+    </nav>
   </header>
-  <section>
-    <img src="#" alt="프로필 이미지">
+  <section class="cont-profile">
+    <div class="img-position">
+      <img src="../images/basic-profile-img.png" alt="기본 프로필" class="profile-img">
+      <input type="file" name="" id="upload-profile" class="txt-hide">
+      <label for="upload-profile"><img src="../images/upload-file.png" alt="파일업로드" class="upload-file"></label>
+    </div>
     <form action="">
       <fieldset>
-        <legend>사용자 정보</legend>
-        <label for="user-name">사용자 이름</label>
-        <input type="text" placeholder="2~10자 이내여야 합니다." minlength="2" maxlength="10">
-        <label for="user-id">계정ID</label>
-        <input type="text" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.">
-        <label for="user-desc">소개</label>
-        <input type="text" placeholder="자신과 판매할 상품에 대해 소개해 주세요!">
+        <legend class="txt-hide">사용자 정보</legend>
+        <div class="form-user">
+          <label for="user-name">사용자 이름</label>
+          <input type="text" name="" id="user-name" class="input-txt" placeholder="2~10자 이내여야 합니다." minlength="2" maxlength="10">
+        </div>
+        <div class="form-user">
+          <label for="user-id">계정 ID</label>
+        <input type="text" name="" id="user-id" class="input-txt" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.">
+        </div>
+        <div class="form-user">
+          <label for="user-intro">소개</label>
+          <input type="text" name="" id="user-intro" class="input-txt" placeholder="자신과 판매할 상품에 대해 소개해 주세요!">
+        </div>
       </fieldset>
     </form>
   </section>

@@ -1,0 +1,47 @@
+body {
+  background-color: #FFFFFF;
+}
+
+.top-nav, .tab-menu {
+  width: 100%;
+}
+
+/* 컨텐츠가 없을 때 */
+.no-cont {
+  display: none;
+}
+
+.feed-cont.no-cont {
+  text-align: center;
+  margin-top: 50%;
+}
+
+.search-follow {
+  margin: 25px 0 20px;
+}
+
+.no-cont .btn {
+  display: inline-block;
+  width: 120px;
+  height: 44px;
+  box-sizing: border-box;
+  padding-top: 13px;
+}
+
+
+/* 컨텐츠가 있을 때 */
+.feed-container {
+  margin-top: 20px;
+}
+
+.home-post {
+  padding: 0 16px;
+}
+
+.main-feed {
+  margin-bottom: 24px;
+}
+
+.tab-menu .wrap-tab-menu {
+  justify-content: space-evenly;
+}
