@@ -6,23 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/reset.css">
-  <link rel="stylesheet" href="../css/uploadPage.css">
   <link rel="stylesheet" href="../css/module.css">
+  <link rel="stylesheet" href="../css/11.uploadPage.css">
   <title>게시글 입력 페이지</title>
 </head>
-
 <body>
+  <header class="top-nav">
+    <nav class="wrap-top-nav .space-between">
+      <button class="btn-back"><img src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></button>
+      <button type="button" class="Ms-button btn">업로드</button>
+    </nav>
+  </header>
   <div class="container">
-    <div class="profile"><img src="../assets/Ellipse 6.png" /></div>
+    <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
     <form>
-      <input type="text" desc="desc" id="desc" placeholder="게시글 입력하기...">
+      <textarea class="textarea-input" placeholder="게시글 입력하기..."></textarea>
       <div class="box-img">
-        <button class="btn-close">X</button>
-        <img src="../assets/post-img-example.png" />
+        <button class="btn-close"><img src="../images/x.png" alt="" class="x"></button>
+        <img src="../images/post-img-example.png" alt="피드 이미지" class="img-feed">
       </div>
     </form>
-    <button class="btn-upload"></button>
   </div>
 </body>
-
 </html>
