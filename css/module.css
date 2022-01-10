@@ -426,14 +426,22 @@ body {
 
 /* test-input */
 .form-user {
-  display: block;
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(118, 118, 118, 1);
+  width: 100%;
 }
 
-.input-txt {
+.form-user .input-name {
+  line-height: 15px;
+}
+
+.form-user .input-txt {
+  display: block;
+  font-size: 14px;
+  width: 100%;
+  margin: 10px 0 16px 0;
   outline: none;
+}
+.form-user .input-txt:focus {
+  border-color: #F26E22;
 }
 
 /* 진실 모듈 끝 */
