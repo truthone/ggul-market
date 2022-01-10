@@ -408,6 +408,7 @@ body {
   padding: 0 0 2px 0;
   border-width: 0 0 1px 0;
   border-bottom-color: rgba(219, 219, 219, 1);
+  outline: none;
 }
 
 .input-comment {
