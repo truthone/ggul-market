@@ -169,13 +169,16 @@ body {
   position: fixed;
   z-index: 999;
   top: 0;
-  width: 390px;
+  width: 100vw;
   height: 47.5px;
   border-bottom: 0.5px solid #DBDBDB;
 }
 
 .top-nav .wrap-top-nav {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
 }
 
 .top-nav .wrap-top-nav .btn-back {
@@ -185,18 +188,20 @@ body {
 }
 
 .top-nav .wrap-top-nav .top-btn-more {
-  margin: 12px 12px 12px 319px;
+  margin: 12px 12px 12px 0;
   width: 24px;
   height: 24px;
   background-color: white;
   border: 0;
 }
 
+.top-nav .wrap-top-nav .wrap-top-search {
+  margin: 0 19px 0 20px;
+  width: 100%;
+}
+
 .top-nav .wrap-top-nav .top-search {
-  margin: 8px 19px 8px 23px;
   padding: 7px 245px 7px 16px;
-  width: 55px;
-  height: 18px;
   background-color: #F2F2F2;
   border: 0;
   border-radius: 32px;
@@ -204,29 +209,16 @@ body {
 
 .top-nav .wrap-top-nav .chat-partner {
   font-size: 14px;
-  margin: 15px 170px 15px 10px;
-  width: 136px;
-  height: 18px;
-}
-
-.chat-btn-more {
-  position: absolute;
-  top: 12px;
-  left: 357px;
-  width: 24px;
-  height: 24px;
-  background-color: white;
-  border: 0;
+  margin: 15px 0 15px 0;
 }
 
 .tab-menu {
-  /* position: relative; */
   position: fixed;
   z-index: 999;
   bottom: 0;
   background-color: #FFFFFF;
   padding: 12px 6px 6px 6px;
-  width: 378px;
+  width: 100vw;
   height: 41px;
   border-top: 0.5px solid #DBDBDB;
   font-size: 10px;
@@ -234,6 +226,7 @@ body {
 
 .tab-menu .wrap-tab-menu {
   display: flex;
+  justify-content: space-around;
 }
 
 .tab-icon {
@@ -274,7 +267,6 @@ body {
   width: 126px;
   height: 46px;
   font-size: 14px;
-  /* font-family: Spoqa Han Sans Neo; */
   background-color: white;
   border: 0;
   border-top: 0.5px solid #DBDBDB;

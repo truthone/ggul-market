@@ -1,7 +1,8 @@
 .page-404 {
+    background-color: white;
     position: relative;
-    width: 390px;
-    height: 820px;
+    width: 100vw;
+    height: 100vh;
     text-align: center;
 }
 
