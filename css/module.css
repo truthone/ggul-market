@@ -165,8 +165,8 @@ body {
 /* 현호 모듈css 시작 */
 .top-nav {
   background-color: #FFFFFF;
-  /* position: relative; */
-  position: fixed;
+  position: relative;
+  /* position: fixed; */
   z-index: 999;
   top: 0;
   width: 100vw;
@@ -195,17 +195,22 @@ body {
   border: 0;
 }
 
-.top-nav .wrap-top-nav .wrap-top-search {
-  margin: 0 19px 0 20px;
+.top-nav .wrap-top-nav form {
   width: 100%;
+  text-align: center;
 }
 
 .top-nav .wrap-top-nav .top-search {
+  margin: 0 19px 0 20px;
   padding: 7px 245px 7px 16px;
   background-color: #F2F2F2;
   border: 0;
   border-radius: 32px;
 }
+
+/* .top-search {
+  width: 100rem;
+} */
 
 .top-nav .wrap-top-nav .chat-partner {
   font-size: 14px;
