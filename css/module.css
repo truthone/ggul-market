@@ -351,12 +351,6 @@ body {
 
 /* 진실 모듈 시작 */
 /* top-main-nav */
-.top-nav .wrap-top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-}
 
 .title-menu {
   font-weight: bold;
