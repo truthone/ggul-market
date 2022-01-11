@@ -165,8 +165,8 @@ body {
 /* 현호 모듈css 시작 */
 .top-nav {
   background-color: #FFFFFF;
-  position: relative;
-  /* position: fixed; */
+  /* position: relative; */
+  position: fixed;
   z-index: 999;
   top: 0;
   width: 100vw;
