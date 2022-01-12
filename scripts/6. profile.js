@@ -127,12 +127,12 @@ const btnCancel = document.querySelector('.btn-cancel')
 const btnRemovePost = document.querySelector('.btn-remove_post')
 
 btnRemove.addEventListener('click', () => {
-  postModal.style.bottom = '-240px';
+  productModal.style.bottom = '-240px';
   viewModal.style.display = 'block';
 })
 
 btnEdit.addEventListener('click', () => {
-  postModal.style.bottom = '-240px';
+  productModal.style.bottom = '-240px';
   viewModal.style.display = 'block';
   msgConfirm.textContent = '게시글을 삭제할까요?';
 })
