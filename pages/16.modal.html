@@ -1,0 +1,81 @@
+<!-- 
+  더보기버튼: 프로필(설정 및 개인정보, 로그아웃), 채팅방(채팅방 나가기), 댓글(삭제 / 신고하기)
+  더보기버튼(small): 게시물(삭제, 수정 / 신고하기), 상품(삭제, 수정, 웹사이트에서 상품 보기),  
+  확인 메세지(로그아웃 / 삭제 / 신고버튼)모달 존재 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>modal</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/modal.css">
+</head>
+<body>
+  <!-- 더보기 버튼 
+    상단 nav바
+    게시물
+    댓글
+   -->
+  <button type="button" class="btn-more-modal"><img src="../images/icon/icon-more-vertical.png" alt="더보기 버튼"></button>
+  
+  <button type="button" class="btn-more-modal"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼 소형"></button>
+
+  <button type="button" class="btn-more-modal"><img src="../images/icon/icon-more-vertical.png" alt="더보기 버튼" class="btn-more-size"></button>
+
+<!-- article에 해당 클래스 추가
+  프로필: modal-profile
+  채팅방: modal-chat-room
+  댓글: modal-other-comment, modal-my-comment
+  게시물: modal-other-edit, modal-my-edit
+  상품: modal-product
+-->
+  <article class="modal">
+    <ul>
+      <li><a href="#" class="btn-one">삭제</a></li>
+      <li><a href="#" class="btn-two">수정</a></li>
+      <li><a href="#">웹사이트에서 상품보기</a></li>
+    </ul>
+  </article>
+  <article class="modal-alert">
+    <h1 class="txt-hide">확인 메세지 모달창</h1>
+      <p class="alert-message">상품을 삭제할까요?</p>
+      <ul class="wrap-modal-alert">
+        <li><button type="button" class="btn-modal alert-btn-one">취소</button></li>
+        <li><button type="button" class="btn-modal btn-modal2 alert-btn-two">삭제</button></li>
+      </ul>
+  </article>
+  <!-- <footer class="tab-menu">
+    <nav>
+      <ul class="wrap-tab-menu">
+        <li>
+          <a href="4.home.html">
+            <img src="../images/icon/icon-home-fill.svg" alt="활성화 홈 아이콘" class="tab-icon">
+            <p class="tab-text activ">홈</p>
+          </a>
+        </li>
+        <li>
+          <a href="12.chat_list.html">
+            <img src="../images/icon/icon-message-circle.svg" alt="채팅 아이콘" class="tab-icon">
+            <p class="tab-text">채팅</p>
+          </a>
+        </li>
+        <li>
+          <a href="11.uploadPage.html">
+            <img src="../images/icon/icon-edit.svg" alt="게시물 아이콘" class="tab-icon">
+            <p class="tab-text">게시물 작성</p>
+          </a>
+        </li>
+        <li>
+          <a href="6.profile.html">
+            <img src="../images/icon/icon-user.svg" alt="프로필 아이콘" class="tab-icon">
+            <p class="tab-text">프로필</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </footer> -->
+  <script src="../scripts/modal.js"></script>
+</body>
+</html>
