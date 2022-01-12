@@ -1,7 +1,11 @@
+body{
+  background-color: #FFFFFF;
+}
+
 .lst-follower {
   background-color: #FFFFFF;
   padding: 24px 16px;
-  height: calc(100vh - 156px);
+  /* height: calc(100vh - 156px); */
 }
 
 .lst-follower .wrap-profile {

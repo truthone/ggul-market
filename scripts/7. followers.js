@@ -18,10 +18,31 @@ btnFollowCancel.forEach(btn =>
   })
 )
 
+const accountName = localStorage.getItem("AccountName")
+const token = localStorage.getItem("Token")
+const id = localStorage.getItem("Id")
+initPage();
+function initPage() {
+  let option = ''
+	if (location.search != '') {
+    option = location.search.replace('?', '');
+	}
+  if (option == "follower"){
+    getFollower(accountName)
+  }
+  else if (option == "following") {
+    getFollowing(accountName)
+  }
+  else {
+    history.back();
+  }
+}
+
+
 // API
-async function getProfile() {
-  const url = "http://146.56.183.55:5050/profile/chowonbeom"
-  const token = localStorage.getItem("Token")
+async function getFollowing(accountName) {
+  // const url = API_URL + `/profile/${accountName}/following`
+  const url = API_URL + `/profile/${accountName}/following?limit=Number&skip=Number`
   const res = await fetch(url,{
       method:"GET",
       headers:{
@@ -29,17 +50,30 @@ async function getProfile() {
           "Content-type" : "application/json"
       }
   })
-  // console.log(res);
   const json = await res.json()
-  console.log(json)
-  console.log(json[0])
-  console.log("=-=-=-=-=-=-=-이 위는 개인프로필 정보입니다.=-=-=-=-=-=-=-=-=-=-=-=")
-}
+  const followingList = document.querySelector('.lst-follower')
 
-getProfile()
-async function getFollowing() {
-  const url = "http://146.56.183.55:5050/profile/chowonbeom/following"
-  const token = localStorage.getItem("Token")
+  for (let following of json) {
+    let follow = document.createElement('article');
+    follow.classList = 'box-profile'
+    follow.innerHTML = `<ul class="wrap-profile">
+    <li>
+      <img src=${following.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile">
+    </li>
+    <li>
+      <ul class="wrap-right">
+        <li class="user-name">${following.username}</li>
+        <li class="user-id">@ ${following.accountname}</li>
+      </ul>
+    </li>
+    <li><button type="button" class="S-button btn activ btn-follower_view_follow">취소</button></li>
+  </ul>`
+    followingList.appendChild(follow)
+  }
+}
+async function getFollower(accountName) {
+  // const url = API_URL + `/profile/${accountName}/follower?limit=2`
+  const url = API_URL + `/profile/${accountName}/follower`
   const res = await fetch(url,{
       method:"GET",
       headers:{
@@ -47,27 +81,26 @@ async function getFollowing() {
           "Content-type" : "application/json"
       }
   })
-  console.log(res);
+console.log(url)
+  const followerList = document.querySelector('.lst-follower')
   const json = await res.json()
-  console.log(json)
-  console.log("=-=-=-=-=-=-=-이 위는 팔로잉리스트 정보입니다.=-=-=-=-=-=-=-=-=-=-=-=")
 
+  for (let follower of json) {
+    let state = follower.follower.includes(id)?`<li><button type="button" class="S-button btn activ btn-follower_view_follow">취소</button></li>`:`<li><button type="button" class="S-button btn btn-follower_view_follow">팔로우</button></li>`;
+    let follow = document.createElement('article');
+    follow.classList = 'box-profile'
+    follow.innerHTML = `<ul class="wrap-profile">
+    <li>
+      <img src=${follower.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile">
+    </li>
+    <li>
+      <ul class="wrap-right">
+        <li class="user-name">${follower.username}</li>
+        <li class="user-id">@ ${follower.accountname}</li>
+      </ul>
+    </li>
+    ${state}
+  </ul>`
+  followerList.appendChild(follow)
+  }
 }
-async function getFollow(accountname) {
-  const url = `http://146.56.183.55:5050/profile/${accountname}/follower?limit=2`
-  const token = localStorage.getItem("Token")
-  const res = await fetch(url,{
-      method:"GET",
-      headers:{
-          "Authorization" : `Bearer ${token}`,
-          "Content-type" : "application/json"
-      }
-  })
-  console.log(res);
-  const json = await res.json()
-  console.log(json)
-  console.log("=-=-=-=-=-=-=-이 위는 팔로워리스트 정보입니다.=-=-=-=-=-=-=-=-=-=-=-=")
-
-}
-getFollowing()
-getFollow("chowonbeom")

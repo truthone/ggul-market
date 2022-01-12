@@ -127,7 +127,6 @@ btnRemovePost.addEventListener('click', () => {
 
 async function getProfile(accountName) {  
   const url = API_URL + `/profile/${accountName}`;
-  console.log(url)
   if(!accountName){
     return
   }
@@ -141,13 +140,11 @@ async function getProfile(accountName) {
     })
     const json = await res.json()
     const profile = json.profile
-    
     if (accountName == profile.accountname) {
       isMyprofile = true;
     }
-
-    let followersCount  = profile.followersCount?json.profile.followersCount:0
-    let followingsCount = profile.followingCount?json.profile.followingCount:0
+    let followerCount  = profile.followerCount?json.profile.followerCount:0
+    let followingCount = profile.followingCount?json.profile.followingCount:0
     let name = profile.username;
     let desc = profile.intro;
     let img = profile.image;
@@ -160,8 +157,8 @@ async function getProfile(accountName) {
     const descUser = document.querySelector('.desc-user')
 
     userImage.src = img;
-    followers.textContent = followersCount
-    followings.textContent = followingsCount
+    followers.textContent = followerCount
+    followings.textContent = followingCount
     userName.textContent = name;
     userId.textContent = `@ ${accountName}`;
     descUser.textContent = desc;
@@ -234,14 +231,21 @@ async function getPost(accountName, authorimg) {
   }
 
   for(let post of json.post){
-    console.log(post.image)
+    const imageArr = post.image.split(',')
+    let images = ''
+    for (let image of imageArr){
+      images += `<img src=${image} alt="피드 이미지" class="img-feed">`
+    }
     let list = document.createElement('article')
     let grid = document.createElement('a')
     list.classList = 'home-post'
     let date = post.createdAt.slice(0, 10).split('-')
     if (post.image){
       grid.classList = 'cont-grid'
-        grid.innerHTML = `<img src=${post.image} alt="피드 이미지">`
+      grid.innerHTML = `<img src=${imageArr[0]} alt="피드 이미지">`
+      if (!imageArr[1]) {
+        grid.style.setProperty('--single', "none");
+      }
 
         list.innerHTML = `<h5 class="txt-hide">피드 게시글</h5>
         <ul class="wrap-profile">
@@ -260,7 +264,7 @@ async function getPost(accountName, authorimg) {
           <p class="txt-feed">
           ${post.content}
           </p>
-          <img src=${post.image} alt="피드 이미지" class="img-feed">
+          ${images}
           <ul class="wrap-reaction">
             <li>
               <img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart icon-heart-active"><span>${post.heartCount}</span>
