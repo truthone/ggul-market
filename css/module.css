@@ -10,35 +10,6 @@ body {
 }
 
 /* 지승 모듈css 시작 */
-.post-modal::before{
-  content: '';
-  position: absolute;
-  margin: 16px auto;
-  width: 50px;
-  height: 4px;
-  left: calc(50% - 25px);
-  background-color: #DBDBDB;
-  border-radius: 5px;
-}
-
-.post-modal {
-  background-color: #FFFFFF;
-  position: fixed;
-  width: 100vw;
-  bottom: -240px;
-  height: 296px;
-  border-radius: 10px;
-  z-index: 99;
-}
-
-.post-modal ul {
-  padding-top: 36px;
-}
-
-.post-modal ul li{
-  padding: 16px 0 16px 26px;
-}
-
 .home-post {
   background-color: #FFFFFF;
   /* width: 358px; */
