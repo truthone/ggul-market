@@ -1,13 +1,69 @@
-/* 아직 더보기 항목 나타나는 것만 구현.  */
-.cont-select {
-  position: relative;
-}
-
-.list-member {
-  display: none;
+.modal::before{
+  content: '';
   position: absolute;
+  margin: 16px auto;
+  width: 50px;
+  height: 4px;
+  left: calc(50% - 25px);
+  background-color: #DBDBDB;
+  border-radius: 5px;
 }
 
-.btn-select.on+.list-member {
-  display: block;
+.modal {
+  background-color: #FFFFFF;
+  position: fixed;
+  width: 100vw;
+  bottom: -240px;
+  height: 296px;
+  border-radius: 10px;
+  z-index: 99;
+}
+
+.modal ul {
+  padding-top: 36px;
+}
+
+.modal ul li {
+  padding: 16px 0 16px 26px;
+}
+
+.btn-more-size {
+  width: 20px;
+}
+
+.modal-alert {
+  background-color: #FFFFFF;
+  position: fixed;
+  display: none;
+  top: calc(50% - 44px);
+  left: calc(50% - 126px);
+  width: 252px;
+  font-weight: 500;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-alert .wrap-modal-alert {
+  display: flex;
+}
+
+.modal-alert p {
+  padding-top: 22px;
+  height: 42px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.btn-modal {
+  width: 126px;
+  height: 46px;
+  font-size: 14px;
+  background-color: white;
+  border: 0;
+  border-top: 0.5px solid #DBDBDB;
+}
+
+.btn-modal2 {
+  border-left: 0.5px solid #DBDBDB;
+  color: #F26E22;
 }
