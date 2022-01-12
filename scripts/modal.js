@@ -140,8 +140,15 @@ btnMoreModal.addEventListener('click', () => {
     open_modal(3);
   }
 })
-// document.addEventListener('click', () => {
-//   if (!('.modal')) {
-//     Modal.classList.remove('open');
-//   }
+
+
+// const non_modal_space = (!document.querySelector('.modal'));
+// console.log(non_modal_space);
+// non_modal_space.addEventListener('click', () => {
+//   Modal.classList.remove('open');
 // })
+
+window.addEventListener('click', (e) => {
+  console.log(e.target);
+  e.Target === Modal ? Modal.classList.remove('open') : false
+})
