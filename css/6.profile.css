@@ -24,7 +24,9 @@
   align-items: center;
 }
 
-.wrap-profile .number-follow {
+.wrap-profile .number-following, .wrap-profile .number-follower {
+  color: black;
+  font-weight: 700;
   font-size: 18px;
 }
 
