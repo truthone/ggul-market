@@ -1,0 +1,12 @@
+.wrap-like-btn {
+  display: flex;
+}
+
+.wrap-like-btn .icon-heart {
+  width: 16.36px;
+}
+
+.wrap-like-btn p {
+  margin: 2px 0 0 7.82px;
+  font-size: 12px;
+}
