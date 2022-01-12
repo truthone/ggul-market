@@ -20,7 +20,7 @@ function open_modal (num) {
     if (Modal.classList.contains('open')) {
       Modal.style.bottom = '-40px';
     }
-    else {
+    else if (num == 3) {
       Modal.style.bottom = '-240px';
     }
   }
@@ -61,6 +61,13 @@ function alert_message (option) {
   ModalAlert.style.display = 'block';
 }
 
+function close_alert () {
+  Alert_btnOne.addEventListener('click', () => {
+    ModalAlert.style.display = "none";
+    Modal.classList.remove('open');
+  })
+}
+
 const btnMoreModal = document.querySelector('.btn-more-modal');
 const Modal = document.querySelector('.modal');
 const btnOne = document.querySelector('.btn-one');
@@ -76,10 +83,7 @@ btnMoreModal.addEventListener('click', () => {
     btnTwo.innerHTML = "로그아웃";
     btnTwo.addEventListener('click', () => {
       alert_message("logout");
-      Alert_btnOne.addEventListener('click', () => {
-        ModalAlert.style.display = "none";
-        Modal.classList.remove('open');
-      })
+      close_alert();
       Alert_btnTwo.addEventListener('click', () => {
         window.location.href = "../pages/2.login.html";
       })
@@ -95,10 +99,7 @@ btnMoreModal.addEventListener('click', () => {
     btnOne.innerHTML = "신고하기";
     btnOne.addEventListener('click', () => {
       alert_message("report_comment");
-      Alert_btnOne.addEventListener('click', () => {
-        ModalAlert.style.display = "none";
-        Modal.classList.remove('open');
-      })
+      close_alert();
     })
     open_modal(1);
   }
@@ -106,10 +107,7 @@ btnMoreModal.addEventListener('click', () => {
     btnOne.innerHTML = "삭제";
     btnOne.addEventListener('click', () => {
       alert_message("delete_comment");
-      Alert_btnOne.addEventListener('click', () => {
-        ModalAlert.style.display = "none";
-        Modal.classList.remove('open');
-      })
+      close_alert();
     })
     open_modal(1);
   }
@@ -117,10 +115,7 @@ btnMoreModal.addEventListener('click', () => {
     btnOne.innerHTML = "신고하기";
     btnOne.addEventListener('click', () => {
       alert_message("report_edit");
-      Alert_btnOne.addEventListener('click', () => {
-        ModalAlert.style.display = "none";
-        Modal.classList.remove('open');
-      })
+      close_alert();
     })
     open_modal(1);
   }
@@ -129,10 +124,7 @@ btnMoreModal.addEventListener('click', () => {
     btnTwo.innerHTML = "수정";
     btnOne.addEventListener('click', () => {
       alert_message("delete_report");
-      Alert_btnOne.addEventListener('click', () => {
-        ModalAlert.style.display = "none";
-        Modal.classList.remove('open');
-      })
+      close_alert();
     })
     btnTwo.href = "../pages/9.addProduct.html"
     open_modal(2);
@@ -142,10 +134,7 @@ btnMoreModal.addEventListener('click', () => {
     btnTwo.innerHTML = "수정";
     btnOne.addEventListener('click', () => {
       alert_message("delete_product");
-      Alert_btnOne.addEventListener('click', () => {
-        ModalAlert.style.display = "none";
-        Modal.classList.remove('open');
-      })
+      close_alert();
     })
     btnTwo.href = "../pages/9.addProduct.html"
     open_modal(3);
