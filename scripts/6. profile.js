@@ -76,31 +76,48 @@ if (itemPost.length == 0){
 
 // (단, 나의 프로필 페이지가 아닐 경우 상품을 클릭하면 바로 상품 판매 사이트로 이동됩니다.)
 
+let isMyprofile = true;
+const myprofile = document.querySelector('.my_profile') 
+const otherprofile = document.querySelector('.other_profile') 
+if (isMyprofile == true) {
+  myprofile.style.display = "none";
+  otherprofile.style.display = "block"
+}
+
+else {
+  myprofile.style.display = "flex";
+  otherprofile.style.display = "none"
+}
+
 const btnMoreModal = document.querySelector('#btn-more-modal')
-const postModal = document.querySelector('.post-modal')
 const productModal = document.querySelector('.product-modal')
 btnMoreModal.addEventListener('click', () => {
-  postModal.classList.toggle('open');
-  if (postModal.classList.contains('open')) {
-    postModal.style.bottom = '-92px';
-  }
-  else {
-    postModal.style.bottom = '-240px';
-  }
-})
-
-products.forEach(product => product.addEventListener('click', () => {
   productModal.classList.toggle('open');
   if (productModal.classList.contains('open')) {
-    productModal.style.bottom = '-52px';
+    productModal.style.bottom = '-92px';
   }
   else {
     productModal.style.bottom = '-240px';
   }
+})
+
+products.forEach(product => product.addEventListener('click', () => {
+  if (isMyprofile == true){
+    productModal.classList.toggle('open');
+    if (productModal.classList.contains('open')) {
+      productModal.style.bottom = '-52px';
+    }
+    else {
+      productModal.style.bottom = '-240px';
+    }
+  }
+  else {
+    location.href="#";
+  }
 }))
 
-const btnRemove = document.querySelector('#btn-remove')
-const btnEdit = document.querySelector('#btn-edit')
+const btnRemove = document.querySelector('.btn-remove')
+const btnEdit = document.querySelector('.btn-edit')
 const viewModal = document.querySelector('.modal-alert')
 const msgConfirm = document.querySelector('.msg-confirm')
 const btnCancel = document.querySelector('.btn-cancel')
@@ -123,5 +140,6 @@ btnCancel.addEventListener('click', () => {
 
 btnRemovePost.addEventListener('click', () => {
   viewModal.style.display = "none";
+  msgConfirm.textContent = '상품을 삭제할까요?';
 })
 
