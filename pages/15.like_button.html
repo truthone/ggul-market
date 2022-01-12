@@ -6,12 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>like_button</title>
   <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/module.css">
+  <style>
+    .wrap-like-btn {
+      display: flex;
+    }
+
+    .wrap-like-btn .icon-heart {
+      width: 16.36px;
+    }
+
+    .wrap-like-btn p {
+      margin: 2px 0 0 7.82px;
+      font-size: 12px;
+    }
+  </style>
 </head>
 <body>
-  <div>
-    <button type="button"><img src="../images/icon/icon-heart.png" alt="하트모양 좋아요 버튼"></button>
+  <div class="wrap-like-btn">
+    <button type="button"><img src="../images/icon/icon-heart.png" alt="빈 하트 아이콘" class="icon-heart"></button>
     <!-- 좋아요 카운트 -->
-    <p>0</p>
+    <p>58</p>
   </div>
 </body>
 </html>
