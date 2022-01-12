@@ -17,9 +17,9 @@ btnFollowUnfollow.addEventListener('click', () => {
 // - 판매 중인 상품 섹션은 등록한 상품이 없을 경우에는 표시되지 않습니다.
 const products = document.querySelectorAll('.product');
 const listSelling = document.querySelector('.wrap-items');
-if (products.length == 0){
-  listSelling.style.display = "none";
-}
+// if (products.length == 0){
+//   listSelling.style.display = "none";
+// }
 
 // - 게시글 섹션에서는 목록형과 앨범형으로 게시글들을 확인할 수 있습니다. 기본형은 목록형이며, 이미지가 없는 게시글을 경우에는 앨범형에서는 표시되지 않습니다.
 const btnViewList = document.querySelector('#toggle-list');
@@ -77,32 +77,9 @@ if (itemPost.length == 0){
 // (단, 나의 프로필 페이지가 아닐 경우 상품을 클릭하면 바로 상품 판매 사이트로 이동됩니다.)
 
 let isMyprofile = false;
-if(localStorage.getItem("Token")){
-  isMyprofile = true;
-}
-const myprofile = document.querySelector('.my_profile') 
-const otherprofile = document.querySelector('.other_profile') 
-if (isMyprofile == true) {
-  myprofile.style.display = "none";
-  otherprofile.style.display = "block"
-}
-
-else {
-  myprofile.style.display = "flex";
-  otherprofile.style.display = "none"
-}
-
-const btnMoreModal = document.querySelector('#btn-more-modal')
-const productModal = document.querySelector('.product-modal')
-btnMoreModal.addEventListener('click', () => {
-  productModal.classList.toggle('open');
-  if (productModal.classList.contains('open')) {
-    productModal.style.bottom = '-92px';
-  }
-  else {
-    productModal.style.bottom = '-240px';
-  }
-})
+const accountName = localStorage.getItem("AccountName")
+const token = localStorage.getItem("Token")
+getProfile(accountName)
 
 products.forEach(product => product.addEventListener('click', () => {
   if (isMyprofile == true){
@@ -146,3 +123,197 @@ btnRemovePost.addEventListener('click', () => {
   msgConfirm.textContent = '상품을 삭제할까요?';
 })
 
+// API
+
+async function getProfile(accountName) {  
+  const url = API_URL + `/profile/${accountName}`;
+  console.log(url)
+  if(!accountName){
+    return
+  }
+  try {
+    const res = await fetch(url,{
+    method:"GET",
+    headers:{
+      "Authorization" : `Bearer ${token}`,
+      "Content-type" : "application/json"
+      }
+    })
+    const json = await res.json()
+    const profile = json.profile
+    
+    if (accountName == profile.accountname) {
+      isMyprofile = true;
+    }
+
+    let followersCount  = profile.followersCount?json.profile.followersCount:0
+    let followingsCount = profile.followingCount?json.profile.followingCount:0
+    let name = profile.username;
+    let desc = profile.intro;
+    let img = profile.image;
+
+    const userImage = document.querySelector('#img-profile')
+    const followers = document.querySelector('.number-follower')
+    const followings = document.querySelector('.number-following')
+    const userName = document.querySelector('.name-user')
+    const userId = document.querySelector('.id-user')
+    const descUser = document.querySelector('.desc-user')
+
+    userImage.src = img;
+    followers.textContent = followersCount
+    followings.textContent = followingsCount
+    userName.textContent = name;
+    userId.textContent = `@ ${accountName}`;
+    descUser.textContent = desc;
+    await getProductList(accountName);
+    await getPost(accountName, img);
+
+}
+catch(err){
+  isMyprofile = false;
+}
+
+  const myprofile = document.querySelector('.my_profile') 
+  const otherprofile = document.querySelector('.other_profile') 
+  if (isMyprofile == true) {
+    myprofile.style.display = "none";
+    otherprofile.style.display = "block"
+  }
+
+  else {
+    myprofile.style.display = "flex";
+    otherprofile.style.display = "none"
+  }
+
+}
+
+async function getProductList(accountName) {
+  const url = API_URL + `/product/${accountName}`;
+  const res = await fetch(url, {
+    method: 'GET',
+    headers:{
+      "Authorization" : `Bearer ${token}`,
+      "Content-type" : "application/json"
+      }
+  })
+  const json = await res.json();
+  if (json.data == 0){
+    listSelling.style.display = "none";
+    return
+  }
+  
+  let price = json.product[0].price.toLocaleString();
+  const slider = document.querySelector('.slider')
+  for (let product of json.product){
+    let item = document.createElement('button')
+    item.classList.add('product')
+    item.innerHTML = `<h5 class="txt-hide">상품 썸네일</h5>
+    <img src=${product.itemImage} alt="상품 이미지" class="img-product">
+    <p class="tit-product">${product.itemName}</p>
+    <p class="price-product">${price}원</p>`
+    slider.appendChild(item)
+  }
+}
+
+async function getPost(accountName, authorimg) {
+  const url = API_URL + `/post/${accountName}/userpost`
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers:{
+      "Authorization" : `Bearer ${token}`,
+      "Content-type" : "application/json"
+      }
+  })
+
+  const json = await res.json()
+
+  if (json.post == []){
+    feed.style.display = "none";
+    return
+  }
+
+  for(let post of json.post){
+    console.log(post.image)
+    let list = document.createElement('article')
+    let grid = document.createElement('a')
+    list.classList = 'home-post'
+    let date = post.createdAt.slice(0, 10).split('-')
+    if (post.image){
+      grid.classList = 'cont-grid'
+        grid.innerHTML = `<img src=${post.image} alt="피드 이미지">`
+
+        list.innerHTML = `<h5 class="txt-hide">피드 게시글</h5>
+        <ul class="wrap-profile">
+          <li>
+            <img src=${authorimg} alt="기본프로필 소형" class="basic-profile">
+          </li>
+          <li>
+            <ul class="wrap-right">
+              <li class="user-name">${post.author.username}<button type="button" id="btn-more-modal"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+              <li class="user-id">@ ${post.author.accountname}</li>
+            </ul>
+          </li>
+        </ul>
+    
+        <div class="main-feed">
+          <p class="txt-feed">
+          ${post.content}
+          </p>
+          <img src=${post.image} alt="피드 이미지" class="img-feed">
+          <ul class="wrap-reaction">
+            <li>
+              <img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart icon-heart-active"><span>${post.heartCount}</span>
+            </li>
+            <li>
+              <img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"><span>${post.commentCount}</span>
+            </li>
+          </ul>
+          <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
+        </div>`
+    }
+    else {
+      list.innerHTML = `<h5 class="txt-hide">피드 게시글</h5>
+      <ul class="wrap-profile">
+        <li>
+          <img src=${authorimg} alt="기본프로필 소형" class="basic-profile">
+        </li>
+        <li>
+          <ul class="wrap-right">
+            <li class="user-name">${post.author.username}<button type="button" id="btn-more-modal"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+            <li class="user-id">@ ${post.author.accountname}</li>
+          </ul>
+        </li>
+      </ul>
+  
+      <div class="main-feed">
+        <p class="txt-feed">
+        ${post.content}
+        </p>
+        <ul class="wrap-reaction">
+          <li>
+            <img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart icon-heart-active"><span>${post.heartCount}</span>
+          </li>
+          <li>
+            <img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"><span>${post.commentCount}</span>
+          </li>
+        </ul>
+        <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
+      </div>`
+    }
+    viewList.appendChild(list)
+    viewAlbum.appendChild(grid)
+  }
+
+  const btnMoreModal = document.querySelector('#btn-more-modal')
+  const productModal = document.querySelector('.product-modal')
+  btnMoreModal.addEventListener('click', () => {
+    productModal.classList.toggle('open');
+    if (productModal.classList.contains('open')) {
+      productModal.style.bottom = '-92px';
+    }
+    else {
+      productModal.style.bottom = '-240px';
+    }
+  })
+}
