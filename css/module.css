@@ -304,6 +304,7 @@ body {
 
 .disabled {
   background-color: #FFC7A7;
+  cursor: default;
 }
 
 .activ {
