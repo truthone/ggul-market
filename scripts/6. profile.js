@@ -76,7 +76,10 @@ if (itemPost.length == 0){
 
 // (단, 나의 프로필 페이지가 아닐 경우 상품을 클릭하면 바로 상품 판매 사이트로 이동됩니다.)
 
-let isMyprofile = true;
+let isMyprofile = false;
+if(localStorage.getItem("Token")){
+  isMyprofile = true;
+}
 const myprofile = document.querySelector('.my_profile') 
 const otherprofile = document.querySelector('.other_profile') 
 if (isMyprofile == true) {
