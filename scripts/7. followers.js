@@ -17,3 +17,57 @@ btnFollowCancel.forEach(btn =>
     }
   })
 )
+
+// API
+async function getProfile() {
+  const url = "http://146.56.183.55:5050/profile/chowonbeom"
+  const token = localStorage.getItem("Token")
+  const res = await fetch(url,{
+      method:"GET",
+      headers:{
+          "Authorization" : `Bearer ${token}`,
+          "Content-type" : "application/json"
+      }
+  })
+  // console.log(res);
+  const json = await res.json()
+  console.log(json)
+  console.log(json[0])
+  console.log("=-=-=-=-=-=-=-이 위는 개인프로필 정보입니다.=-=-=-=-=-=-=-=-=-=-=-=")
+}
+
+getProfile()
+async function getFollowing() {
+  const url = "http://146.56.183.55:5050/profile/chowonbeom/following"
+  const token = localStorage.getItem("Token")
+  const res = await fetch(url,{
+      method:"GET",
+      headers:{
+          "Authorization" : `Bearer ${token}`,
+          "Content-type" : "application/json"
+      }
+  })
+  console.log(res);
+  const json = await res.json()
+  console.log(json)
+  console.log("=-=-=-=-=-=-=-이 위는 팔로잉리스트 정보입니다.=-=-=-=-=-=-=-=-=-=-=-=")
+
+}
+async function getFollow(accountname) {
+  const url = `http://146.56.183.55:5050/profile/${accountname}/follower?limit=2`
+  const token = localStorage.getItem("Token")
+  const res = await fetch(url,{
+      method:"GET",
+      headers:{
+          "Authorization" : `Bearer ${token}`,
+          "Content-type" : "application/json"
+      }
+  })
+  console.log(res);
+  const json = await res.json()
+  console.log(json)
+  console.log("=-=-=-=-=-=-=-이 위는 팔로워리스트 정보입니다.=-=-=-=-=-=-=-=-=-=-=-=")
+
+}
+getFollowing()
+getFollow("chowonbeom")
