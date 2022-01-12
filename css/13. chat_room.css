@@ -61,8 +61,6 @@
 }
 
 .chat-room .wrap-comment {
-    height: 61px;
-    color: #C4C4C4;
     position: fixed;
     z-index: 999;
     bottom: 0;
