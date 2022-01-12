@@ -6,9 +6,12 @@ body {
   background-color: #ffffff;
 }
 
-.chat {
-  margin: 26px 16px;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
   width: 100%;
+  padding: 10px 16px;
   box-sizing: border-box;
 }
 
@@ -17,11 +20,16 @@ body {
   display: flex;
 }
 
-.wrap-profile .img-writer {
+.chat {
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+/* .wrap-profile .img-writer {
   width: 42px;
   height: 42px;
   margin-right: 12px;
-}
+} */
 
 .wrap-profile .wrap-right {
   padding-top: 4px;
@@ -34,32 +42,34 @@ body {
   justify-content: space-between;
   font-size: 14px;
   line-height: 18px;
-  font-weight: bold;
+  color: #000000;
 }
 
-.wrap-profile .wrap-right .user-id {
+/* .wrap-profile .wrap-right .user-id {
+  font-size: 12px;
+  margin-top: 2px;
+  line-height: 14px;
+  
+} */
+
+.wrap-profile .wrap-right .chat-desc {
   font-size: 12px;
   margin-top: 2px;
   line-height: 14px;
   color: #767676;
-}
-
-.wrap-profile .wrap-right .chat-decs {
-  font-size: 12px;
-  margin-top: 2px;
-  line-height: 14px;
 }
 
 .wrap-profile .wrap-right .chat-date{
   font-size: 10px;
   margin-top: 2px;
   line-height: 14px;
+  color: #DBDBDB;
+
 }
 
-.wrap-chatsummury {
+.wrap-chat-summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 4px;
-  color: #767676;
 }
