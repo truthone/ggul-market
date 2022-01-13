@@ -85,6 +85,8 @@ btnMoreModal.addEventListener('click', () => {
       alert_message("logout");
       close_alert();
       Alert_btnTwo.addEventListener('click', () => {
+        // 로그아웃 됩니다
+        localStorage.clear();
         window.location.href = "../pages/2.login.html";
       })
     })
