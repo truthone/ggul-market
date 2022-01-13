@@ -1,19 +1,25 @@
-let btn_like = document.querySelector('.wrap-like-btn');
-let icon_heart = document.querySelector('.icon-heart');
-let like_count = document.querySelector('.like-count');
-let number = like_count.innerHTML;
-let btn_check = 0;
+let btn_like = document.getElementsByClassName('wrap-like-btn');
+let icon_heart = document.getElementsByClassName('icon-heart');
+let like_count = document.getElementsByClassName('like-count');
+let btn_check = Array.from({length: btn_like.length}, () => 0);
+let number = new Array();
+for (let i = 0; i < like_count.length; i++) {
+  number[i] = like_count[i].innerHTML;
+}
 
-btn_like.addEventListener('click', () => {
-  if (btn_check == 0) {
-    btn_check = 1;
-    icon_heart.src = "../images/icon/icon-heart-active.png";
-    number = parseInt(number) + 1;
-  }
-  else {
-    btn_check = 0;
-    icon_heart.src = "../images/icon/icon-heart.png";
-    number = parseInt(number) - 1;
-  }
-  like_count.innerHTML = number;
-})
+
+for (let i = 0; i <btn_like.length; i++) {
+  btn_like[i].addEventListener('click', () => {
+    if (btn_check[i] == 0) {
+      btn_check[i] = 1;
+      icon_heart[i].src = "../images/icon/icon-heart-active.png";
+      number[i] = parseInt(number[i]) + 1;
+    }
+    else {
+      btn_check[i] = 0;
+      icon_heart[i].src = "../images/icon/icon-heart.png";
+      number[i] = parseInt(number[i]) - 1;
+    }
+    like_count[i].innerHTML = number[i];
+  })
+}
