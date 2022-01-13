@@ -63,6 +63,10 @@ form {
 
 #productImgInput {
   z-index: -99999;
-  left: 99999px;
+  bottom: 100000px;
   position: absolute;
+  width: 1px;
+  height: 1px;
+  outline: none;
+  border: none;
 }
