@@ -230,6 +230,7 @@ async function getPost(accountName, authorimg) {
     return
   }
 
+  let idx = 0;
   for(let post of json.post){
     const imageArr = post.image.split(',')
     let images = ''
@@ -237,7 +238,8 @@ async function getPost(accountName, authorimg) {
       images += `<img src=${image} alt="피드 이미지" class="img-feed">`
     }
     if (imageArr[1]){
-      images = `<div class="wrap-images">${images}</div><button type="button" class="btn-left">⬅️</button><button type="button" class="btn-right">➡️</button>`;
+      images = `<div class="wrap-images" id="wrap-images${idx}">${images}</div><button type="button" class="btn-left" id="btn-left${idx}">⬅️</button><button type="button" class="btn-right" id="btn-right${idx}">➡️</button>`;
+      idx++;
     }
     let list = document.createElement('article')
     let grid = document.createElement('a')
@@ -312,10 +314,10 @@ async function getPost(accountName, authorimg) {
     viewAlbum.appendChild(grid)
 
     if (imageArr[1]){
-      const btnLeft = document.querySelector('.btn-left')
-      const btnRight = document.querySelector('.btn-right')
-      const wrapImages = document.querySelector('.wrap-images')
-      const imageSize = wrapImages.getBoundingClientRect().width;
+      let btnLeft = document.querySelector(`#btn-left${idx-1}`)
+      let btnRight = document.querySelector(`#btn-right${idx-1}`)
+      let wrapImages = document.querySelector(`#wrap-images${idx-1}`)
+      let imageSize = wrapImages.getBoundingClientRect().width;
 
       let pos = 0
       btnShow()
@@ -337,7 +339,6 @@ async function getPost(accountName, authorimg) {
       })
 
       function btnShow() {
-        console.log(pos)
         pos = Math.round(pos)
   
         if (pos == 0){
