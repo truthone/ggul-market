@@ -97,31 +97,31 @@ products.forEach(product => product.addEventListener('click', () => {
 }))
 
 const btnRemove = document.querySelector('.btn-remove')
-const btnEdit = document.querySelector('.btn-edit')
+// const btnEdit = document.querySelector('.btn-edit')
 const viewModal = document.querySelector('.modal-alert')
 const msgConfirm = document.querySelector('.msg-confirm')
-const btnCancel = document.querySelector('.btn-cancel')
-const btnRemovePost = document.querySelector('.btn-remove_post')
+// const btnCancel = document.querySelector('.btn-cancel')
+// const btnRemovePost = document.querySelector('.btn-remove_post')
 
-btnRemove.addEventListener('click', () => {
-  productModal.style.bottom = '-240px';
-  viewModal.style.display = 'block';
-})
+// btnRemove.addEventListener('click', () => {
+//   productModal.style.bottom = '-240px';
+//   viewModal.style.display = 'block';
+// })
 
-btnEdit.addEventListener('click', () => {
-  productModal.style.bottom = '-240px';
-  viewModal.style.display = 'block';
-  msgConfirm.textContent = '게시글을 삭제할까요?';
-})
+// btnEdit.addEventListener('click', () => {
+//   productModal.style.bottom = '-240px';
+//   viewModal.style.display = 'block';
+//   msgConfirm.textContent = '게시글을 삭제할까요?';
+// })
 
-btnCancel.addEventListener('click', () => {
-  viewModal.style.display = "none";
-})
+// btnCancel.addEventListener('click', () => {
+//   viewModal.style.display = "none";
+// })
 
-btnRemovePost.addEventListener('click', () => {
-  viewModal.style.display = "none";
-  msgConfirm.textContent = '상품을 삭제할까요?';
-})
+// btnRemovePost.addEventListener('click', () => {
+//   viewModal.style.display = "none";
+//   msgConfirm.textContent = '상품을 삭제할까요?';
+// })
 
 // API
 
@@ -236,6 +236,9 @@ async function getPost(accountName, authorimg) {
     for (let image of imageArr){
       images += `<img src=${image} alt="피드 이미지" class="img-feed">`
     }
+    if (imageArr[1]){
+      images = `<div class="wrap-images">${images}</div><button type="button" class="btn-left">⬅️</button><button type="button" class="btn-right">➡️</button>`;
+    }
     let list = document.createElement('article')
     let grid = document.createElement('a')
     list.classList = 'home-post'
@@ -307,17 +310,81 @@ async function getPost(accountName, authorimg) {
     }
     viewList.appendChild(list)
     viewAlbum.appendChild(grid)
+
+    if (imageArr[1]){
+      const btnLeft = document.querySelector('.btn-left')
+      const btnRight = document.querySelector('.btn-right')
+      const wrapImages = document.querySelector('.wrap-images')
+      const imageSize = wrapImages.getBoundingClientRect().width;
+
+      let pos = 0
+      btnShow()
+
+      let scrollLeft;
+      let totalWidth = wrapImages.clientWidth * (imageArr.length - 1)
+      wrapImages.addEventListener('scroll', () => {
+        scrollLeft = wrapImages.scrollLeft;
+        pos = scrollLeft/wrapImages.clientWidth
+        if(scrollLeft == 0) {
+          btnShow()
+        }
+        else if(scrollLeft > totalWidth) {
+          btnShow()
+        }
+        else {
+          btnShow()
+        }
+      })
+
+      function btnShow() {
+        console.log(pos)
+        pos = Math.round(pos)
+  
+        if (pos == 0){
+          btnLeft.style.display = "none";
+        }
+        else if (pos == imageArr.length - 1){
+          btnRight.style.display = "none";
+        }
+        else {
+          btnLeft.style.display = "block";
+          btnRight.style.display = "block";
+        }
+
+      }
+
+      btnLeft.addEventListener('click', () => {
+        if (pos >= 1) {
+          pos -= 1;
+        }
+        wrapImages.scroll({
+          left: (imageSize*pos),
+          behavior: 'smooth'
+        })
+        btnShow()
+      })
+      btnRight.addEventListener('click', () => {
+        if (pos < imageArr.length - 1) {
+          pos += 1;
+        }
+        wrapImages.scroll({
+          left: (imageSize*pos),
+          behavior: 'smooth'
+        })
+        btnShow()
+      })
+    }
   }
 
-  const btnMoreModal = document.querySelector('#btn-more-modal')
-  const productModal = document.querySelector('.product-modal')
-  btnMoreModal.addEventListener('click', () => {
-    productModal.classList.toggle('open');
-    if (productModal.classList.contains('open')) {
-      productModal.style.bottom = '-92px';
-    }
-    else {
-      productModal.style.bottom = '-240px';
-    }
-  })
+  // const btnMoreModal = document.querySelector('#btn-more-modal')
+  // const productModal = document.querySelector('.product-modal')
+  // btnMoreModal.addEventListener('click', () => {
+  //   productModal.classList.toggle('open');
+  //   if (productModal.classList.contains('open')) {
+  //     productModal.style.bottom = '-92px';
+  //   }
+  //   else {
+  //     productModal.style.bottom = '-240px';
+  //   }
+  // })
 }
