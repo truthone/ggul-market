@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/9.addProduct.css">
-    <link rel="stylesheet" href="../css/module.css">
-    <title>상품 등록</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/9.addProduct.css">
+  <link rel="stylesheet" href="../css/module.css">
+  <title>상품 등록</title>
 </head>
-<body>
+<body id="product-upload-page">
   <header class="top-nav">
     <nav class="wrap-top-nav">
-      <a onclick="location.href='javascript:history.back();'" class="btn-back"><img src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></a>
-      <button type="button" class="Ms-button btn disabled">저장</button>
+      <a onclick="location.href='javascript:history.back();'" class="btn-back"><img
+          src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></a>
+      <button type="button" id="save-btn" class="Ms-button btn disabled" onclick="postProductData()">저장</button>
     </nav>
   </header>
   <div class="container">
     <form>
-      <div class="box-input">
-        <label for="image-add" class="label-image">이미지 등록</label>
-        <input type="file" accept="image/*" class="box-img"><!--img src="../images/product-img-example.png"--></input>
-        <button type="file" class="img-button"></button>
+      <div class="img-container">
+        <h3>이미지 등록</h3>
+        <label for="image-add" class="product-img-label">
+          <button type="button" id="product-img-btn" class="img-button" onclick="clickImgBtn()"></button>
+        </label>
+        <input type="file" accept="image/*" id="productImgInput" class="box-img">
       </div>
-      <div class="form-user">
-        <label for="product-name">상품명</label>
-        <input class="input-txt" placeholder="2-15자 이내여야 합니다" type="text">
-      </div>
-      <div class="form-user">
-        <label for="product-price">가격</label>
-        <input class="input-txt" placeholder="숫자만 입력 가능합니다" type="number">
-      </div>
-      <div class="form-user">
-        <label for="product-price">판매 링크</label>
-        <input class="input-txt" placeholder="URL을 입력해 주세요" type="url">
-      </div>
-    </form>
-  </div>  
+      <div class="input-container">
+        <div class="form-user">
+          <label for="product-name">상품명</label>
+          <input id="productNameInput" class="input-txt" placeholder="2-15자 이내여야 합니다" type="text">
+        </div>
+        <div class="form-user">
+          <label for="product-price">가격</label>
+          <input id="priceInput" class="input-txt" placeholder="숫자만 입력 가능합니다" type="number">
+        </div>
+        <div class="form-user">
+          <label for="product-price">판매 링크</label>
+          <input id="storeLinkInput" class="input-txt" placeholder="URL을 입력해 주세요" type="url">
+        </div>
+    </div>
+  </form>
+  </div>
+  <script src="../scripts/9.addProduct.js"></script>
 </body>
+
 </html>
