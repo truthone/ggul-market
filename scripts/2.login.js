@@ -32,23 +32,6 @@ loginPwInput.addEventListener("input", function() {
 });
 
 
-// 입력을 완료한 경우 버튼 활성화
-// function btnActive()  {
-//   const target = document.getElementsByClassName('login-submit');
-//   target.disabled = false;
-//   // document.querySelector('.btn').remove('.disabled');
-// }
-
-// const v = document.getElementById('login-cont-email');
-// if(v != '') {
-//   btnActive();
-// }
-
-// id, pw 유효성 검사
-
-// email 오류 시 on class 추가
-
-
 
 
 // login API 부분입니다.
@@ -90,5 +73,8 @@ async function login() {
   }
   catch(err){
     console.log('로그인 실패. input을 초기화합니다.')
+    document.querySelector(".login-warn").classList.add("on");
+    loginEmailInput.value = null;
+    loginPwInput.value = null;
   }
 }
