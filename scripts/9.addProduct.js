@@ -123,7 +123,7 @@ async function postProductData() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Bearer ' + localStorage.getItem("access-token")
+          "Authorization": 'Bearer ' + localStorage.getItem("Token")
         },
         body: JSON.stringify({
           "product": {
@@ -148,7 +148,7 @@ async function postProductData() {
 function href(pageName) {
   const routeTag = document.createElement('a');
   routeTag.id = "routeTag";
-  routeTag.href = `http://127.0.0.1:5500/pages${pageName}`;
+  routeTag.href = `/pages${pageName}`;
   document.querySelector(".container").appendChild(routeTag);
   document.querySelector("#routeTag").click();
 }
