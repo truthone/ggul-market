@@ -3,8 +3,6 @@ const loginEmailInput = document.querySelector("#login-cont-email");
 const loginPwInput = document.querySelector("#login-cont-pwd");
 const loginSubmit = document.querySelector(".login-submit");
 
-// Uncaught TypeError: Cannot read properties of undefined (reading 'toString')
-// console.log(loginEmailInput.value);
 
 // 입력을 완료한 경우 버튼 활성화
 // 아이디 입력
@@ -30,8 +28,6 @@ loginPwInput.addEventListener("input", function() {
     loginSubmit.classList.remove('disabled');
   }
 });
-
-
 
 
 // login API 부분입니다.
