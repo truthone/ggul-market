@@ -29,6 +29,8 @@ const container = document.querySelector('.container');
             const image = post.image
             const heartCount = post.heartCount
             const hearted = post.hearted
+            const date = post.createdAt.slice(0, 10).split('-')
+            
 
             // for(let post of json.post){
             //     const imageArr = post.image.split(',')
@@ -69,7 +71,7 @@ const container = document.querySelector('.container');
                             <span>12</span>
                         </li>
                     </ul>
-                    <small class="txt-date">2020년 10월 21일</small>
+                    <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
                 </div>
             <article>
         </section>
