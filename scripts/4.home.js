@@ -70,7 +70,7 @@ const container = document.querySelector('.container');
                             <a href="#10.html">
                                 <img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle">
                             </a>
-                                <span>12</span>
+                                <span>${post.commentCount}</span>
                             </li>
                         </ul>
                         <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
