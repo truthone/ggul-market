@@ -8,6 +8,31 @@ const container = document.querySelector('.container');
         location.href = './2.login.html'
     }
 
+    // async function likePost(postId) {
+    //     const res = await fetch(API_URL+"/post/${postId}/heart", {
+    //         method: "POST",
+    //         headers:{
+    //             "Authorization" : `Bearer ${token}`,
+    //             "Content-type" : "application/json"
+    //         }
+    //     });
+    //     const data = await res.json();
+
+    //     return data;
+    // }
+
+    // async function cancleLikePost(postId) {
+    //     const res = await fetch(API_URL+"/post/${postId}/unheart", {
+    //         method: "DELETE",
+    //         headers:{
+    //             "Authorization" : `Bearer ${token}`,
+    //             "Content-type" : "application/json"
+    //         }
+    //     });
+    //     const data = await res.json();
+    //     return data;
+    // }
+
     async function getFeed() {
         const token = localStorage.getItem("Token")
         const res = await fetch(API_URL+"/post/feed",{
@@ -30,16 +55,19 @@ const container = document.querySelector('.container');
             const heartCount = post.heartCount
             const hearted = post.hearted
             const date = post.createdAt.slice(0, 10).split('-')
-            
+            const id = post.id
 
+            // console.log(post.id)
+            // console.log(post.heartCount)
             // console.log(post.hearted)
-            // const icon_heart = document.document.querySelector('.icon-heart');
-            // if (post.hearted == false) {
-            //     icon_heart.src = "../images/icon/icon-heart.png"
+            // console.log(post.hearted)
+            // const icon_heart = document.querySelector(".icon-heart");
+            // if (post.hearted == true) {
+            //     icon_heart.src = "../images/icon/icon-heart-active.png";          
             // }
-            // else {
-            //     icon_heart.src = "../images/icon/icon-heart-active.png";
-            // }
+
+
+
             
             if (post.image) {
                 document.querySelector(".container").innerHTML+=`
@@ -107,7 +135,7 @@ const container = document.querySelector('.container');
                             <a href="#10.html">
                                 <img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle">
                             </a>
-                                <span>12</span>
+                                <span>${post.commentCount}</span>
                             </li>
                         </ul>
                         <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
@@ -116,10 +144,67 @@ const container = document.querySelector('.container');
             </section>
             `
             }
+            const icon_heart = document.querySelector(".icon-heart");
+            
+            // if (post.hearted == true) {
+            //     icon_heart.src = "../images/icon/icon-heart-active.png";    
+            // }
+            console.log(post.hearted)
+            console.log(icon_heart)
+            // const icon_heart = document.getElementsByClassName("icon-heart");
+            // for (let i = 0; i <icon_heart.length; i++) {
+            //     if (post.hearted[i] == true) {
+            //         icon_heart[i].src = "../images/icon/icon-heart-active.png";          
+            //     }
+            // }
         });
     }
-    getFeed()
+    getFeed();
+    
+    // const likeBtn = document.querySelector(".wrap-like-btn");
+    // const like_count = document.querySelector(".like-count");
+    // this.likeBtnEvent(likeBtn, item);
+    // if (item["hearted"]) {
+    //     likeBtn.classList.add("like-active");
+    // }
 
+
+
+    // function likeBtnEvent(element, item) {
+    //     const likeCount = element.querySelector(".like-count");
+    //     const id = item["id"];
+
+    //     let data = {};
+
+    //     element.addEventListener("click", async () => {
+    //         if(element.classList.contains("like-active")){
+    //             element.classList.remove("like-active");
+    //             data = await this.cancleLikePost(id);
+    //             likeCount.textContent = data["post"]["heartCount"];
+    //             await this.getPostData();
+    //         } else {
+    //             element.classList.add("like-active");
+    //             data = await this.likePost(id);
+    //             likeCount.textContent = data["post"]["heartCount"];
+    //             await this.getPostData();
+    //         }
+    //     })
+    // }
+
+
+
+    // let btn_like = document.getElementsByClassName('wrap-like-btn');
+    // let icon_heart = document.getElementsByClassName('icon-heart');
+    // btn_like.addEventListener('click', () => {
+    //     if (post.hearted == false) {
+    //         icon_heart.src = "../images/icon/icon-heart.png"
+    //         post.hearted == true;
+    //     }
+    //     else {
+    //         icon_heart.src = "../images/icon/icon-heart-active.png";
+    //         post.hearted == false;
+    //     }
+    // })
 
 
     // let btn_like = document.getElementsByClassName('wrap-like-btn');
