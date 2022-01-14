@@ -118,7 +118,7 @@ const container = document.querySelector('.container');
                         </li>
                         <li>
                             <ul class="wrap-right">
-                            <li class="user-name">${post.author.username}</li>
+                            <li class="user-name">${post.author.username}<button type="button" id="btn-more-modal"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
                             <li class="user-id">@ ${post.author.accountname}</li>
                             </ul>
                         </li>
