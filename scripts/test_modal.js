@@ -1,3 +1,29 @@
+// function open_modal (num) {
+//   if (num == 1) {
+//     if (Modal.classList.contains('open')) {
+//       Modal.style.bottom = '-140px';
+//     }
+//     else {
+//       Modal.style.bottom = '-240px';
+//     }
+//   }
+//   else if (num == 2) {
+//     if (Modal.classList.contains('open')) {
+//       Modal.style.bottom = '-90px';
+//     }
+//     else {
+//       Modal.style.bottom = '-240px';
+//     }
+//   }
+//   else {
+//     if (Modal.classList.contains('open')) {
+//       Modal.style.bottom = '-40px';
+//     }
+//     else if (num == 3) {
+//       Modal.style.bottom = '-240px';
+//     }
+//   }
+// }
 function open_modal (num) {
   if (num == 1) {
     if (Modal.classList.contains('open')) {
@@ -150,3 +176,15 @@ for (let i = 0; i < btnMoreModal.length; i++) {
   }
   })
 }
+// window.addEventListener('click', (e) => {
+//   if (Modal.classList.contains('open')) {
+//     if (e.target != Modal) {
+//       Modal.style.bottom = '-240px';
+//     }
+//   }
+// })
+// window.addEventListener('click', (e) => {
+//     if (e.target != Modal) {
+//       Modal.style.bottom = '-240px';
+//     }
+// })

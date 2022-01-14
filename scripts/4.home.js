@@ -55,7 +55,6 @@ const container = document.querySelector('.container');
             const heartCount = post.heartCount
             const hearted = post.hearted
             const date = post.createdAt.slice(0, 10).split('-')
-            const id = post.id
 
             // console.log(post.id)
             // console.log(post.heartCount)
@@ -144,13 +143,36 @@ const container = document.querySelector('.container');
             </section>
             `
             }
-            const icon_heart = document.querySelector(".icon-heart");
-            
+            // const like_btn = document.getElementsByClassName('wrap-like-btn');
+            // const icon_heart = document.getElementsByClassName('icon-heart');
+            // let like_count = document.getElementsByClassName('like-count');
+
+            // let btn_check = Array.from({length: btn_like.length}, () => 0);
+            // let number = new Array();
+            // for (let i = 0; i < like_count.length; i++) {
+            //   number[i] = like_count[i].innerHTML;
+            // }
+
+            // for (let i = 0; i < btn_like.length; i++) {
+            //     like_btn[i].addEventListener('click', () => {
+            //         if (btn_check[i] == 0) {
+            //             icon_heart[i].src = "../images/icon/icon-heart-active.png";  
+            //             btn_check[i] = 1;
+            //             number[i] = parseInt(number[i]) + 1;
+            //         }
+            //         else {
+            //             icon_heart[i].src = "../images/icon/icon-heart.png";  
+            //             btn_check[i] = 0;
+            //             number[i] = parseInt(number[i]) - 1;
+            //         }
+            //         like_count[i].innerHTML = number[i];
+            //     })
+            // }
             // if (post.hearted == true) {
             //     icon_heart.src = "../images/icon/icon-heart-active.png";    
             // }
-            console.log(post.hearted)
-            console.log(icon_heart)
+            // console.log(post.hearted)
+            // console.log(icon_heart)
             // const icon_heart = document.getElementsByClassName("icon-heart");
             // for (let i = 0; i <icon_heart.length; i++) {
             //     if (post.hearted[i] == true) {
