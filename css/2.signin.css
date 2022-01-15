@@ -1,7 +1,12 @@
 /* login-email */
+body {
+  background-color: #FFFFFF;
+  padding: 0;
+}
+
 #emailLogin, #emailJoinin {
   width: 100%;
-  background-color: #FFFFFF;
+  /* background-color: #FFFFFF; */
   padding: 0;
   padding: 54px 34px;
   box-sizing: border-box;
