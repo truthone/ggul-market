@@ -9,24 +9,56 @@
   <link rel="stylesheet" href="../css/module.css">
   <link rel="stylesheet" href="../css/2.signin.css">
 </head>
-<body id="emailJoinin">
-  <h1 class="tit-name">이메일로 회원가입</h1>
-  <main>
-    <form>
-      <div class="form-user join-email">
-        <label for="join-cont-email">이메일</label>
-        <input type="text" name="" id="join-cont-email" class="input-txt" required>
-        <p class="login-warn on">* 이미 가입된 이메일 주소입니다.</p>
+<body>
+  <h1 class="txt-hide">회원가입</h1>
+  <section id="emailJoinin">
+    <h2 class="tit-name">이메일로 회원가입</h2>
+    <main>
+      <form>
+        <div class="form-user join-email">
+          <label for="join-cont-email">이메일</label>
+          <input type="text" name="" id="join-cont-email" class="input-txt" required>
+          <p class="login-warn login-email-warn txt-hide">* 이미 가입된 이메일 주소입니다.</p>
+        </div>
+        <div class="form-user join-pwd">
+          <label for="join-cont-pwd">비밀번호</label>
+          <input type="password" name="" id="join-cont-pwd" class="input-txt" minlength="6" required>
+          <p class="login-warn login-pwd-warn txt-hide">* 비밀번호를 입력하세요</p>
+        </div>
+        <button type="button" class="join-next L-button btn disabled" disabled>다음</button>
+      </form>
+  </section>
+  <section id="setProfile">
+    <h2 class="tit-name">프로필 설정</h2>
+    <main>
+      <div class="cont-profile">
+        <p class="set-profile-notice">나중에 언제든지 변경할 수 있습니다.</p>
+        <div class="img-position">
+          <img src="../images/basic-profile-img.png" alt="기본 프로필" class="profile-img">
+          <input type="file" name="" id="upload-profile" accept="image/*" class="txt-hide">
+          <label for="upload-profile"><img src="../images/upload-file.png" alt="파일업로드" class="upload-file"></label>
+        </div>
       </div>
-      <div class="form-user join-pwd">
-        <label for="join-cont-pwd">비밀번호</label>
-        <input type="password" name="" id="join-cont-pwd" class="input-txt" minlength="6" required>
-        <p class="login-warn on">* 비밀번호는 6자 이상이어야 합니다.</p>
-      </div>
-      <a href="#" class="join-next L-button btn">다음</a>
-    </form>
+      <form>
+        <div class="form-user">
+          <label for="user-name">사용자 이름</label>
+          <input type="text" name="" id="user-name" class="input-txt">
+        </div>
+        <div class="form-user">
+          <label for="user-id">계정 ID</label>
+          <input type="text" name="" id="user-id" class="input-txt">
+          <p class="profile-warn wrong on">* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</p>
+          <p class="profile-warn dup on">* 이미 사용 중인 ID입니다.</p>
+        </div>
+        <div class="form-user profile-intro">
+          <label for="user-intro">소개</label>
+          <input type="text" name="" id="user-intro" class="input-txt">
+        </div>
+        <button class="submit-btn L-button btn">감귤마켓 시작하기</button>
+      </form>
+  </section>
   </main>
-  
+
   <script src="../scripts/script.js"></script>
   <script src="../scripts/3.join.js"></script>
 </body>
