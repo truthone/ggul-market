@@ -65,6 +65,7 @@ async function login() {
   localStorage.setItem("Token", token)
   localStorage.setItem("AccountName", json.user.accountname)
   localStorage.setItem("Id", json.user._id)
+  localStorage.setItem("Target", json.user.accountname)
   location.href = "./4.home.html"
   }
   catch(err){

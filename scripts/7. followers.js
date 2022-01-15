@@ -1,28 +1,13 @@
 // **7. 팔로워, 팔로잉 목록**
-
 // - 사용자 프로필 페이지에서 팔로워 및 팔로잉 수를 클릭하면 나타나는 페이지입니다.
 // - 목록은 사용자 프로필 사진, 이름, 계정 ID, 팔로우(또는 취소) 버튼으로 구성됩니다.
-// - 내가 팔로우 한 사용자일 경우 취소 버튼이, 내가 팔로우 하지 않은 사용자일 경우에는 팔로우 버튼이 표시됩니다. 단, 팔로우 기능은 구현하지 않습니다. 버튼의 변화만 구현하세요.
 
-const btnFollowCancel = document.querySelectorAll('.btn-follower_view_follow');
-
-btnFollowCancel.forEach(btn => 
-  btn.addEventListener("click", () => {
-    btn.classList.toggle('activ')
-    if (btn.classList.contains('activ')){
-      btn.textContent="취소";
-    }
-    else {
-      btn.textContent="팔로우";
-    }
-  })
-)
-
-const accountName = localStorage.getItem("AccountName")
+const accountName = localStorage.getItem("Target")
 const token = localStorage.getItem("Token")
 const id = localStorage.getItem("Id")
 initPage();
 function initPage() {
+  const tit_txt = document.querySelector('.tit-follow')
   let option = ''
 	if (location.search != '') {
     option = location.search.replace('?', '');
@@ -32,6 +17,7 @@ function initPage() {
   }
   else if (option == "following") {
     getFollowing(accountName)
+    tit_txt.textContent = "Following"
   }
   else {
     history.back();
@@ -50,27 +36,16 @@ async function getFollowing(accountName) {
           "Content-type" : "application/json"
       }
   })
-  const json = await res.json()
   const followingList = document.querySelector('.lst-follower')
+  const json = await res.json()
 
   for (let following of json) {
-    let follow = document.createElement('article');
-    follow.classList = 'box-profile'
-    follow.innerHTML = `<ul class="wrap-profile">
-    <li>
-      <img src=${following.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile">
-    </li>
-    <li>
-      <ul class="wrap-right">
-        <li class="user-name">${following.username}</li>
-        <li class="user-id">@ ${following.accountname}</li>
-      </ul>
-    </li>
-    <li><button type="button" class="S-button btn activ btn-follower_view_follow">취소</button></li>
-  </ul>`
+    let follow = getFollowProfile(following);
     followingList.appendChild(follow)
   }
+  followingCheck()
 }
+
 async function getFollower(accountName) {
   // const url = API_URL + `/profile/${accountName}/follower?limit=2`
   const url = API_URL + `/profile/${accountName}/follower`
@@ -81,26 +56,53 @@ async function getFollower(accountName) {
           "Content-type" : "application/json"
       }
   })
-console.log(url)
   const followerList = document.querySelector('.lst-follower')
   const json = await res.json()
 
   for (let follower of json) {
-    let state = follower.follower.includes(id)?`<li><button type="button" class="S-button btn activ btn-follower_view_follow">취소</button></li>`:`<li><button type="button" class="S-button btn btn-follower_view_follow">팔로우</button></li>`;
-    let follow = document.createElement('article');
+    let follow = getFollowProfile(follower);
+    followerList.appendChild(follow)
+  }
+  followingCheck()
+}
+
+function getFollowProfile(target) {
+  const goURL = `6.profile.html?${target.accountname}`
+  let state = target.follower.includes(id)?`<li><button type="button" class="S-button btn activ btn-follower_view_follow">취소</button></li>`:`<li><button type="button" class="S-button btn btn-follower_view_follow">팔로우</button></li>`;
+  let follow = document.createElement('article');
     follow.classList = 'box-profile'
     follow.innerHTML = `<ul class="wrap-profile">
     <li>
-      <img src=${follower.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile">
+      <a href=${goURL}><img src=${target.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
     </li>
     <li>
-      <ul class="wrap-right">
-        <li class="user-name">${follower.username}</li>
-        <li class="user-id">@ ${follower.accountname}</li>
-      </ul>
+      <a href=${goURL}>
+        <ul class="wrap-right">
+          <li class="user-name">${target.username}</li>
+          <li class="user-id">@ ${target.accountname}</li>
+        </ul>
+      </a>
     </li>
     ${state}
   </ul>`
-  followerList.appendChild(follow)
-  }
+
+  return follow
+}
+
+// - 내가 팔로우 한 사용자일 경우 취소 버튼이, 내가 팔로우 하지 않은 사용자일 경우에는 팔로우 버튼이 표시됩니다. 단, 팔로우 기능은 구현하지 않습니다. 버튼의 변화만 구현하세요.
+
+function followingCheck(){
+  const btnFollowCancel = document.querySelectorAll('.btn-follower_view_follow');
+
+  btnFollowCancel.forEach(btn => 
+  btn.addEventListener("click", () => {
+    btn.classList.toggle('activ')
+    if (btn.classList.contains('activ')){
+      btn.textContent="취소";
+    }
+    else {
+      btn.textContent="팔로우";
+    }
+  })
+)
 }
