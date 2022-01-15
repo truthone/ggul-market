@@ -239,9 +239,11 @@ async function getPost(currentProfile) {
       let grid = document.createElement('a')
       grid.classList = 'cont-grid'
       grid.innerHTML = `<img src=${imageArr[0]} alt="피드 이미지">`
+
       // 앨범형에서 더보기 버튼이 보이지 않음
       if (imageLength == 1) {
         grid.style.setProperty('--single', "hidden");
+
       }
       viewAlbum.appendChild(grid)
     }
