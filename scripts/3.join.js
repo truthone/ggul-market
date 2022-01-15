@@ -62,3 +62,23 @@ joinBtnNext.addEventListener('click', () => {
 });
 
 // join_membership
+// 프로필 이미지 업로드
+async function imageUpload(files){
+  const formData = new FormData();
+  formData.append("image", files[0]);//formData.append("키이름","값")
+  const res = await fetch(`http://146.56.183.55:5050/image/uploadfile`, {
+      method: "POST",
+      body : formData
+  })
+  const data = await res.json()
+  const productImgName = data["filename"];
+  return productImgName
+}
+
+async function profileImage(e) {
+  const files = e.target.files
+  const result = await imageUpload(files)
+  document.querySelector('.profile-img').src = localStorage.getItem("url/")+result
+  console.log(result)
+}
+document.querySelector("#upload-profile").addEventListener("change",profileImage)
