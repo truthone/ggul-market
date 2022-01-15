@@ -1,15 +1,15 @@
 // login-email.html
 const loginEmailInput = document.querySelector("#login-cont-email");
-const loginPwInput = document.querySelector("#login-cont-pwd");
+const loginPwdInput = document.querySelector("#login-cont-pwd");
 const loginSubmit = document.querySelector(".login-submit");
 
 
 // 입력을 완료한 경우 버튼 활성화
 // 아이디 입력
 loginEmailInput.addEventListener("input", function() {
-  if(loginEmailInput.value === '' && loginPwInput === '') {
+  if(loginEmailInput.value === '' && loginPwdInput === '') {
     loginSubmit.disabled = true;
-  } else if(loginEmailInput.value === '' || loginPwInput.value === '') {
+  } else if(loginEmailInput.value === '' || loginPwdInput.value === '') {
     loginSubmit.disabled = true;
   } else {
     loginSubmit.disabled = false;
@@ -18,10 +18,10 @@ loginEmailInput.addEventListener("input", function() {
 });
 
 // 비밀번호 입력
-loginPwInput.addEventListener("input", function() {
-  if(loginEmailInput.value === '' && loginPwInput === '') {
+loginPwdInput.addEventListener("input", function() {
+  if(loginEmailInput.value === '' && loginPwdInput === '') {
     loginSubmit.disabled = true;
-  } else if(loginEmailInput.value === '' || loginPwInput.value === '') {
+  } else if(loginEmailInput.value === '' || loginPwdInput.value === '') {
     loginSubmit.disabled = true;
   } else {
     loginSubmit.disabled = false;
@@ -65,13 +65,12 @@ async function login() {
   localStorage.setItem("Token", token)
   localStorage.setItem("AccountName", json.user.accountname)
   localStorage.setItem("Id", json.user._id)
-  localStorage.setItem("Target", json.user.accountname)
   location.href = "./4.home.html"
   }
   catch(err){
-    console.log('로그인 실패. input을 초기화합니다.')
+    // console.log('로그인 실패. input을 초기화합니다.')
     document.querySelector(".login-warn").classList.add("on");
     loginEmailInput.value = null;
-    loginPwInput.value = null;
+    loginPwdInput.value = null;
   }
 }
