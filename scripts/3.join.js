@@ -5,6 +5,7 @@ const joinBtnNext = document.querySelector(".join-next");
 const emailWarnTxt = document.querySelector(".login-email-warn");
 const pwdWarnTxt = document.querySelector(".login-pwd-warn");
 
+
 // 포커스를 잃었을 때 유효성 검사
 joinEmailInput.addEventListener('focusout', async () => {
   const email = joinEmailInput.value;
@@ -53,3 +54,11 @@ async function checkEmailValid(email) {
   const json = await res.json();
   return json.message == "사용 가능한 이메일 입니다." ? true : false
 }
+
+// 다음 버튼 클릭시 프로필 설정
+joinBtnNext.addEventListener('click', () => {
+  document.querySelector('#setProfile').style.display = "block";
+  document.querySelector('#emailJoinin').style.display = "none";
+});
+
+// join_membership
