@@ -67,7 +67,8 @@ document.querySelector('#emailJoinin').style.display = "none";
 
 // join_membership
 const joinUserIdInput = document.querySelector('#user-id');
-  
+const profileWarn = document.querySelector('.profile-warn');
+
 // 프로필 이미지 업로드
 async function imageUpload(files){
   const formData = new FormData();
@@ -92,40 +93,41 @@ document.querySelector("#upload-profile").addEventListener("change",profileImage
 
 
 // 계정 ID 중복검사
-async function checkUserIdValid(accountname) {
-  const url = `http://146.56.183.55:5050/user/searchuser/?accountname=${accountname}`;
-  const res = await fetch(url, {
-    method:"GET",
-    headers: {
-      "Authorization": "Bearer " + localStorage.getItem("Token"),
-      "Content-Type": "application/json",
-    },
-  });
-  const json = await res.json();
-  console.log(json);
-  // return json.message == "사용 가능한 아이디 입니다." ? true : false
-}
+// async function checkUserIdValid(accountname) {
+//   const url = `http://146.56.183.55:5050/user`;
+//   const res = await fetch(url, {
+//     method:"GET",
+//     headers: {
+//       "id": '',
+//       "username": '',
+//       "email": '',
+//       "accountname": accountname
+//   }
+//   });
+//   const json = await res.json();
+//   console.log(json);
+//   // return json.message == "사용 가능한 아이디 입니다." ? true : false
+// }
 
-const profileWarn = document.querySelector('.profile-warn');
 
 // 계정 ID 포커스 잃었을때 유효성 검사
 joinUserIdInput.addEventListener('focusout', async () => {
   const userId = joinUserIdInput.value;
   const regExp = new RegExp('^[a-zA-Z0-9_.]+$');
 
-  const validUserId = await checkUserIdValid(userId);
-  console.log(validUserId);
-  if(validUserId) {
-    profileWarn.classList.remove('txt-hide','login-warn');
-    profileWarn.innerText = "* 사용 가능한 ID입니다.";
-  } else if (!regExp.test(userId)) {
+  // const validUserId = await checkUserIdValid(userId);
+  // console.log(validUserId);
+  // if(validUserId) {
+  //   profileWarn.classList.remove('txt-hide','login-warn');
+  //   profileWarn.innerText = "* 사용 가능한 ID입니다.";
+  // } else 
+  if (!regExp.test(userId)) {
     profileWarn.innerText = "* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.add('on');
   }
   else {
-    profileWarn.innerText = "* 이미 사용 중인 ID입니다.";
     profileWarn.classList.remove('txt-hide');
-    profileWarn.classList.add('on');
+    profileWarn.innerText = "* 사용 가능한 아이디 입니다.";
   }
 });

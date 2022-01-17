@@ -150,9 +150,6 @@ body {
   margin-bottom: 6px;
 }
 
-.profile-warn {
-  display: none;
-}
 .profile-warn.on {
   display: block;
   color: #EB5757;
