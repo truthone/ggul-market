@@ -39,15 +39,15 @@ async function getProductData() {
 function postProductImg() {
   console.log("첨부된 이미지 나타내기")
   const imgInput = document.querySelector("#productImgInput");
-  const productImgLabel = document.querySelector(".product-img-label");
-  let productImgElement = document.querySelector(".product-img-label img");
+  const productImgBox = document.querySelector("#product-img-box");
+  let productImgElement = document.querySelector("#product-img-box img");
 
   imgInput.addEventListener("change", (e) => {
     this.productImgName = "";
 
     if (!productImgElement) {
       productImgElement = document.createElement("img");
-      productImgLabel.append(productImgElement);
+      productImgBox.append(productImgElement);
     }
 
     if (e.target.files && e.target.files[0]) {
@@ -84,10 +84,10 @@ async function setCurrentData() {
   const productPrice = document.querySelector("#priceInput");
   const storeLink = document.querySelector("#storeLinkInput");
   const productImgInput = documenthis.querySelector("#productImgInput");
-  const productImgLabel = document.querySelector(".product-img-label")
+  const productImgBox = document.querySelector("#product-img-box")
 
   const productImgElement = document.createElement("img");
-  productImgLabel.append(productImgElement);
+  productImgBox.append(productImgElement);
 
   await this.getProductData();
 
@@ -197,7 +197,7 @@ function dataReset() {
     item.value = "";
 
     if (item.getAttribute("type") == "file") {
-      const imgTag = document.querySelector(".product-img-label img");
+      const imgTag = document.querySelector("#product-img-box img");
       imgTag.remove();
       this.productImgName = "";
     }
@@ -261,7 +261,7 @@ function checkValidation(element) {
 // 상품 가격 체크 이벤트
 function checkPriceValue() {
   console.log("상품 가격 체크 이벤트")
-  const priceInput = this.mainElement.querySelector("#priceInput");
+  const priceInput = document.querySelector("#priceInput");
 
   // 입력될 때 숫자 이외에 다른 문자(특수문자 포함) 입력되지 않도록 합니다.
   priceInput.addEventListener("input", () => {
@@ -270,9 +270,9 @@ function checkPriceValue() {
   });
 
   // 입력 후 포커스를 잃으면 입력된 가격이 원단위로 표시됩니다.
-  priceInput.addEventListener("blur", () => {
-    priceInput.value = priceInput.value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  });
+  // priceInput.addEventListener("blur", () => {
+  //   priceInput.value = priceInput.value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  // });
 }
 
 // input value 체크
@@ -336,4 +336,7 @@ function clickImgBtn() {
   postProductImg();
 }
 
-window.addEventListener("DOMContentLoaded", inputEvent());
+window.addEventListener("DOMContentLoaded", () => {
+  inputEvent()
+  postProductImg()
+});
