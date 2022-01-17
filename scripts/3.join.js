@@ -4,6 +4,7 @@ const joinPwdInput = document.querySelector("#join-cont-pwd");
 const joinBtnNext = document.querySelector(".join-next");
 const emailWarnTxt = document.querySelector(".login-email-warn");
 const pwdWarnTxt = document.querySelector(".login-pwd-warn");
+const joinBtnSubmit = document.querySelector(".submit-btn");
 
 
 // 포커스를 잃었을 때 유효성 검사
@@ -60,9 +61,9 @@ joinBtnNext.addEventListener('click', () => {
   document.querySelector('#setProfile').style.display = "block";
   document.querySelector('#emailJoinin').style.display = "none";
 });
-// dev code
-document.querySelector('#setProfile').style.display = "block";
-document.querySelector('#emailJoinin').style.display = "none";
+// // dev code
+// document.querySelector('#setProfile').style.display = "block";
+// document.querySelector('#emailJoinin').style.display = "none";
 
 
 // join_membership
@@ -93,41 +94,82 @@ document.querySelector("#upload-profile").addEventListener("change",profileImage
 
 
 // 계정 ID 중복검사
-// async function checkUserIdValid(accountname) {
-//   const url = `http://146.56.183.55:5050/user`;
-//   const res = await fetch(url, {
-//     method:"GET",
-//     headers: {
-//       "id": '',
-//       "username": '',
-//       "email": '',
-//       "accountname": accountname
-//   }
-//   });
-//   const json = await res.json();
-//   console.log(json);
-//   // return json.message == "사용 가능한 아이디 입니다." ? true : false
-// }
-
+async function checkUserIdValid(accountname) {
+  const url = `http://146.56.183.55:5050/user`;
+  const res = await fetch(url, {
+    method:"GET",
+  });
+  const json = await res.json();
+  for(let item of json) {
+    if(accountname == item["accountname"]) {
+      return true;
+      break;
+    }
+  }
+}
 
 // 계정 ID 포커스 잃었을때 유효성 검사
 joinUserIdInput.addEventListener('focusout', async () => {
   const userId = joinUserIdInput.value;
   const regExp = new RegExp('^[a-zA-Z0-9_.]+$');
 
-  // const validUserId = await checkUserIdValid(userId);
+  const validUserId = await checkUserIdValid(userId);
   // console.log(validUserId);
-  // if(validUserId) {
-  //   profileWarn.classList.remove('txt-hide','login-warn');
-  //   profileWarn.innerText = "* 사용 가능한 ID입니다.";
-  // } else 
-  if (!regExp.test(userId)) {
+  if(!validUserId) {
+    profileWarn.classList.remove('txt-hide');
+    profileWarn.innerText = "* 사용 가능한 아이디 입니다.";
+  } else if (!regExp.test(userId)) {
     profileWarn.innerText = "* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.add('on');
   }
   else {
     profileWarn.classList.remove('txt-hide');
-    profileWarn.innerText = "* 사용 가능한 아이디 입니다.";
+    profileWarn.innerText = "* 이미 사용중인 아이디 입니다.";
   }
 });
+
+
+// 서버로 데이터 전송
+async function join() {
+  const email = joinEmailInput.value;
+  const pw = joinPwdInput.value;
+  const userName = document.querySelector('#user-name').value;
+  const userId = joinUserIdInput.value;
+  const intro = document.querySelector('#user-intro').value;
+  const imgSrc = document.querySelector('.profile-img').src;
+
+  if(imgSrc === '') {
+    this.imgSrc = "http://127.0.0.1:5500/images/Ellipse.png"
+  }
+  try{
+    const res = await fetch("http://146.56.183.55:5050/user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body : JSON.stringify({
+                    "user": {
+                        "email": email,
+                        "password": pw,
+                        "username": userName,
+                        "accountname": userId,
+                        "intro": intro,
+                        "image": imgSrc,
+                    }
+                })
+            })
+            console.log(res);
+            const json = await res.json()
+            // const message = json.message
+            if(res.status==200){
+              location.href = "./index.html"
+          }
+          else{
+              console.log(json)
+          }
+  } catch (err) {
+    alert(err)
+  }
+}
+joinBtnSubmit.addEventListener('click', join());
