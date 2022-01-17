@@ -48,7 +48,7 @@ body {
   color: #767676;
 }
 
-.wrap-profile .wrap-right .s-icon-more-vertical {
+.wrap-profile .btn-more-modal {
   position: absolute;
   right: 0;
   height: 17px;
