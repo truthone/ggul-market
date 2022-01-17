@@ -21,7 +21,7 @@ function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
     }
   }
   // console.log(post.hearted)
-  let heartimage = post.hearted?'<img src="../images/icon/icon-heart-active.png" alt="좋아요 이미지" class="icon-heart icon-heart-active">':'<img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart icon-heart-active">'
+  let heartimage = post.hearted?'<img src="../images/icon/icon-heart-active.png" alt="좋아요 이미지" class="icon-heart">':'<img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart">'
 
   list.innerHTML = `<h5 class="txt-hide">피드 게시글</h5>
   <ul class="wrap-profile">
@@ -44,11 +44,11 @@ function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
     </p>
     ${images}
     <ul class="wrap-reaction">
-      <li>
-        <button>${heartimage}</button><span>${post.heartCount}</span>
+      <li class="wrap-like-btn ${post.id} ${post.heartCount}  ${post.hearted}">
+      <button>${heartimage}</button><span class="like-count">${post.heartCount}</span>
       </li>
       <li>
-        <button><img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></butto><span>${post.commentCount}</span>
+        <button><img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></button><span>${post.commentCount}</span>
       </li>
     </ul>
     <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>

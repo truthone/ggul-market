@@ -69,7 +69,6 @@ function close_alert () {
   })
 }
 
-
 //게시글 신고
 async function reportPost(postId) {
   const url = API_URL + `/post/${postId}/report`;
@@ -153,7 +152,7 @@ async function getBtn() {
     btn.addEventListener('click', () => {
       let postId = btn.classList.item(0);
       let productId = btn.classList.item(0);
-      console.log(productId)
+      console.log(btn.classList)
       Modal.classList.toggle('open')
       if (Modal.classList.contains('open')) {
         if (btn.classList.contains('modal-my-edit')) {
@@ -260,31 +259,3 @@ topbtnMoreModal.addEventListener('click', () => {
     topModal.style.bottom = '-240px';
   }
 })
-
-// // 게시글 좋아요
-// async function likePost(postId) {
-//   const url = API_URL + `/post/${postId}/heart`;
-//   const res = await fetch(url, {
-//     method:"POST",
-//     headers:{
-//       "Authorization" : `Bearer ${token}`,
-//       "Content-type" : "application/json"
-//     }
-//   })
-//   const data = await res.json();
-//   return data;
-// }
-
-// // 게시글 좋아요 취소
-// async function canclelikePost(postId) {
-//   const url = API_URL + `/post/${postId}/unheart`;
-//   const res = await fetch(url, {
-//     method:"DELETE",
-//     headers:{
-//       "Authorization" : `Bearer ${token}`,
-//       "Content-type" : "application/json"
-//     }
-//   })
-//   const data = await res.json();
-//   return data;
-// }
