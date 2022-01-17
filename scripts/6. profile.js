@@ -195,6 +195,7 @@ async function getProductList(targetName) {
   for (let product of json.product){
     let item = document.createElement('button')
     item.type="button"
+    item.classList.add(product.id)
     item.classList.add('product')
     item.classList.add('modal-product')
     item.classList.add('btn-more-modal')

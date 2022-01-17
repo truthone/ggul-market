@@ -54,6 +54,7 @@ function close_alert () {
 
 // 피드 더보기버튼 위치
 // 두번째부터 모달창 안열리는 문제
+// 삭제 시 화면 스크롤 유지한 상태로 새로고침
 // function close_modal () {
 //   window.addEventListener('click', () => {
 //     window.addEventListener('click', (e) => {
@@ -91,6 +92,18 @@ async function deletePost(postId) {
   })
 }
 
+//상품 삭제
+async function deleteProduct(productId) {
+  const url = API_URL + `/product/${productId}`;
+  const res = await fetch(url, {
+    method:"DELETE",
+    headers:{
+        "Authorization" : `Bearer ${token}`,
+        "Content-type" : "application/json"
+    }
+  })
+}
+
 
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
 async function getBtn() {
@@ -98,7 +111,8 @@ async function getBtn() {
   btnMoreModal.forEach(btn => {
     btn.addEventListener('click', () => {
       let postId = btn.classList.item(0);
-      console.log(postId)
+      let productId = btn.classList.item(0);
+      console.log(productId)
       Modal.classList.toggle('open')
       if (Modal.classList.contains('open')) {
         if (btn.classList.contains('modal-my-edit')) {
@@ -137,9 +151,10 @@ async function getBtn() {
           btnOne.addEventListener('click', () => {
             alert_message("delete_product");
             close_alert();
-            // Alert_btnTwo.addEventListener('click', async () => {
-            //   deletePost(postId);
-            // })
+            Alert_btnTwo.addEventListener('click', async () => {
+              deleteProduct(productId);
+              ModalAlert.style.display = "none";
+            })
           })
         }
   
