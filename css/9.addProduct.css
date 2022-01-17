@@ -28,7 +28,7 @@ form {
   line-height: 14px;
 }
 
-.product-img-label {
+#product-img-box {
   width: 100%;
   height: 204px;
   margin-top: 18px;
@@ -43,8 +43,9 @@ form {
   align-content: center;
 }
 
-.product-img-label img {
-  height: inherit;
+#product-img-box > img {
+  width: inherit;
+  height: fit-content;
 }
 
 .form-user label {
