@@ -42,19 +42,18 @@
       <form>
         <div class="form-user">
           <label for="user-name">사용자 이름</label>
-          <input type="text" name="" id="user-name" class="input-txt">
+          <input type="text" name="" id="user-name" minlength="2" maxlength="10" class="input-txt">
         </div>
         <div class="form-user">
           <label for="user-id">계정 ID</label>
           <input type="text" name="" id="user-id" class="input-txt">
-          <p class="profile-warn wrong on">* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</p>
-          <p class="profile-warn dup on">* 이미 사용 중인 ID입니다.</p>
+          <p class="profile-warn txt-hide">* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</p>
         </div>
         <div class="form-user profile-intro">
           <label for="user-intro">소개</label>
           <input type="text" name="" id="user-intro" class="input-txt">
         </div>
-        <button class="submit-btn L-button btn">감귤마켓 시작하기</button>
+        <button type="button" class="submit-btn L-button btn">감귤마켓 시작하기</button>
       </form>
   </section>
   </main>
