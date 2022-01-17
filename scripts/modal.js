@@ -51,6 +51,7 @@ function close_alert () {
   })
 }
 
+
 // 피드 더보기버튼 위치
 // 두번째부터 모달창 안열리는 문제
 // function close_modal () {
@@ -83,27 +84,27 @@ token = localStorage.getItem("Token")
 // 게시글 상세
 // this.postData = {};
 // getPostId(post_id)
-async function getPostId() {
-  const url = API_URL + `/post`;
-  const res = await fetch(url, {
-    method:"GET",
-    headers:{
-      "Authorization" : `Bearer ${token}`,
-      "Content-type" : "application/json"
-    }
-  })
-  let postId = '';
-  const json = await res.json();
-  const post = json.posts
-  console.log(post)
-  post.forEach(post => {
-    postId = postId + ' ' + post._id
-    // const postContent = post.content
-    // console.log(postContent)
-  })
-  // console.log(postId)
-  return(postId)
-}
+// async function getPostId() {
+//   const url = API_URL + `/post`;
+//   const res = await fetch(url, {
+//     method:"GET",
+//     headers:{
+//       "Authorization" : `Bearer ${token}`,
+//       "Content-type" : "application/json"
+//     }
+//   })
+//   let postId = '';
+//   const json = await res.json();
+//   const post = json.posts
+//   // console.log(post)
+//   post.forEach(post => {
+//     postId = postId + ' ' + post._id
+//     // const postContent = post.content
+//     // console.log(postContent)
+//   })
+//   // console.log(postId)
+//   return(postId)
+// }
 // console.log(postId)
 // getPostId();
 
@@ -127,7 +128,6 @@ async function deletePost(postId) {
   const res = await fetch(url, {
     method:"DELETE",
     headers:{
-        // "Authorization" : 'Bearer' + localStorage.getItem("Token"),
         "Authorization" : `Bearer ${token}`,
         "Content-type" : "application/json"
     }
@@ -138,14 +138,20 @@ async function deletePost(postId) {
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
 async function getBtn() {
   // await this.getPostData();
-  let postId = await getPostId();
-  postId = postId.split(' ')
-  postId.splice(0, 1);
-  console.log(postId[5])
-  // console.log(postId)
+  // let postId = await getPostId();
+  // postId = postId.split(' ')
+  // postId.splice(0, 1);
+  // console.log(postId[5])
+  // console.log(post)
   const btnMoreModal = document.querySelectorAll('.btn-more-modal');
+  // console.log(btnMoreModal.classList)
+  // const postId = btnMoreModal.classList[0];
+  // console.log(postId)
   btnMoreModal.forEach(btn => {
     btn.addEventListener('click', () => {
+      // console.log(btn.classList.item(0))
+      let postId = btn.classList.item(0);
+      console.log(postId)
       Modal.classList.toggle('open')
       if (Modal.classList.contains('open')) {
         if (btn.classList.contains('modal-my-edit')) {
@@ -154,7 +160,8 @@ async function getBtn() {
             alert_message("delete_edit");
             close_alert();
             Alert_btnTwo.addEventListener('click', async () => {
-              deletePost(postId[4])
+              deletePost(postId);
+              ModalAlert.style.display = "none";
             })
           })
           // close_modal();
@@ -165,9 +172,15 @@ async function getBtn() {
           btnOne.textContent = "신고하기";
           btnOne.addEventListener('click', () => {
             alert_message("report_edit");
-            close_alert();
-            Alert_btntwo.addEventListener('click', async () => {
-              reportPost(postId)
+            // close_alert();
+            Alert_btnOne.addEventListener('click', () => {
+              ModalAlert.style.display = "none";
+              Modal.classList.remove('open');
+            })
+            Alert_btnTwo.addEventListener('click', async () => {
+              reportPost(postId);
+              ModalAlert.style.display = "none";
+              Modal.classList.remove('open');
             })
           })
         }

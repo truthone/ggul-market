@@ -61,7 +61,7 @@ async function getFeed() {
         let imageArr = post.image.split(',')
         let imageLength = imageArr.length;
         let list = loadPost(idx, post, imageArr, imageLength, isMyprofile, authorAccount);
-        
+        // console.log(post.id)
         container.appendChild(list)
         
         if (imageLength > 1){

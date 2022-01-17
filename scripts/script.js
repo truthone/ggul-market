@@ -34,7 +34,7 @@ function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
         </ul>
       </li>
     </a>
-    <li><button type="button" class="btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+    <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
   </ul>
   <div class="main-feed">
     <p class="txt-feed">
