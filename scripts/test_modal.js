@@ -93,17 +93,18 @@ const ModalAlert = document.querySelector('.modal-alert');
 const Alert_msg = document.querySelector('.alert-message');
 const Alert_btnOne = document.querySelector('.alert-btn-one');
 const Alert_btnTwo = document.querySelector('.alert-btn-two');
+
 for (let i = 0; i < btnMoreModal.length; i++) {
   let temp = 0;
   btnMoreModal[i].addEventListener('click', () => {
     if (temp == btnMoreModal[i].classList[0]) {
-      Modal.classList.remove(btnMoreModal[i].classList[0])
+      Modal.classList.remove(btnMoreModal[i].classList[0]);
       temp = 0;
     }
     else {
       Modal.classList.add(btnMoreModal[i].classList[0]);
       temp = Modal.classList.value.split(" ")[1];
-      console.log(temp)
+      // console.log(temp)
     }
     Modal.classList.toggle('open')
 
@@ -120,6 +121,19 @@ for (let i = 0; i < btnMoreModal.length; i++) {
             window.location.href = "../pages/2.login.html";
           })
         })
+        // window.addEventListener('click', () => {
+        //   window.addEventListener('click', (e) => {
+        //     console.log(e.target)
+        //       if (e.target != (Modal)) {
+        //           Modal.style.bottom = '-240px';
+        //           console.log(btnMoreModal[i].classList[0])
+        //           Modal.classList.remove(btnMoreModal[i].classList[0]);
+        //           console.log(temp)
+        //           temp = 0;
+        //           Modal.classList.remove('open');
+        //       }
+        //   })
+        // })
       }
       else if (Modal.classList.contains('modal-chat-room')) {
         btnOne.innerHTML = "채팅방 나가기";
@@ -171,20 +185,37 @@ for (let i = 0; i < btnMoreModal.length; i++) {
         open_modal(3);
       }
     }
-  else {
-    Modal.style.bottom = '-240px';
-  }
+    // else {
+    //   Modal.style.bottom = '-240px';
+    // }
   })
 }
 // window.addEventListener('click', (e) => {
+//   console.log(e.target)
+//     if (e.target != Modal) {
+//       window.addEventListener('click', (e) => {
+//         Modal.style.bottom = '-240px';
+//       })
+//     }
+// })
+// window.addEventListener('click', (e) => {
+//   console.log(e.target)
 //   if (Modal.classList.contains('open')) {
 //     if (e.target != Modal) {
-//       Modal.style.bottom = '-240px';
+//       window.addEventListener('click', (e) => {
+//         Modal.style.bottom = '-240px';
+//       })
 //     }
 //   }
 // })
-// window.addEventListener('click', (e) => {
-//     if (e.target != Modal) {
-//       Modal.style.bottom = '-240px';
-//     }
-// })
+window.addEventListener('click', () => {
+  window.addEventListener('click', (e) => {
+    console.log(e.target)
+      if (e.target != (Modal)) {
+          Modal.style.bottom = '-240px';
+        }
+      })
+    })
+// 더보기버튼 클릭하면 open 클래스 생기고 모달창 열림
+// 그와 동시에 e.target이 더보기버튼을 가리키므로 아래 함수 적용되어 모달창 자체가 닫힌 상태가 됨
+// 따라서 아래 함수가 모달창 열린 다음에 한번더 클릭했을떄 발생하도록 해야함

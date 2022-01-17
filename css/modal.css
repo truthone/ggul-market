@@ -1,4 +1,4 @@
-.modal::before{
+.modal::before, .top-modal::before{
   content: '';
   position: absolute;
   margin: 16px auto;
@@ -9,7 +9,7 @@
   border-radius: 5px;
 }
 
-.modal {
+.modal, .top-modal{
   background-color: #FFFFFF;
   position: fixed;
   width: 100vw;
@@ -19,11 +19,11 @@
   z-index: 99;
 }
 
-.modal ul {
+.modal ul, .top-modal ul{
   padding-top: 36px;
 }
 
-.modal ul li {
+.modal ul li, .top-modal ul li{
   padding: 16px 0 16px 26px;
 }
 
