@@ -43,10 +43,10 @@ function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
     ${images}
     <ul class="wrap-reaction">
       <li>
-        <img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart icon-heart-active"><span>${post.heartCount}</span>
+        <button><img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart icon-heart-active"></button><span>${post.heartCount}</span>
       </li>
       <li>
-        <img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"><span>${post.commentCount}</span>
+        <button><img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></butto><span>${post.commentCount}</span>
       </li>
     </ul>
     <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
