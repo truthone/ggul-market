@@ -10,22 +10,24 @@
   <link rel="stylesheet" href="../css/11.uploadPage.css">
   <title>게시글 입력 페이지</title>
 </head>
-<body>
+<body id="feed-upload-page">
   <header class="top-nav">
-    <nav class="wrap-top-nav .space-between">
-      <button onclick="location.href='javascript:history.back();'" class="btn-back"><img src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></button>
-      <button type="button" class="Ms-button btn">업로드</button>
+    <nav class="wrap-top-nav">
+      <a onclick="location.href='javascript:history.back();'" class="btn-back"><img
+        src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></a>
+      <button type="button" id="save-btn" class="Ms-button btn disabled" onclick="postUpload()">업로드</button>
     </nav>
   </header>
   <div class="container">
-    <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
+    <img src="../images/basic-profile-img.png" alt="기본프로필 소형" id="feed-profile" class="basic-profile">
     <form>
       <textarea class="textarea-input" placeholder="게시글 입력하기..."></textarea>
-      <div class="box-img">
-        <button class="btn-close"><img src="../images/x.png" alt="" class="x"></button>
-        <img src="../images/post-img-example.png" alt="피드 이미지" class="img-feed">
-      </div>
+      <input type="file" accept="image/*" id="feedImgInput" class="box-img">
+      <ul class="upload-img-list"></ul>
+      <!--button type="button" id="feed-img-btn" class="upload-file" onclick="clickImgBtn()"></!--button-->
     </form>
+    <label for="feedImgInput" id="feed-img-btn" class="upload-file"></label>
   </div>
 </body>
+<script src="../scripts/11.uploadPage.js"></script>
 </html>
