@@ -1,3 +1,21 @@
+// 피드 더보기버튼 위치, 버튼 열렸다말았다 - 서버따라 자꾸 달라짐
+// 두번째부터 모달창 안열리는 문제
+// 모달확인창 버튼 클릭시 화면이 맨위로 올라가는 현상
+// 삭제 시 화면 스크롤 유지한 상태로 새로고침
+// document.location.reload(true);
+
+// function close_modal () {
+//   window.addEventListener('click', () => {
+//     window.addEventListener('click', (e) => {
+//       console.log(e.target)
+//         if (e.target != (Modal)) {
+//             Modal.style.bottom = '-240px';
+//           }
+//         })
+//       })
+// }
+
+
 token = localStorage.getItem("Token")
 const Modal = document.querySelector('.modal');
 const btnOne = document.querySelector('.btn-one');
@@ -52,21 +70,7 @@ function close_alert () {
 }
 
 
-// 피드 더보기버튼 위치
-// 두번째부터 모달창 안열리는 문제
-// 삭제 시 화면 스크롤 유지한 상태로 새로고침
-// function close_modal () {
-//   window.addEventListener('click', () => {
-//     window.addEventListener('click', (e) => {
-//       console.log(e.target)
-//         if (e.target != (Modal)) {
-//             Modal.style.bottom = '-240px';
-//           }
-//         })
-//       })
-// }
-
-// //게시글 신고
+//게시글 신고
 async function reportPost(postId) {
   const url = API_URL + `/post/${postId}/report`;
   const res = await fetch(url, {
@@ -92,6 +96,24 @@ async function deletePost(postId) {
   })
 }
 
+//게시글 수정
+async function editPost(postId) {
+  const url = API_URL + `/post/${postId}`;
+  const res = await fetch(url, {
+    method:"PUT",
+    headers:{
+        "Authorization" : `Bearer ${token}`,
+        "Content-type" : "application/json"
+    },
+    body: JSON.stringify({
+      "post": {
+        "content": String,
+				"image": String
+      }
+    })
+  })
+}
+
 //상품 삭제
 async function deleteProduct(productId) {
   const url = API_URL + `/product/${productId}`;
@@ -104,6 +126,25 @@ async function deleteProduct(productId) {
   })
 }
 
+//상품 수정
+async function editProduct(productId) {
+  const url = API_URL + `/product/${productId}`;
+  const res = await fetch(url, {
+    method:"PUT",
+    headers:{
+        "Authorization" : `Bearer ${token}`,
+        "Content-type" : "application/json"
+    },
+    body: JSON.stringify({
+      "product": {
+				"itemName": String,
+				"price": Number,
+				"link": String,
+				"itemImage": String
+				}
+    })
+  })
+}
 
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
 async function getBtn() {
@@ -124,6 +165,10 @@ async function getBtn() {
               deletePost(postId);
               ModalAlert.style.display = "none";
             })
+          })
+          btnTwo.addEventListener('click', () => {
+            window.location.href = "../pages/11.uploadPage.html";
+            editPost(postId);
           })
           // close_modal();
         }
@@ -155,6 +200,10 @@ async function getBtn() {
               deleteProduct(productId);
               ModalAlert.style.display = "none";
             })
+          })
+          btnTwo.addEventListener('click', () => {
+            window.location.href = "../pages/09.addProduct.html";
+            editProduct(productId);
           })
         }
   
