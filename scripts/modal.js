@@ -154,7 +154,7 @@ async function getBtn() {
             alert_message("delete_edit");
             close_alert();
             Alert_btnTwo.addEventListener('click', async () => {
-              deletePost(postId[5])
+              deletePost(postId[4])
             })
           })
           // close_modal();
