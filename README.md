@@ -17,13 +17,13 @@
 **Frontend**: HTML, CSS, JavaScript    
 **Backend** : [API 명세](https://paullabworkspace.notion.site/API-b9c93280e29f4670b324009d4461f4d5) [서버 API](http://146.56.183.55:5050/) # 해당 서버가 닫혀있을 시 프로젝트가 제대로 동작하지 않을 수 있음.        
 **IDE** : VS Code   
-**Team Collaboration Tool** : Git, Git Projects, Discord
-**Platform** : Mobile Web
-**Test Browser** : Chrome Version 97.0.4692.71, Safari Version 15.2    
-**Test Device** : iPhoneSE/XR, Gallaxy S12     
+**Team Collaboration Tool** : Git, Git Projects, Discord       
+**Platform** : Mobile Web        
+**Test Browser** : Chrome Version 97.0.4692.71, Safari Version 15.2      
+**Test Device** : iPhoneSE/XR, Gallaxy S12       
 
 ## 기능 구현 상세
-<table style="width: 80%;">
+<table style="width: 100%;">
     <thead>
       <tr>
         <th colspan="3" style="background:black;color:white;text-align:center;">감귤마켓 SNS 팀 프로젝트 진행 현황</th>
