@@ -66,7 +66,10 @@ async function checkUserIdValid(accountname) {
   });
   const json = await res.json();
   for(let item of json) {
-    if(accountname == item["accountname"]) {
+    if(accountname == uAccount.value) {
+      return false;
+      break;
+    } else if(accountname == item["accountname"]) {
       return true;
       break;
     }
@@ -105,14 +108,14 @@ async function updateProfile() {
   const id = uAccount.value;
   const intro = uIntro.value;
   const imgUrl = uImg.src;
-  // const token = localStorage.getItem("Token");
+  const token = localStorage.getItem("Token");
 
   try {
     const res = await fetch("http://146.56.183.55:5050/user", {
 
-                method: "POST",
+                method: "PUT",
                 headers: {
-                  // "Authorization" : `Bearer ${token}`,
+                  "Authorization" : `Bearer ${token}`,
                   "Content-type" : "application/json",
                 },
                 body : JSON.stringify({
@@ -124,9 +127,13 @@ async function updateProfile() {
                     }
                 })
             })
-    console.log(res);
+    // 로컬스토리지에 있는 accountName 업데이트
+    localStorage.setItem("AccountName", id);
     const json = await res.json()
-    console.log(json);
+    console.log(res);
+
+    // 버튼 누르면 프로필로 이동
+    location.href = './6.profile.html'
   }
   catch(err) {
     alert(err)
