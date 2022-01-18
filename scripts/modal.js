@@ -150,9 +150,11 @@ async function getBtn() {
   const btnMoreModal = document.querySelectorAll('.btn-more-modal');
   btnMoreModal.forEach(btn => {
     btn.addEventListener('click', () => {
+      // let scrollPosition = window.scrollY || document.documentElement.scrollTop;
+      // window.scrollTo(0, scrollPosition);
+      // console.log(scrollPosition)
       let postId = btn.classList.item(0);
       let productId = btn.classList.item(0);
-      console.log(btn.classList)
       Modal.classList.toggle('open')
       if (Modal.classList.contains('open')) {
         if (btn.classList.contains('modal-my-edit')) {
@@ -163,6 +165,7 @@ async function getBtn() {
             Alert_btnTwo.addEventListener('click', async () => {
               deletePost(postId);
               ModalAlert.style.display = "none";
+              document.location.reload(true);
             })
           })
           btnTwo.addEventListener('click', () => {
@@ -198,6 +201,7 @@ async function getBtn() {
             Alert_btnTwo.addEventListener('click', async () => {
               deleteProduct(productId);
               ModalAlert.style.display = "none";
+              document.location.reload(true);
             })
           })
           btnTwo.addEventListener('click', () => {
