@@ -23,6 +23,8 @@
   max-width: 432px;
 }
 .img-position .profile-img {
+  width: 110px; height: 110px;
+  border-radius: 110px;
   display: block;
   margin: 30px auto 30px;
 
@@ -45,8 +47,16 @@
   font-size: 14px;
   line-height: 17.53px;
   width: 100%; height: 26px;
-  margin: 6px 0 16px 0;
+  margin: 6px 0 6px 0;
 }
 .form-user .input-txt:focus {
   border-color: #F26E22;
+}
+
+.profile-warn {
+  display: block;
+  margin-bottom: 10px;
+}
+.profile-warn.on {
+  color: #EB5757;
 }

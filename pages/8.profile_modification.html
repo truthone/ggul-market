@@ -19,14 +19,14 @@
     <h1 class="txt-hide">프로필 수정</h1>
     <nav class="wrap-top-nav .space-between">
       <button onclick="location.href='javascript:history.back();'" class="btn-back"><img src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></button>
-      <button type="button" class="Ms-button btn">저장</button>
+      <button type="button" class="profile-save Ms-button btn disabled" disabled>저장</button>
     </nav>
   </header>
   <section class="cont-profile">
     <div class="img-position">
       <img src="../images/basic-profile-img.png" alt="기본 프로필" class="profile-img">
-      <input type="file" name="" id="upload-profile" class="txt-hide">
-      <label for="upload-profile"><img src="../images/upload-file.png" alt="파일업로드" class="upload-file"></label>
+          <input type="file" name="" id="upload-profile" accept="image/*" class="txt-hide">
+          <label for="upload-profile"><img src="../images/upload-file.png" alt="파일업로드" class="upload-file"></label>
     </div>
     <form action="">
       <fieldset>
@@ -37,14 +37,17 @@
         </div>
         <div class="form-user">
           <label for="user-id">계정 ID</label>
-        <input type="text" name="" id="user-id" class="input-txt" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.">
+          <input type="text" name="" id="user-id" class="input-txt" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.">
+          <p class="profile-warn txt-hide">* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</p>
         </div>
         <div class="form-user">
-          <label for="user-intro">소개</label>
+          <label for="user-intro" class="intro">소개</label>
           <input type="text" name="" id="user-intro" class="input-txt" placeholder="자신과 판매할 상품에 대해 소개해 주세요!">
         </div>
       </fieldset>
     </form>
   </section>
+
+  <script src="../scripts/8.profile_modification.js"></script>
 </body>
 </html>
