@@ -144,6 +144,7 @@ async function join() {
   }
   try{
     const res = await fetch("http://146.56.183.55:5050/user", {
+
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -161,15 +162,18 @@ async function join() {
             })
             console.log(res);
             const json = await res.json()
-            // const message = json.message
-            if(res.status==200){
-              location.href = "./index.html"
-          }
-          else{
-              console.log(json)
-          }
+            // const message = json.message;
+            // console.log(message);
+
+            // if(res.status==200){
+            //   // location.href = "./4.home.html"
+            // }
+            // else{
+            //     console.log(json)
+            // }
+            location.href = './2.login.html'
   } catch (err) {
     alert(err)
   }
 }
-joinBtnSubmit.addEventListener('click', join());
+joinBtnSubmit.addEventListener('click', join);
