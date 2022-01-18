@@ -269,6 +269,7 @@ function checkPriceValue() {
     priceInput.value = priceInput.value.replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '');
   });
 
+  // price.toLocaleString();
   // 입력 후 포커스를 잃으면 입력된 가격이 원단위로 표시됩니다.
   // priceInput.addEventListener("blur", () => {
   //   priceInput.value = priceInput.value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
