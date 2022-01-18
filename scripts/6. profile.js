@@ -249,5 +249,6 @@ async function getPost(currentProfile) {
       viewAlbum.appendChild(grid)
     }
   }
+  BtnLike();
   getBtn();
 }

@@ -62,44 +62,7 @@ async function getFeed() {
             handleImageScroll(++idx, imageLength)
         }
     }
-
-    // 좋아요 버튼
-    let btn_like = document.getElementsByClassName('wrap-like-btn');
-    let icon_heart = document.getElementsByClassName('icon-heart');
-    let like_count = document.getElementsByClassName('like-count');
-
-    for (let i = 0; i < btn_like.length; i++) {
-      btn_like[i].addEventListener('click', () => {
-          let postId = btn_like[i].classList[1];
-          let HeartCount = btn_like[i].classList[2];
-          let isHearted = btn_like[i].classList[3];
-        console.log(isHearted)
-        console.log(HeartCount)
-        if (isHearted == "false") {
-            likePost(postId);
-            isHearted = "true"
-            HeartCount = parseInt(HeartCount) + 1;
-            btn_like[i].classList.remove(btn_like[i].classList[3]);
-            btn_like[i].classList.remove(btn_like[i].classList[2]);
-            btn_like[i].classList.add(HeartCount);
-            btn_like[i].classList.add(isHearted);
-            icon_heart[i].src = "../images/icon/icon-heart-active.png";
-        }
-        else {
-            canclelikePost(postId);
-            isHearted = "false"
-            HeartCount = parseInt(HeartCount) - 1;
-            btn_like[i].classList.remove(btn_like[i].classList[3]);
-            btn_like[i].classList.remove(btn_like[i].classList[2]);
-            btn_like[i].classList.add(HeartCount);
-            btn_like[i].classList.add(isHearted);
-            icon_heart[i].src = "../images/icon/icon-heart.png";
-        }
-        console.log(isHearted)
-        console.log(HeartCount)
-        like_count[i].innerHTML = HeartCount;
-      })
-    }
+    BtnLike();
     getBtn();
 }
 
@@ -127,4 +90,44 @@ async function canclelikePost(postId) {
     }
   })
   const data = await res.json();
+}
+
+    // 좋아요 버튼
+function BtnLike() {
+  let btn_like = document.getElementsByClassName('wrap-like-btn');
+  let icon_heart = document.getElementsByClassName('icon-heart');
+  let like_count = document.getElementsByClassName('like-count');
+
+  for (let i = 0; i < btn_like.length; i++) {
+    btn_like[i].addEventListener('click', () => {
+        let postId = btn_like[i].classList[1];
+        let HeartCount = btn_like[i].classList[2];
+        let isHearted = btn_like[i].classList[3];
+      console.log(isHearted)
+      console.log(HeartCount)
+      if (isHearted == "false") {
+          likePost(postId);
+          isHearted = "true"
+          HeartCount = parseInt(HeartCount) + 1;
+          btn_like[i].classList.remove(btn_like[i].classList[3]);
+          btn_like[i].classList.remove(btn_like[i].classList[2]);
+          btn_like[i].classList.add(HeartCount);
+          btn_like[i].classList.add(isHearted);
+          icon_heart[i].src = "../images/icon/icon-heart-active.png";
+      }
+      else {
+          canclelikePost(postId);
+          isHearted = "false"
+          HeartCount = parseInt(HeartCount) - 1;
+          btn_like[i].classList.remove(btn_like[i].classList[3]);
+          btn_like[i].classList.remove(btn_like[i].classList[2]);
+          btn_like[i].classList.add(HeartCount);
+          btn_like[i].classList.add(isHearted);
+          icon_heart[i].src = "../images/icon/icon-heart.png";
+      }
+      console.log(isHearted)
+      console.log(HeartCount)
+      like_count[i].innerHTML = HeartCount;
+    })
+  }
 }
