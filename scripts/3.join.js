@@ -115,16 +115,18 @@ joinUserIdInput.addEventListener('focusout', async () => {
 
   const validUserId = await checkUserIdValid(userId);
   // console.log(validUserId);
-  if(!validUserId) {
+  if(!validUserId && userId != '') {
     profileWarn.classList.remove('txt-hide');
+    profileWarn.classList.remove('on');
     profileWarn.innerText = "* 사용 가능한 아이디 입니다.";
   } else if (!regExp.test(userId)) {
-    profileWarn.innerText = "* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.add('on');
+    profileWarn.innerText = "* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
   }
   else {
     profileWarn.classList.remove('txt-hide');
+    profileWarn.classList.add('on');
     profileWarn.innerText = "* 이미 사용중인 아이디 입니다.";
   }
 });
