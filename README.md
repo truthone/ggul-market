@@ -76,10 +76,13 @@
 
 ✅ 체크리스트✅         
 **1. splash**☑️
-- 서비스 접속 초기화면
 - splash 화면이 잠시 나온 뒤 다음 페이지가 나타납니다.
     - 로그인을 하지 않은 경우 : 로그인 화면
+![splash](https://user-images.githubusercontent.com/93389773/150164180-06ad18b6-43ed-4a7e-a14a-8679770e8aec.gif)
+
     - 로그인이 되어 있는 경우 : 감귤마켓 피드
+![splash2](https://user-images.githubusercontent.com/93389773/150164339-ddd5caa3-b04c-4332-9e6d-b4987c487252.gif)
+
 
 **2. 로그인**☑️
 
