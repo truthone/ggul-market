@@ -125,7 +125,7 @@ joinUserIdInput.addEventListener('focusout', async () => {
 
   const validUserId = await checkUserIdValid(userId);
   // console.log(validUserId);
-  if(!validUserId && userId != '') {
+  if(!validUserId && userId != '' && regExp.test(userId) == true) {
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.remove('on');
     profileWarn.innerText = "* 사용 가능한 아이디 입니다.";

@@ -65,7 +65,6 @@ async function checkUserIdValid(accountname) {
     method:"GET",
   });
   const json = await res.json();
-  console.log(json);
   for(let item of json) {
     if(accountname == accountName) {
       return false;
@@ -85,7 +84,7 @@ uAccount.addEventListener('focusout', async () => {
 
   const validUserId = await checkUserIdValid(userId);
   // console.log(validUserId);
-  if(!validUserId && userId != '') {
+  if(!validUserId && userId != '' && regExp.test(userId) == true) {
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.remove('on');
     profileWarn.innerText = "* 사용 가능한 아이디 입니다.";
