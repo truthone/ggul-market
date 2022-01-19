@@ -239,6 +239,7 @@ const topModal = document.querySelector('.top-modal');
 const topbtnOne = document.querySelector('.top-btn-one');
 const topbtnTwo = document.querySelector('.top-btn-two');
 
+if (topbtnMoreModal)
 topbtnMoreModal.addEventListener('click', () => {
   topModal.classList.toggle('open');
   if (topModal.classList.contains('open')) { 

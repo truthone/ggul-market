@@ -83,7 +83,6 @@ function handleImageScroll(idx, imageLength) {
     scrollLeft = wrapImages.scrollLeft;
     pos = scrollLeft / wrapImages.clientWidth
     pos = Math.round(pos)
-    console.log(pos, btnImage[pos])
     for (let i = 0; i < imageLength; i++) {
       if (i == pos) {
         btnImage[i].style.background = "orange";
