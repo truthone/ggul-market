@@ -29,10 +29,10 @@ async function loadUserData() {
   });
   const json = await res.json();
   console.log(json);
-  uImg.src = json["user"]["image"]
-  uName.value = json["user"]["username"]
+  uImg.src = json["user"]["image"];
+  uName.value = json["user"]["username"];
   uAccount.value = json["user"]["accountname"];
-  uIntro.value =json["user"]["intro"]
+  uIntro.value =json["user"]["intro"];
 }
 loadUserData();
 
@@ -59,14 +59,17 @@ document.querySelector("#upload-profile").addEventListener("change",profileImage
 
 
 // 계정 ID 중복검사
+const accountName = localStorage.getItem("AccountName");
+// console.log(accountName);
 async function checkUserIdValid(accountname) {
   const url = `http://146.56.183.55:5050/user`;
   const res = await fetch(url, {
     method:"GET",
   });
   const json = await res.json();
+  console.log(json);
   for(let item of json) {
-    if(accountname == uAccount.value) {
+    if(accountname == accountName) {
       return false;
       break;
     } else if(accountname == item["accountname"]) {
@@ -79,6 +82,7 @@ async function checkUserIdValid(accountname) {
 // // 계정 ID 포커스 잃었을때 유효성 검사
 uAccount.addEventListener('focusout', async () => {
   const userId = uAccount.value;
+  console.log(userId);
   const regExp = new RegExp('^[a-zA-Z0-9_.]+$');
 
   const validUserId = await checkUserIdValid(userId);
@@ -94,11 +98,15 @@ uAccount.addEventListener('focusout', async () => {
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.add('on');
     profileWarn.innerText = "* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
+    btnSave.disabled = true;
+    btnSave.classList.add('disabled');
   }
   else {
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.add('on');
     profileWarn.innerText = "* 이미 사용중인 아이디 입니다.";
+    btnSave.disabled = true;
+    btnSave.classList.add('disabled');
   }
 });
 
