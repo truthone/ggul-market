@@ -5,7 +5,7 @@ const uIntro = document.querySelector('#user-intro');
 const uImg = document.querySelector('.profile-img');
 const btnSave = document.querySelector('.profile-save');
 const profileWarn = document.querySelector('.profile-warn');
-
+const accountName = localStorage.getItem("AccountName");
 
 // 기존 데이터 불러오기
 async function loadUserData() {
@@ -59,8 +59,6 @@ document.querySelector("#upload-profile").addEventListener("change",profileImage
 
 
 // 계정 ID 중복검사
-const accountName = localStorage.getItem("AccountName");
-// console.log(accountName);
 async function checkUserIdValid(accountname) {
   const url = `http://146.56.183.55:5050/user`;
   const res = await fetch(url, {
@@ -82,7 +80,7 @@ async function checkUserIdValid(accountname) {
 // // 계정 ID 포커스 잃었을때 유효성 검사
 uAccount.addEventListener('focusout', async () => {
   const userId = uAccount.value;
-  console.log(userId);
+  // console.log(userId);
   const regExp = new RegExp('^[a-zA-Z0-9_.]+$');
 
   const validUserId = await checkUserIdValid(userId);
