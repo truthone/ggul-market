@@ -8,13 +8,23 @@ const joinBtnSubmit = document.querySelector(".submit-btn");
 
 
 // 포커스를 잃었을 때 유효성 검사
+// 이메일 형식 유효성 검사
 joinEmailInput.addEventListener('focusout', async () => {
   const email = joinEmailInput.value;
-  const pw = joinPwdInput.value;
+  const regExp = new RegExp('^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+');
+  // console.log(regExp);
+  console.log(regExp.test(email));
+  console.log(email);
+
     const validEmail = await checkEmailValid(email);
-    if(validEmail) {
+    if(validEmail && email != '' && regExp.test(email) == true) {
       emailWarnTxt.classList.remove('txt-hide','login-warn');
       emailWarnTxt.innerText = "* 사용 가능한 이메일 입니다.";
+    }
+    else if(!regExp.test(email)) {
+      emailWarnTxt.classList.remove('txt-hide');
+      emailWarnTxt.classList.add('on');
+      emailWarnTxt.innerText = "* 이메일 형식이 아닙니다.";
     }
     else {
       emailWarnTxt.innerText = "* 이미 가입된 이메일 주소입니다.";
