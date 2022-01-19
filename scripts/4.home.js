@@ -44,7 +44,6 @@ async function getFeed() {
         // console.log(hearted)
         // console.log(heartCount)
 
-        
         if (accountName == post.author.accountname) {
             isMyprofile = true;
         }
@@ -56,7 +55,8 @@ async function getFeed() {
         let imageArr = post.image.split(',')
         let imageLength = imageArr.length;
         let list = loadPost(idx, post, imageArr, imageLength, isMyprofile, authorAccount);
-        container.appendChild(list)
+        if(container) 
+          container.appendChild(list)
         
         if (imageLength > 1){
             handleImageScroll(++idx, imageLength)

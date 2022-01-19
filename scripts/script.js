@@ -65,7 +65,11 @@ function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
 function handleImageScroll(idx, imageLength) {
   let btnImage = document.querySelectorAll(`.btn-image${idx-1}`)
   let wrapImages = document.querySelector(`#wrap-images${idx-1}`)
-  let imageSize = wrapImages.getBoundingClientRect().width;
+  if (!wrapImages){
+    return;
+  }
+  // let imageSize = wrapImages.getBoundingClientRect().width;
+  let imageSize = wrapImages.clientWidth;
   let pos = 0 // 현재 보고 있는 이미지
 
   btnImage.forEach(btn => {
@@ -81,7 +85,7 @@ function handleImageScroll(idx, imageLength) {
   // 스크롤 동작
   wrapImages.addEventListener('scroll', () => {
     scrollLeft = wrapImages.scrollLeft;
-    pos = scrollLeft / wrapImages.clientWidth
+    pos = scrollLeft / imageSize
     pos = Math.round(pos)
     for (let i = 0; i < imageLength; i++) {
       if (i == pos) {
