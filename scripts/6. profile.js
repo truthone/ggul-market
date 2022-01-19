@@ -132,6 +132,7 @@ async function getProfile(currentProfile) {
     let desc = profile.intro;
     let img = profile.image;
     let targetId = profile._id;
+    let accountname = profile.accountname;
     if (followingId.includes(targetId)) {
       btnFollowUnfollow.classList.add('activ')
       btnFollowUnfollow.textContent='언팔로우'
@@ -151,7 +152,7 @@ async function getProfile(currentProfile) {
     followers.textContent = followerCount
     followings.textContent = followingCount
     userName.textContent = name;
-    userId.textContent = `@ ${name}`;
+    userId.textContent = `@ ${accountname}`;
     descUser.textContent = desc;
     await getProductList(currentProfile);
     await getPost(currentProfile);
