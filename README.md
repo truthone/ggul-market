@@ -80,7 +80,7 @@
     - 로그인을 하지 않은 경우 : 로그인 화면
     - 로그인이 되어 있는 경우 : 감귤마켓 피드
 
-![splash](https://user-images.githubusercontent.com/93389773/150164180-06ad18b6-43ed-4a7e-a14a-8679770e8aec.gif){width=50%}\ ![splash2](https://user-images.githubusercontent.com/93389773/150164339-ddd5caa3-b04c-4332-9e6d-b4987c487252.gif){width=50%}
+![splash](https://user-images.githubusercontent.com/93389773/150164180-06ad18b6-43ed-4a7e-a14a-8679770e8aec.gif) ![splash2](https://user-images.githubusercontent.com/93389773/150164339-ddd5caa3-b04c-4332-9e6d-b4987c487252.gif)
 
 
 **2. 로그인**☑️
