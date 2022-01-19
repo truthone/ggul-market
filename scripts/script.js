@@ -1,5 +1,26 @@
 const API_URL = "http://146.56.183.55:5050"
 
+function getMiniProfile(target) {
+  const goURL = `6.profile.html?${target.accountname}`
+  let profile = document.createElement('article');
+  profile.classList = 'box-profile'
+  profile.innerHTML = `<ul class="wrap-profile">
+    <li>
+      <a href=${goURL}><img src=${target.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
+    </li>
+    <li>
+      <a href=${goURL}>
+        <ul class="wrap-right">
+          <li class="user-name">${target.username}</li>
+          <li class="user-id">@ ${target.accountname}</li>
+        </ul>
+      </a>
+    </li>
+  </ul>`
+
+  return profile
+}
+
 function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
   const goURL = `6.profile.html?${authorName}`
 

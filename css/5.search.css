@@ -1,7 +1,7 @@
 .res-search {
   background-color: #FFFFFF;
   padding: 20px 16px;
-  height: calc(100vh - 148px);
+  height: 100vh;
 }
 
 .res-search .wrap-profile {

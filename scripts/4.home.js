@@ -25,7 +25,7 @@ async function getFeed() {
     // 게시물 없음
     if (!json.post){
       const feed = document.querySelector('.feed-cont')
-      console.log(feed)
+      if (feed)
       feed.style.display = "block"
       return;
     }

@@ -17,23 +17,22 @@
 </head>
 <body>
   <header class="top-nav">
-    <h1 class="txt-hide">감귤 마켓 계정 검색</h1>
     <nav class="wrap-top-nav">
       <a href="javascript:history.back();" class="btn-back">
         <img src="../images/icon/icon-arrow-left.png" alt="뒤로가기 버튼" class="icon-arrow-left">
       </a>
-    <form>
-      <fieldset>
-        <legend class="txt-hide">계정 검색</legend>
-        <label for="search-id"></label>
-        <input type="text" placeholder="계정 검색" class="top-search">
-      </fieldset>
-    </form>
+      <form>
+        <fieldset>
+          <legend class="txt-hide">계정 검색</legend>
+          <label for="search-id"></label>
+          <input type="text" placeholder="계정 검색" class="top-search" value='' onkeyup=getAccount(this)>
+        </fieldset>
+      </form>
     </nav>
   </header>
   <section class="res-search">
     <h2 class="txt-hide">계정 검색 결과</h2>
-    <ul class="wrap-profile">
+    <!-- <ul class="wrap-profile">
       <li>
         <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
       </li>
@@ -50,7 +49,7 @@
         <li class="user-name">애월읍 한라봉 최고 맛집</li>
         <li class="user-id">@ hanlabong</li>
       </ul>
-    </ul>
+    </ul> -->
   </section>
   <footer class="tab-menu">
     <nav>
@@ -82,6 +81,7 @@
       </ul>
     </nav>
   </footer>
-  <script src="../scripts/5. search.js"></script>
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/5.search.js"></script>
 </body>
 </html>
