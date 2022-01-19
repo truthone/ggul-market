@@ -5,7 +5,7 @@ const uIntro = document.querySelector('#user-intro');
 const uImg = document.querySelector('.profile-img');
 const btnSave = document.querySelector('.profile-save');
 const profileWarn = document.querySelector('.profile-warn');
-
+const accountName = localStorage.getItem("AccountName");
 
 // 기존 데이터 불러오기
 async function loadUserData() {
@@ -29,10 +29,10 @@ async function loadUserData() {
   });
   const json = await res.json();
   console.log(json);
-  uImg.src = json["user"]["image"]
-  uName.value = json["user"]["username"]
+  uImg.src = json["user"]["image"];
+  uName.value = json["user"]["username"];
   uAccount.value = json["user"]["accountname"];
-  uIntro.value =json["user"]["intro"]
+  uIntro.value =json["user"]["intro"];
 }
 loadUserData();
 
@@ -66,7 +66,7 @@ async function checkUserIdValid(accountname) {
   });
   const json = await res.json();
   for(let item of json) {
-    if(accountname == uAccount.value) {
+    if(accountname == accountName) {
       return false;
       break;
     } else if(accountname == item["accountname"]) {
@@ -79,11 +79,12 @@ async function checkUserIdValid(accountname) {
 // // 계정 ID 포커스 잃었을때 유효성 검사
 uAccount.addEventListener('focusout', async () => {
   const userId = uAccount.value;
+  // console.log(userId);
   const regExp = new RegExp('^[a-zA-Z0-9_.]+$');
 
   const validUserId = await checkUserIdValid(userId);
   // console.log(validUserId);
-  if(!validUserId && userId != '') {
+  if(!validUserId && userId != '' && regExp.test(userId) == true) {
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.remove('on');
     profileWarn.innerText = "* 사용 가능한 아이디 입니다.";
@@ -94,11 +95,15 @@ uAccount.addEventListener('focusout', async () => {
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.add('on');
     profileWarn.innerText = "* 영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.";
+    btnSave.disabled = true;
+    btnSave.classList.add('disabled');
   }
   else {
     profileWarn.classList.remove('txt-hide');
     profileWarn.classList.add('on');
     profileWarn.innerText = "* 이미 사용중인 아이디 입니다.";
+    btnSave.disabled = true;
+    btnSave.classList.add('disabled');
   }
 });
 
