@@ -21,13 +21,13 @@ async function getFeed() {
         }
     })
     const json = await res.json()
-    // console.log(json)
 
     // 게시물 없음
-    if (json.post == []){
-        const feed = document.querySelector('feed-cont')
-        feed.classList.remove('no-cont');
-        return
+    if (!json.post){
+      const feed = document.querySelector('.feed-cont')
+      console.log(feed)
+      feed.style.display = "block"
+      return;
     }
 
     let idx = 0;
