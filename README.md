@@ -76,26 +76,26 @@
 
 ✅ 체크리스트✅  
 
-**1. splash**☑️
+**1. splash**
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/93389773/150164180-06ad18b6-43ed-4a7e-a14a-8679770e8aec.gif">
+    <img src="https://user-images.githubusercontent.com/93389773/150171014-966531fc-e192-4f42-a713-ff69a5667e2a.gif">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="https://user-images.githubusercontent.com/93389773/150164339-ddd5caa3-b04c-4332-9e6d-b4987c487252.gif">
+    <img src="https://user-images.githubusercontent.com/93389773/150171024-2899a4cf-f04d-45ce-8436-ba2c0f90f8ba.gif">
 </p>
       
-**2. 로그인**☑️
+**2. 로그인**
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/93389773/150167642-0b1b7903-715b-47bb-8853-735d5402c4e8.gif">
+    <img src="https://user-images.githubusercontent.com/93389773/150171102-c6adee6c-d3e3-44a6-a1f7-c17bbee5ff09.gif">
 </p>
 
-**3. 회원가입**☑️
+**3. 회원가입**
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/93389773/150168105-40331738-e34a-4e54-9e7e-990d299c23da.gif">
+    <img src="https://user-images.githubusercontent.com/93389773/150171129-4e1caba8-c549-4be7-890d-4b1dda2f1d36.gif">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="https://user-images.githubusercontent.com/93389773/150168100-3f343312-6607-42ad-aad1-b7a6d7323850.gif">
+    <img src="https://user-images.githubusercontent.com/93389773/150171178-0756967a-14b9-4090-87a7-68188f0c8eb7.gif">
 </p>
 
 
@@ -132,7 +132,7 @@
 **8. 내 프로필 수정**☑️
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/93389773/150168719-3c2e5600-2b67-4fae-b1d3-08158538c723.gif">
+    <img src="https://user-images.githubusercontent.com/93389773/150171305-b5e2de2b-4bb9-4045-839c-a220c21992c3.gif">
 </p>
 
 **9. 상품 등록**☑️
