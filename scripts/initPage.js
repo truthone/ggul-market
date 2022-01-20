@@ -67,9 +67,9 @@ function splashPage() {
   // 토큰이 있는 경우 홈피드로 이동
   function splashpage() {
     if (TOKEN != '') {
-      location.href = '../pages/4.home.html'
+      location.href = 'pages/4.home.html'
     } else {
-      location.href = '../pages/2.login.html'
+      location.href = 'pages/2.login.html'
     }
   }
 }
