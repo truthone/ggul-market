@@ -4,13 +4,7 @@ import {
   TOKEN,
   ID
 } from './constants.js'
-import {
-  getMiniProfile,
-  loadPost,
-  handleImageScroll,
-  BtnLike,
-  getBtn
-} from './script.js'
+import {getMiniProfile, loadPost, handleImageScroll, follow, unfollow, BtnLike, BtnComment, getBtn} from './script.js'
 
 // login API
 export async function login() {
@@ -249,6 +243,7 @@ export async function getFeed() {
     }
   }
   BtnLike();
+  BtnComment();
   getBtn();
 }
 

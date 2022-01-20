@@ -84,7 +84,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
       <button>${heartimage}</button><span class="like-count">${post.heartCount}</span>
       </li>
       <li>
-        <button><img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></button><span>${post.commentCount}</span>
+        <button class="${post.id} btn-comment"><img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></button><span>${post.commentCount}</span>
       </li>
     </ul>
     <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
@@ -321,10 +321,89 @@ export async function getBtn() {
             close_alert();
           })
         }
-      } else {
+      } 
+      else {
         Modal.style.bottom = '-240px';
       }
     })
   });
 }
 
+// 댓글 리스트
+export  async function GetComment(postId) {
+  const url = API_URL + `/post/${postId}/comments`;
+  const res = await fetch(url, {
+    method:"GET",
+    headers:{
+      "Authorization" : `Bearer ${TOKEN}`,
+      "Content-type" : "application/json"
+    }
+  })
+  const data = await res.json();
+  console.log(data);
+}
+// 댓글 작성
+export async function editComment(postId) {
+  const url = API_URL + `/post/${postId}/comments`;
+  const res = await fetch(url, {
+    method:"POST",
+    headers:{
+      "Authorization" : `Bearer ${TOKEN}`,
+      "Content-type" : "application/json"
+    }
+  })
+  const data = await res.json();
+  console.log(data);
+}
+// 댓글 삭제
+export async function deleteComment(postId) {
+  const url = API_URL + `/post/${postId}/comments/${commentId}`;
+  const res = await fetch(url, {
+    method:"DELETE",
+    headers:{
+        "Authorization" : `Bearer ${TOKEN}`,
+        "Content-type" : "application/json"
+    }
+  })
+}
+// 댓글 신고
+export async function reportComment(postId) {
+  const url = API_URL + `/post/${postId}/comments/${commentId}/report`;
+  const res = await fetch(url, {
+    method:"POST",
+    headers:{
+      "Authorization" : `Bearer ${TOKEN}`,
+      "Content-type" : "application/json"
+    }
+  })
+  const data = await res.json();
+  console.log(data);
+}
+// 댓글
+export async function BtnComment () {
+  const btn_comment = document.querySelectorAll('.btn-comment');
+  btn_comment.forEach(btn => {
+    btn.addEventListener('click', () => {
+      let postId = btn.classList.item(0);
+      // const goURL = `6.profile.html?${authorName}`;
+      // // profile.classList = 'box-profile'
+      // list.innerHTML = `<h5 class="txt-hide">피드 댓글</h5>
+      // <ul class="wrap-profile">
+      //   <li>
+      //     <a href=${goURL}><img src=${post.author.image} alt="기본프로필 소형" class="basic-profile"></a>
+      //   </li>
+      //   <a href=${goURL}>
+      //     <li>
+      //       <ul class="wrap-right">
+      //         <li class="user-name">${post.author.username}</li>
+      //         <li class="user-id">@ ${post.author.accountname}</li>
+      //       </ul>
+      //     </li>
+      //   </a>
+      //   <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+      // </ul>`
+      console.log(postId)
+      GetComment(postId);
+    })
+  })
+}
