@@ -294,7 +294,13 @@ export async function getAccount(searching) {
     json.forEach(person => {
       let profile = getMiniProfile(person)
       wrapProfile.appendChild(profile)
-      wrapProfile.style.height = "100%";
+      if (json.length > 14) {
+        wrapProfile.style.height = "100%";
+      }
+      else{
+        wrapProfile.style.height = "100vh";
+
+      }
     });
   } catch (err) {
     console.log(err)

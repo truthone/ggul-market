@@ -1,6 +1,11 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
 
+body, html {
+  position: relative;
+  overflow-x: hidden;
+  }
+
 body {
   font-style: normal;
   font-weight: 400;
