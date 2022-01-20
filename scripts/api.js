@@ -397,10 +397,10 @@ async function getProductList(targetName) {
     return
   }
 
-  let price = json.product[0].price.toLocaleString();
   const slider = document.querySelector('.slider')
   for (let product of json.product) {
     let item = document.createElement('button')
+    let price = product.price.toLocaleString();
     item.type = "button"
     item.classList.add(product.id)
     item.classList.add('product')
