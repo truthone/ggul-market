@@ -6,8 +6,8 @@ window.onload = setTimeout(splashpage, 2000);
 function splashpage() {
   const token = localStorage.getItem("Token");
   if(token != '') {
-    location.href = './4.home.html'
+    location.href = '../pages/4.home.html'
   } else {
-    location.href = './2.login.html'
+    location.href = '../pages/2.login.html'
   }
 }

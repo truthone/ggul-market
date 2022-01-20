@@ -33,16 +33,7 @@ async function getFeed() {
     let idx = 0;
     let isMyprofile = false;
     for(let post of json.posts) {
-        // const authorimg = post.author.image
         const authorAccount = post.author.accountname
-        // const authorName = post.author.username
-        // const commentCount = post.commentCount
-        // const content = post.content
-        // const image = post.image
-        // const heartCount = post.heartCount
-        // const hearted = post.hearted
-        // console.log(hearted)
-        // console.log(heartCount)
 
         if (accountName == post.author.accountname) {
             isMyprofile = true;
