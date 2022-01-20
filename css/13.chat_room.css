@@ -67,6 +67,11 @@
 }
 
 .chat-room .wrap-comment .btn-send {
+    width: 33px;
     font-size: 14px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
+}
+
+.active {
+    color: #F26E22;
 }
