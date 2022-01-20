@@ -11,19 +11,19 @@ function initPage() {
   let option = ''
 	if (location.search != '') {
     option = location.search.replace('?', '');
+    option = option.split('?')
 	}
-  if (option == "follower"){
-    getFollower(accountName)
+  if (option[1] === "follower"){
+    getFollower(option[0])
   }
-  else if (option == "following") {
-    getFollowing(accountName)
+  else if (option[1] === "following") {
+    getFollowing(option[0])
     tit_txt.textContent = "Following"
   }
   else {
     history.back();
   }
 }
-
 
 // API
 async function getFollowing(accountName) {
@@ -68,7 +68,7 @@ async function getFollower(accountName) {
 
 function getFollowProfile(target) {
   const goURL = `6.profile.html?${target.accountname}`
-  let state = target.follower.includes(id)?`<li><button type="button" class="S-button btn activ btn-follower_view_follow">취소</button></li>`:`<li><button type="button" class="S-button btn btn-follower_view_follow">팔로우</button></li>`;
+  let state = target.follower.includes(id)?`<li><button type="button" class="S-button btn activ btn-follower_view_follow" id=${target.accountname}>취소</button></li>`:`<li><button type="button" class="S-button btn btn-follower_view_follow" id=${target.accountname}>팔로우</button></li>`;
   let follow = document.createElement('article');
     follow.classList = 'box-profile'
     follow.innerHTML = `<ul class="wrap-profile">
@@ -97,11 +97,14 @@ function followingCheck(){
   btnFollowCancel.forEach(btn => 
   btn.addEventListener("click", () => {
     btn.classList.toggle('activ')
+    console.log(btn.id)
     if (btn.classList.contains('activ')){
       btn.textContent="취소";
+      follow(btn.id)
     }
     else {
       btn.textContent="팔로우";
+      unfollow(btn.id)
     }
   })
 )
