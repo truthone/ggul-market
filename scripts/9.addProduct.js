@@ -29,7 +29,7 @@ const mainElement = document.querySelector(".container");
 async function getProductData() {
   const response = await fetch(`http://146.56.183.55:5050/product/detail/${this.productId}`, {
     headers: {
-      "Authorization": "Bearer " + localStorage.getItem("access-token")
+      "Authorization": "Bearer " + localStorage.getItem("Token")
     }
   });
   this.productData = await response.json();
@@ -167,7 +167,7 @@ function editProductData(saveBtn) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Bearer ' + localStorage.getItem("access-token")
+          "Authorization": 'Bearer ' + localStorage.getItem("Token")
         },
         body: JSON.stringify({
           "product": {
