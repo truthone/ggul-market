@@ -304,7 +304,7 @@ export async function getBtn() {
             })
           })
           btnTwo.addEventListener('click', () => {
-            window.location.href = "../pages/09.addProduct.html";
+            window.location.href = "../pages/9.addProduct.html";
             editProduct(productId);
           })
         } else if (btn.classList.contains('modal-my-comment')) {
