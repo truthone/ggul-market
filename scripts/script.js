@@ -10,7 +10,10 @@ import {
 
 
 
-export function getMiniProfile(target) {
+export function getMiniProfile(target, key) {
+  let name = target.username.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`)
+  let accountname = target.accountname.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`)
+  
   const goURL = `6.profile.html?${target.accountname}`
   let profile = document.createElement('article');
   profile.classList = 'box-profile'
@@ -21,8 +24,8 @@ export function getMiniProfile(target) {
     <li>
       <a href=${goURL}>
         <ul class="wrap-right">
-          <li class="user-name">${target.username}</li>
-          <li class="user-id">@ ${target.accountname}</li>
+          <li class="user-name" style="display: block;">${name}</li>
+          <li class="user-id">@ ${accountname}</li>
         </ul>
       </a>
     </li>

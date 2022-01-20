@@ -292,9 +292,9 @@ export async function getAccount(searching) {
     })
     const json = await res.json()
     json.forEach(person => {
-      let profile = getMiniProfile(person)
+      let profile = getMiniProfile(person, key)
       wrapProfile.appendChild(profile)
-      if (json.length > 14) {
+      if (json.length > 10) {
         wrapProfile.style.height = "100%";
       }
       else{
