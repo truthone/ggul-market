@@ -396,11 +396,12 @@ async function getProductList(targetName) {
     document.querySelector('.wrap-items').style.display = "none";
     return
   }
-  let isMyprofile = targetName == ACCOUNT_NAME;
   let price = json.product[0].price.toLocaleString();
+  let isMyprofile = targetName == ACCOUNT_NAME;
   const slider = document.querySelector('.slider')
   for (let product of json.product) {
     let item = document.createElement('button')
+    let price = product.price.toLocaleString();
     item.type = "button"
     item.classList.add(product.id)
     item.classList.add('product')
