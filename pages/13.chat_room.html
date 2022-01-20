@@ -70,5 +70,19 @@
     </article>
   </main>
   <script src="../scripts/modal.js"></script>
+  <script>
+      const wrapComment = document.querySelector('.wrap-comment');
+      const btnSend = document.querySelector('.btn-send');
+      const Comment = document.querySelector('.input-comment');
+      wrapComment.addEventListener('input', () => {
+        btnSend.classList.add('active');
+        if (Comment.value == "") {
+          btnSend.classList.remove('active');
+        }
+        else {
+          btnSend.classList.add('active');
+        }
+      })
+  </script>
 </body>
 </html>
