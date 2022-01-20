@@ -14,7 +14,6 @@ import {
   getFollowing,
   getFollower,
   loadUserData,
-  // checkUserIdValid,
   updateProfile,
   profileImage
 
@@ -48,8 +47,8 @@ switch (loc) {
   case '7.followers.html':
     followPage();
     break;
-  case '8.profileModifyPage.html':
-    homePage();
+  case '8.profile_modification.html':
+    profileModifyPage();
     break;
   default:
     splashPage();
@@ -59,7 +58,7 @@ switch (loc) {
 
 function splashPage() {
   // index.html 화면이 로드되고 2초 뒤 로그인 화면으로 이동
-  window.onload = setTimeout(splashpage, 2000);
+  window.onload = setTimeout(splashpage, 1000);
   // 토큰이 있는 경우 홈피드로 이동
   function splashpage() {
     if (TOKEN != '') {
@@ -218,17 +217,22 @@ function profilePage() {
   let targetAccount = ACCOUNT_NAME;
   let isMyprofile = false;
 
-  getProfile(targetAccount, isMyprofile)
-  getFollowingList()
   if (location.search != '') {
     targetAccount = location.search.replace('?', '');
+    // 로그인 정보와 프로필이 일치
+    if (ACCOUNT_NAME == targetAccount) {
+      isMyprofile = true;
+    }
+    console.log(isMyprofile)
+    document.querySelector('.cont-followers').href = `7.followers.html?${targetAccount}?follower`
+    document.querySelector('.cont-followings').href = `7.followers.html?${targetAccount}?following`
   }
-  // 로그인 정보와 프로필이 일치
-  if (ACCOUNT_NAME == targetAccount) {
-    isMyprofile = true;
+  else{
+    document.querySelector('.cont-followers').href = `7.followers.html?${ACCOUNT_NAME}?follower`
+    document.querySelector('.cont-followings').href = `7.followers.html?${ACCOUNT_NAME}?following`
   }
-  document.querySelector('.cont-followers').href = `7.followers.html?${targetAccount}?follower`
-  document.querySelector('.cont-followings').href = `7.followers.html?${targetAccount}?following`
+  getProfile(targetAccount)
+  getFollowingList()
 
   const btnViewList = document.querySelector('#toggle-list'); // 목록형 버튼
   const btnViewAlbum = document.querySelector('#toggle-album'); // 앨범형 버튼
