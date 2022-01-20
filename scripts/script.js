@@ -1,5 +1,29 @@
 const API_URL = "http://146.56.183.55:5050"
 
+async function follow(target) {
+  console.log('follow', target)
+  const url = API_URL + `/profile/${target}/follow`
+  const res = await fetch(url,{
+      method:"POST",
+      headers:{
+          "Authorization" : `Bearer ${token}`,
+          "Content-type" : "application/json"
+      }
+  })
+}
+
+async function unfollow(target) {
+  console.log('unfollow', target)
+  const url = API_URL + `/profile/${target}/unfollow`
+  const res = await fetch(url,{
+    method:"DELETE",
+    headers:{
+        "Authorization" : `Bearer ${token}`,
+        "Content-type" : "application/json"
+    }
+})
+}
+
 function getMiniProfile(target) {
   const goURL = `6.profile.html?${target.accountname}`
   let profile = document.createElement('article');

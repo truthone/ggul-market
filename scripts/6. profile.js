@@ -14,7 +14,10 @@ function initPage() {
     targetProfile = location.search.replace('?', '');
     localStorage.setItem("Target", targetProfile)
 	}
+  const gofollower = document.querySelector('.cont-followers').href=`7.followers.html?${targetProfile}?follower`
+  const gofollowing = document.querySelector('.cont-followings').href=`7.followers.html?${targetProfile}?following`
 }
+
 
 async function getFollowingList() {
   const url = API_URL + `/profile/${accountName}`;
@@ -34,9 +37,9 @@ async function getFollowingList() {
     const profile = json.profile
     followingId = profile.following
   }
-catch(err){
-  console.log(err)
-}
+  catch(err){
+    console.log(err)
+  }
 }
 
 
@@ -45,13 +48,15 @@ const btnFollowUnfollow = document.querySelector('#btn-profile_view_follow');
 followBtnChange()
 function followBtnChange() {
 
-  btnFollowUnfollow.addEventListener('click', () => {
+  btnFollowUnfollow.addEventListener('click', (e) => {
     btnFollowUnfollow.classList.toggle('activ')
     if (btnFollowUnfollow.classList.contains('activ')){
       btnFollowUnfollow.textContent="언팔로우";
+      follow(targetProfile)
     }
     else{
       btnFollowUnfollow.textContent="팔로우";
+      unfollow(targetProfile)
     }
   });
 }
@@ -123,8 +128,9 @@ async function getProfile(currentProfile) {
     const profile = json.profile
 
     // 로그인 정보와 프로필이 일치
-    if (accountName == profile.accountname) {
+    if (accountName == targetProfile) {
       isMyprofile = true;
+      console.log('my')
     }
     let followerCount  = profile.followerCount?json.profile.followerCount:0
     let followingCount = profile.followingCount?json.profile.followingCount:0
@@ -156,11 +162,11 @@ async function getProfile(currentProfile) {
     descUser.textContent = desc;
     await getProductList(currentProfile);
     await getPost(currentProfile);
+    
 }
 catch(err){
-  isMyprofile = false;
+  console.log(err)
 }
-
   const myprofile = document.querySelector('.my_profile') 
   const otherprofile = document.querySelector('.other_profile') 
   if (isMyprofile == true) {
@@ -172,7 +178,6 @@ catch(err){
     myprofile.style.display = "flex";
     otherprofile.style.display = "none"
   }
-
 }
 
 // 판매중인 상품 리스트 로드
