@@ -396,7 +396,7 @@ async function getProductList(targetName) {
     document.querySelector('.wrap-items').style.display = "none";
     return
   }
-
+  let isMyprofile = targetName == ACCOUNT_NAME;
   let price = json.product[0].price.toLocaleString();
   const slider = document.querySelector('.slider')
   for (let product of json.product) {
@@ -404,7 +404,12 @@ async function getProductList(targetName) {
     item.type = "button"
     item.classList.add(product.id)
     item.classList.add('product')
-    item.classList.add('modal-product')
+    if (isMyprofile == true) {
+      item.classList.add('modal-product')
+    }
+    else {
+      item.classList.add('modal-other-edit')
+    }
     item.classList.add('btn-more-modal')
     item.innerHTML = `<h5 class="txt-hide">상품 썸네일</h5>
     <img src=${product.itemImage} alt="상품 이미지" class="img-product">
