@@ -22,8 +22,13 @@ import {
   API_URL
 } from './constants.js';
 
-let loc = document.location.href.split('/pages/')[1]
-loc = loc.split('?')[0]
+let loc = []
+if (document.location.href.includes('/pages')){
+  loc = document.location.href.split('/pages/')[1]
+  if (loc.includes('?')){
+    loc = loc.split('?')[0]
+  }
+}
 console.log(loc)
 switch (loc) {
   case '2.login_email.html':

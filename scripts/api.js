@@ -4,7 +4,7 @@ import {
   TOKEN,
   ID
 } from './constants.js'
-import {getMiniProfile, loadPost, handleImageScroll, follow, unfollow, BtnLike, BtnComment, getBtn} from './script.js'
+import {getMiniProfile, loadPost, handleImageScroll, BtnLike, BtnComment, getBtn} from './script.js'
 
 // login API
 export async function login() {
