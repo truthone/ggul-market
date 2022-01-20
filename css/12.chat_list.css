@@ -25,16 +25,22 @@ body {
   box-sizing: border-box;
 }
 
-/* .wrap-profile .img-writer {
-  width: 42px;
-  height: 42px;
-  margin-right: 12px;
-} */
+.wrap-profile .chat > li {
+  position : relative;
+}
 
 .wrap-profile .wrap-right {
   padding-top: 4px;
   height: 38px;
   width: 304px;
+}
+
+.unread-mark {
+  position: absolute;
+  background-color: #F26E22;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
 }
 
 .wrap-profile .wrap-right .user-name {
