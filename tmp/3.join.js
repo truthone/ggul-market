@@ -1,4 +1,6 @@
-// join_email.html
+import {checkEmailValid, imageUpload, checkUserIdValid, join} from './api.js';
+import { API_URL } from './constants.js';
+
 const joinEmailInput = document.querySelector("#join-cont-email");
 const joinPwdInput = document.querySelector("#join-cont-pwd");
 const joinBtnNext = document.querySelector(".join-next");
@@ -6,15 +8,14 @@ const emailWarnTxt = document.querySelector(".login-email-warn");
 const pwdWarnTxt = document.querySelector(".login-pwd-warn");
 const joinBtnSubmit = document.querySelector(".submit-btn");
 
-
 // 포커스를 잃었을 때 유효성 검사
 // 이메일 형식 유효성 검사
 joinEmailInput.addEventListener('focusout', async () => {
   const email = joinEmailInput.value;
   const regExp = new RegExp('^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+');
   // console.log(regExp);
-  console.log(regExp.test(email));
-  console.log(email);
+  // console.log(regExp.test(email));
+  // console.log(email);
 
     const validEmail = await checkEmailValid(email);
     if(validEmail && email != '' && regExp.test(email) == true) {
@@ -49,74 +50,23 @@ joinPwdInput.addEventListener('focusout', async () => {
   }
 });
 
-// 이메일 중복체크
-async function checkEmailValid(email) {
-  const res = await fetch(`http://146.56.183.55:5050/user/emailvalid`, {
-    method:"POST",
-    headers: {
-            "Content-Type": "application/json",
-        },
-    body:JSON.stringify({
-        "user":{
-                "email":email
-        }
-    })
-  });
-  const json = await res.json();
-  return json.message == "사용 가능한 이메일 입니다." ? true : false
-}
-
 // 다음 버튼 클릭시 프로필 설정
 joinBtnNext.addEventListener('click', () => {
   document.querySelector('#setProfile').style.display = "block";
   document.querySelector('#emailJoinin').style.display = "none";
 });
-// // dev code
-// document.querySelector('#setProfile').style.display = "block";
-// document.querySelector('#emailJoinin').style.display = "none";
-
 
 // join_membership
 const joinUserIdInput = document.querySelector('#user-id');
 const profileWarn = document.querySelector('.profile-warn');
 
-// 프로필 이미지 업로드
-async function imageUpload(files){
-  const formData = new FormData();
-  formData.append("image", files[0]);//formData.append("키이름","값")
-  const res = await fetch(`http://146.56.183.55:5050/image/uploadfile`, {
-      method: "POST",
-      body : formData
-  })
-  const data = await res.json()
-  // console.log(data);
-  const productImgName = data["filename"];
-  return productImgName
-}
-
 async function profileImage(e) {
+  const url = API_URL + `/${result}`
   const files = e.target.files
   const result = await imageUpload(files)
-  document.querySelector('.profile-img').src = `http://146.56.183.55:5050/`+result
-  // console.log(result)
+  document.querySelector('.profile-img').src = url
 }
 document.querySelector("#upload-profile").addEventListener("change",profileImage)
-
-
-// 계정 ID 중복검사
-async function checkUserIdValid(accountname) {
-  const url = `http://146.56.183.55:5050/user`;
-  const res = await fetch(url, {
-    method:"GET",
-  });
-  const json = await res.json();
-  for(let item of json) {
-    if(accountname == item["accountname"]) {
-      return true;
-      break;
-    }
-  }
-}
 
 // 계정 ID 포커스 잃었을때 유효성 검사
 joinUserIdInput.addEventListener('focusout', async () => {
@@ -141,51 +91,4 @@ joinUserIdInput.addEventListener('focusout', async () => {
   }
 });
 
-
-// 서버로 데이터 전송
-async function join() {
-  const email = joinEmailInput.value;
-  const pw = joinPwdInput.value;
-  const userName = document.querySelector('#user-name').value;
-  const userId = joinUserIdInput.value;
-  const intro = document.querySelector('#user-intro').value;
-  const imgSrc = document.querySelector('.profile-img').src;
-
-  if(imgSrc === '') {
-    this.imgSrc = "http://127.0.0.1:5500/images/Ellipse.png"
-  }
-  try{
-    const res = await fetch("http://146.56.183.55:5050/user", {
-
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body : JSON.stringify({
-                    "user": {
-                        "email": email,
-                        "password": pw,
-                        "username": userName,
-                        "accountname": userId,
-                        "intro": intro,
-                        "image": imgSrc,
-                    }
-                })
-            })
-            console.log(res);
-            const json = await res.json()
-            // const message = json.message;
-            // console.log(message);
-
-            // if(res.status==200){
-            //   // location.href = "./4.home.html"
-            // }
-            // else{
-            //     console.log(json)
-            // }
-            location.href = './2.login.html'
-  } catch (err) {
-    alert(err)
-  }
-}
 joinBtnSubmit.addEventListener('click', join);

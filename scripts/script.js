@@ -1,30 +1,30 @@
-const API_URL = "http://146.56.183.55:5050"
+import { API_URL, TOKEN } from './constants.js'
 
-async function follow(target) {
+export async function follow(target) {
   console.log('follow', target)
   const url = API_URL + `/profile/${target}/follow`
   const res = await fetch(url,{
       method:"POST",
       headers:{
-          "Authorization" : `Bearer ${token}`,
+          "Authorization" : `Bearer ${TOKEN}`,
           "Content-type" : "application/json"
       }
   })
 }
 
-async function unfollow(target) {
+export async function unfollow(target) {
   console.log('unfollow', target)
   const url = API_URL + `/profile/${target}/unfollow`
   const res = await fetch(url,{
     method:"DELETE",
     headers:{
-        "Authorization" : `Bearer ${token}`,
+        "Authorization" : `Bearer ${TOKEN}`,
         "Content-type" : "application/json"
     }
 })
 }
 
-function getMiniProfile(target) {
+export function getMiniProfile(target) {
   const goURL = `6.profile.html?${target.accountname}`
   let profile = document.createElement('article');
   profile.classList = 'box-profile'
@@ -45,7 +45,7 @@ function getMiniProfile(target) {
   return profile
 }
 
-function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
+export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
   const goURL = `6.profile.html?${authorName}`
 
   let btnMsg = isMyprofile ? 'modal-my-edit' : 'modal-other-edit';
@@ -107,7 +107,7 @@ function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
 }
 
 // 다중 이미지 슬라이드(스크롤)
-function handleImageScroll(idx, imageLength) {
+export function handleImageScroll(idx, imageLength) {
   let btnImage = document.querySelectorAll(`.btn-image${idx-1}`)
   let wrapImages = document.querySelector(`#wrap-images${idx-1}`)
   if (!wrapImages){
@@ -141,3 +141,158 @@ function handleImageScroll(idx, imageLength) {
     }
   })
 }
+
+// 좋아요 버튼
+export function BtnLike() {
+  let btn_like = document.getElementsByClassName('wrap-like-btn');
+  let icon_heart = document.getElementsByClassName('icon-heart');
+  let like_count = document.getElementsByClassName('like-count');
+
+  for (let i = 0; i < btn_like.length; i++) {
+    btn_like[i].addEventListener('click', () => {
+        let postId = btn_like[i].classList[1];
+        let HeartCount = btn_like[i].classList[2];
+        let isHearted = btn_like[i].classList[3];
+      console.log(isHearted)
+      console.log(HeartCount)
+      if (isHearted == "false") {
+          likePost(postId);
+          isHearted = "true"
+          HeartCount = parseInt(HeartCount) + 1;
+          btn_like[i].classList.remove(btn_like[i].classList[3]);
+          btn_like[i].classList.remove(btn_like[i].classList[2]);
+          btn_like[i].classList.add(HeartCount);
+          btn_like[i].classList.add(isHearted);
+          icon_heart[i].src = "../images/icon/icon-heart-active.png";
+      }
+      else {
+        cancellikePost(postId);
+          isHearted = "false"
+          HeartCount = parseInt(HeartCount) - 1;
+          btn_like[i].classList.remove(btn_like[i].classList[3]);
+          btn_like[i].classList.remove(btn_like[i].classList[2]);
+          btn_like[i].classList.add(HeartCount);
+          btn_like[i].classList.add(isHearted);
+          icon_heart[i].src = "../images/icon/icon-heart.png";
+      }
+      console.log(isHearted)
+      console.log(HeartCount)
+      like_count[i].innerHTML = HeartCount;
+    })
+  }
+}
+
+// // 게시글 좋아요 취소
+export async function cancellikePost(postId) {
+  const url = API_URL + `/post/${postId}/unheart`;
+  const res = await fetch(url, {
+    method:"DELETE",
+    headers:{
+      "Authorization" : `Bearer ${token}`,
+      "Content-type" : "application/json"
+    }
+  })
+  const data = await res.json();
+}
+
+// 게시글 좋아요
+export async function likePost(postId) {
+  const url = API_URL + `/post/${postId}/heart`;
+  const res = await fetch(url, {
+    method:"POST",
+    headers:{
+      "Authorization" : `Bearer ${TOKEN}`,
+      "Content-type" : "application/json"
+    }
+  })
+  const data = await res.json();
+  }
+
+  export // 버튼이 동적으로 생성되고 나서 호출됩니다.
+  async function getBtn() {
+    const btnMoreModal = document.querySelectorAll('.btn-more-modal');
+    btnMoreModal.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // let scrollPosition = window.scrollY || document.documentElement.scrollTop;
+        // window.scrollTo(0, scrollPosition);
+        // console.log(scrollPosition)
+        let postId = btn.classList.item(0);
+        let productId = btn.classList.item(0);
+        Modal.classList.toggle('open')
+        if (Modal.classList.contains('open')) {
+          if (btn.classList.contains('modal-my-edit')) {
+            Modal.style.bottom = '-90px'
+            btnOne.addEventListener('click', () => {
+              alert_message("delete_edit");
+              close_alert();
+              Alert_btnTwo.addEventListener('click', async () => {
+                deletePost(postId);
+                ModalAlert.style.display = "none";
+                document.location.reload(true);
+              })
+            })
+            btnTwo.addEventListener('click', () => {
+              window.location.href = "../pages/11.uploadPage.html";
+              editPost(postId);
+            })
+            // close_modal();
+          }
+          
+          else if (btn.classList.contains('modal-other-edit')) {
+            Modal.style.bottom = '-140px'
+            btnOne.textContent = "신고하기";
+            btnOne.addEventListener('click', () => {
+              alert_message("report_edit");
+              // close_alert();
+              Alert_btnOne.addEventListener('click', () => {
+                ModalAlert.style.display = "none";
+                Modal.classList.remove('open');
+              })
+              Alert_btnTwo.addEventListener('click', async () => {
+                reportPost(postId);
+                ModalAlert.style.display = "none";
+                Modal.classList.remove('open');
+              })
+            })
+          }
+    
+          else if (btn.classList.contains('modal-product')){
+            Modal.style.bottom = '-40px';
+            btnOne.addEventListener('click', () => {
+              alert_message("delete_product");
+              close_alert();
+              Alert_btnTwo.addEventListener('click', async () => {
+                deleteProduct(productId);
+                ModalAlert.style.display = "none";
+                document.location.reload(true);
+              })
+            })
+            btnTwo.addEventListener('click', () => {
+              window.location.href = "../pages/09.addProduct.html";
+              editProduct(productId);
+            })
+          }
+    
+          else if (btn.classList.contains('modal-my-comment')){
+            Modal.style.bottom = '-90px';
+            btnOne.addEventListener('click', () => {
+              alert_message("delete_comment");
+              close_alert();
+            })
+          }
+    
+          else if (btn.classList.contains('modal-other-comment')){
+            Modal.style.bottom = '-140px';
+            btnOne.textContent = "신고하기";
+            btnOne.addEventListener('click', () => {
+              alert_message("report_comment");
+              close_alert();
+            })
+          }
+        }
+        else {
+          Modal.style.bottom = '-240px';
+        }
+        })
+    });
+  }
