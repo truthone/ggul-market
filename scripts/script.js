@@ -260,8 +260,10 @@ export async function getBtn() {
   btnMoreModal.forEach(btn => {
     btn.addEventListener('click', () => {
       let postId = btn.classList.item(0);
-      let productId = btn.classList.item(0);
+      let productId = btn.dataset.productId;
+      localStorage.setItem('productId', productId);
       Modal.classList.toggle('open')
+
       if (Modal.classList.contains('open')) {
         if (btn.classList.contains('modal-my-edit')) {
           Modal.style.bottom = '-90px'
@@ -308,7 +310,6 @@ export async function getBtn() {
           })
           btnTwo.addEventListener('click', () => {
             window.location.href = "../pages/9.addProduct.html";
-            editProduct(productId);
           })
         } else if (btn.classList.contains('modal-my-comment')) {
           Modal.style.bottom = '-90px';
