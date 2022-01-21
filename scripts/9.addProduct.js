@@ -27,7 +27,8 @@
 const mainElement = document.querySelector(".container");
 
 // 상품 정보 가져오기
-const productId = '';
+let productId = '';
+productId = localStorage.getItem('productId',productId);
 // "61e8f7b7458f1ddd2e29643f"; //일단 하드코딩. test 계정의 상품-노트북의 아이디 
 
 // async function getProductData() {
@@ -184,8 +185,8 @@ async function postProductData() {
       const data = await response.json();
 
       if (data) {
-        // this.dataReset();
-        // href("/6.profile.html");
+        this.dataReset();
+        href("/6.profile.html");
       }
     }
   // });
@@ -200,44 +201,45 @@ function href(pageName) {
 }
 
 // 상품 정보 서버로 전송 - 수정
-function editProductData() {
-  console.log("상품 정보 서버로 전송 -수정")
-  saveBtn.addEventListener("click", async () => {
-    if (!saveBtn.classList.contains("disabled")) {
-      const productName = document.querySelector("#productNameInput");
-      const productPrice = document.querySelector("#priceInput");
-      const storeLink = document.querySelector("#storeLinkInput");
+// function editProductData() {
+//   console.log("상품 정보 서버로 전송 -수정")
+//   saveBtn.addEventListener("click", async () => {
+//     if (!saveBtn.classList.contains("disabled")) {
+//       const productName = document.querySelector("#productNameInput");
+//       const productPrice = document.querySelector("#priceInput");
+//       const storeLink = document.querySelector("#storeLinkInput");
 
-      const price = parseInt(productPrice.value.replaceAll(",", ""), 10);
-      const response = await fetch(`http://146.56.183.55:5050/product/${this.productId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": 'Bearer ' + localStorage.getItem("Token")
-        },
-        body: JSON.stringify({
-          "product": {
-            "itemName": productName.value,
-            "price": price,
-            "link": storeLink.value,
-            "itemImage": this.productImgName
-          }
-        })
-      });
+//       const price = parseInt(productPrice.value.replaceAll(",", ""), 10);
+//       const response = await fetch(`http://146.56.183.55:5050/product/${this.productId}`, {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "Authorization": 'Bearer ' + localStorage.getItem("Token")
+//         },
+//         body: JSON.stringify({
+//           "product": {
+//             "itemName": productName.value,
+//             "price": price,
+//             "link": storeLink.value,
+//             "itemImage": this.productImgName
+//           }
+//         })
+//       });
 
-      const data = await response.json();
+//       const data = await response.json();
 
-      if (data) {
-        this.dataReset();
-        href("/profile");
-      }
-    }
-  });
-}
+//       if (data) {
+//         this.dataReset();
+//         href("/profile");
+//       }
+//     }
+//   });
+// }
 
 // 상품 정보 전송 후 데이터 리셋
 function dataReset() {
-  console.log("상품 정보 전송 후 데이터 리셋vv")
+  console.log("상품 정보 전송 후 데이터, productId 리셋")
+  localStorage.setItem("productId",'');
   const inputs = document.querySelectorAll("INPUT");
   inputs.forEach((item) => {
     item.value = "";

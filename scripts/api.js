@@ -402,7 +402,7 @@ async function getProductList(targetName) {
     let item = document.createElement('button')
     let price = product.price.toLocaleString();
     item.type = "button"
-    item.classList.add(product.id)
+    item.dataset.productId = product.id;
     item.classList.add('product')
     item.classList.add('modal-product')
     item.classList.add('btn-more-modal')
