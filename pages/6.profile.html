@@ -1,130 +1,185 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
-  <link rel="stylesheet" href="../css/reset.css">
-  <link rel="stylesheet" href="../css/module.css">
-  <link rel="stylesheet" href="../css/6.profile.css">
-  <link rel="stylesheet" href="../css/modal.css">
-</head>
-<body>
-  <header class="top-nav">
-    <h1 class="txt-hide">감귤 마켓</h1>
-    <nav class="wrap-top-nav">
-      <a href="javascript:location.href = document.referrer;" class="btn-back">
-        <img src="../images/icon/icon-arrow-left.png" alt="뒤로가기 버튼" class="icon-arrow-left">
-      </a>
-      <button type="button" class="modal-profile top-btn-more top-btn-more-modal">
-        <img src="../images/icon/icon-more-vertical.png" alt="더보기 버튼" class="icon-more-vertical">
-      </button>
-    </nav>
-  </header>
-  <section class="main-profile">
-    <h2 class="txt-hide">계정 프로필</h2>
-    <article class="wrap-profile">
-      <h3 class="txt-hide">프로필 기본 정보</h3>
-      <a class="cont-followers">
-        <div class="number-follower"><strong>2950</strong></div>
-        <div class="txt-follow">followers</div>
-      </a>
-      <img src="../images/basic-profile-img.png" alt="기본프로필" class="basic-profile-img" id="img-profile">
-      <a class="cont-followings">
-        <div class="number-following" class="number-follow">128</div>
-        <div class="txt-follow">followings</div>
-      </a>
-    </article>
-    <strong class="name-user">애월읍 위니브 감귤농장</strong><br>
-    <small class="id-user">@ weniv_Mandarin</small>
-    <p class="desc-user">애월읍 감귤 전국 배송, 귤따기, 체험, 감귤 농장</p>
-    <article class="my_profile">
-      <h3 class="txt-hide">내 프로필</h3>
-      <button type="button" class="btn-chat"> <img src="../images/icon/icon-message-circle.png" alt="" class="chat-icon-message-circle">
-      </button>
-      <button type="button" class="M-button btn" id="btn-profile_view_follow">팔로우</button>
-      <button type="button" class="btn-share">  <img src="../images/icon/icon-share.png" alt="" class="icon-share">
-      </button>
-    </article>
-    <article class="other_profile">
-      <h3 class="txt-hide">다른 유저의 프로필</h3>
-      <button type="button" onclick="location.href='./8.profile_modification.html'" class="btn activ btn-edit">프로필 수정</button>
-      <button type="button" onclick="location.href='./9.addProduct.html'" class="btn activ btn-post">상품 등록</button>
-    </article>
-  </section>
-  <section class="wrap-items">
-    <h2 class="txt-tit">판매 중인 상품</h2>
-    <article class="slider">
-    </article>
-  </section>
-  <section class="feed">
-    <h2 class="txt-hide">게시글 목록</h2>
-    <header class="wrap-view">
-      <button type="button" id="toggle-list"><img src="../images/icon/icon-post-list-on.png" alt="" class="icon-post-list-on on-view"><img src="../images/icon/icon-post-list-off.png" alt="" class="icon-post-list-off off-view"></button>
-      <button type="button" id="toggle-album"><img src="../images/icon/icon-post-album-on.png" alt="" class="icon-post-album-on off-view"><img src="../images/icon/icon-post-album-off.png" alt="" class="icon-post-album-of on-view"></button>
-    </header>
-    <article class="list-post">
-      <h2 class="txt-hide">목록형 게시글</h2>
-      <article class="home-post">
-        <h5 class="txt-hide">피드 게시글</h5>
-      </article>
-    </article>
-    <article class="grid-post">
-      <h2 class="txt-hide">앨범형 게시글</h2>
-    </article>
-  </section>
-  <article class="top-modal">
-    <ul>
-      <li><a href="#" class="top-btn-one">설정 및 개인정보</a></li>
-      <li><a href="#" class="top-btn-two">로그아웃</a></li>
-    </ul>
-  </article>
-  <article class="modal">
-    <ul>
-      <li><a href="#" class="btn-one">삭제</a></li>
-      <li><a href="#" class="btn-two">수정</a></li>
-      <li><a href="#">웹사이트에서 상품보기</a></li>
-    </ul>
-  </article>
-  <article class="modal-alert">
-    <h1 class="txt-hide">확인 메세지 모달창</h1>
-      <p class="alert-message">상품을 삭제할까요?</p>
-      <ul class="wrap-modal-alert">
-        <li><button type="button" class="btn-modal alert-btn-one">취소</button></li>
-        <li><button type="button" class="btn-modal btn-modal2 alert-btn-two">삭제</button></li>
-      </ul>
-  </article>
-  <footer class="tab-menu">
-    <nav>
-      <ul class="wrap-tab-menu">
-        <li>
-          <a href="4.home.html">
-            <img src="../images/icon/icon-home.svg" alt="홈 아이콘" class="tab-icon">
-            <p class="tab-text">홈</p>
-          </a>
-        </li>
-        <li>
-          <a href="12.chat_list.html">
-            <img src="../images/icon/icon-message-circle.svg" alt="채팅 아이콘" class="tab-icon">
-            <p class="tab-text">채팅</p>
-          </a>
-        </li>
-        <li>
-          <a href="11.uploadPage.html">
-            <img src="../images/icon/icon-edit.svg" alt="게시물 아이콘" class="tab-icon">
-            <p class="tab-text">게시물 작성</p>
-          </a>
-        </li>
-        <li>
-          <a href="6.profile.html">
-            <img src="../images/icon/icon-user-fill.png" alt="활성화 프로필 아이콘" class="tab-icon">
-            <p class="tab-text activ">프로필</p>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </footer>
-  <script type="module" src="../scripts/initPage.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>User Profile</title>
+		<link rel="stylesheet" href="../css/reset.css" />
+		<link rel="stylesheet" href="../css/module.css" />
+		<link rel="stylesheet" href="../css/6.profile.css" />
+		<link rel="stylesheet" href="../css/modal.css" />
+	</head>
+	<body>
+		<header class="top-nav">
+			<h1 class="txt-hide">감귤 마켓</h1>
+			<nav class="wrap-top-nav">
+				<a href="javascript:location.href = document.referrer;" class="btn-back">
+					<img
+						src="../images/icon/icon-arrow-left.png"
+						alt="뒤로가기 버튼"
+						class="icon-arrow-left"
+					/>
+				</a>
+				<button type="button" class="modal-profile top-btn-more top-btn-more-modal">
+					<img
+						src="../images/icon/icon-more-vertical.png"
+						alt="더보기 버튼"
+						class="icon-more-vertical"
+					/>
+				</button>
+			</nav>
+		</header>
+		<section class="main-profile">
+			<h2 class="txt-hide">계정 프로필</h2>
+			<article class="wrap-profile">
+				<h3 class="txt-hide">프로필 기본 정보</h3>
+				<a class="cont-followers">
+					<div class="number-follower"><strong>2950</strong></div>
+					<div class="txt-follow">followers</div>
+				</a>
+				<img
+					src="../images/basic-profile-img.png"
+					alt="기본프로필"
+					class="basic-profile-img"
+					id="img-profile"
+				/>
+				<a class="cont-followings">
+					<div class="number-following" class="number-follow">128</div>
+					<div class="txt-follow">followings</div>
+				</a>
+			</article>
+			<strong class="name-user">애월읍 위니브 감귤농장</strong><br />
+			<small class="id-user">@ weniv_Mandarin</small>
+			<p class="desc-user">애월읍 감귤 전국 배송, 귤따기, 체험, 감귤 농장</p>
+			<article class="my_profile">
+				<h3 class="txt-hide">내 프로필</h3>
+				<button type="button" class="btn-chat">
+					<img
+						src="../images/icon/icon-message-circle.png"
+						alt=""
+						class="chat-icon-message-circle"
+					/>
+				</button>
+				<button type="button" class="M-button btn" id="btn-profile_view_follow">팔로우</button>
+				<button type="button" class="btn-share">
+					<img src="../images/icon/icon-share.png" alt="" class="icon-share" />
+				</button>
+			</article>
+			<article class="other_profile">
+				<h3 class="txt-hide">다른 유저의 프로필</h3>
+				<button
+					type="button"
+					onclick="location.href='./8.profile_modification.html'"
+					class="btn activ btn-edit"
+				>
+					프로필 수정
+				</button>
+				<button
+					type="button"
+					onclick="location.href='./9.addProduct.html'"
+					class="btn activ btn-post"
+				>
+					상품 등록
+				</button>
+			</article>
+		</section>
+		<section class="wrap-items">
+			<h2 class="txt-tit">판매 중인 상품</h2>
+			<article class="slider"></article>
+		</section>
+		<section class="feed">
+			<h2 class="txt-hide">게시글 목록</h2>
+			<header class="wrap-view">
+				<button type="button" id="toggle-list">
+					<img
+						src="../images/icon/icon-post-list-on.png"
+						alt=""
+						class="icon-post-list-on on-view"
+					/><img
+						src="../images/icon/icon-post-list-off.png"
+						alt=""
+						class="icon-post-list-off off-view"
+					/>
+				</button>
+				<button type="button" id="toggle-album">
+					<img
+						src="../images/icon/icon-post-album-on.png"
+						alt=""
+						class="icon-post-album-on off-view"
+					/><img
+						src="../images/icon/icon-post-album-off.png"
+						alt=""
+						class="icon-post-album-of on-view"
+					/>
+				</button>
+			</header>
+			<article class="list-post">
+				<h2 class="txt-hide">목록형 게시글</h2>
+			</article>
+			<article class="grid-post">
+				<h2 class="txt-hide">앨범형 게시글</h2>
+			</article>
+		</section>
+		<article class="top-modal">
+			<ul>
+				<li><a href="#" class="top-btn-one">설정 및 개인정보</a></li>
+				<li><a href="#" class="top-btn-two">로그아웃</a></li>
+			</ul>
+		</article>
+		<article class="modal">
+			<ul>
+				<li><a href="#" class="btn-one">삭제</a></li>
+				<li><a href="#" class="btn-two">수정</a></li>
+				<li><a href="#">웹사이트에서 상품보기</a></li>
+			</ul>
+		</article>
+		<article class="modal-alert">
+			<h1 class="txt-hide">확인 메세지 모달창</h1>
+			<p class="alert-message">상품을 삭제할까요?</p>
+			<ul class="wrap-modal-alert">
+				<li><button type="button" class="btn-modal alert-btn-one">취소</button></li>
+				<li><button type="button" class="btn-modal btn-modal2 alert-btn-two">삭제</button></li>
+			</ul>
+		</article>
+		<footer class="tab-menu">
+			<nav>
+				<ul class="wrap-tab-menu">
+					<li>
+						<a href="4.home.html">
+							<img src="../images/icon/icon-home.svg" alt="홈 아이콘" class="tab-icon" />
+							<p class="tab-text">홈</p>
+						</a>
+					</li>
+					<li>
+						<a href="12.chat_list.html">
+							<img
+								src="../images/icon/icon-message-circle.svg"
+								alt="채팅 아이콘"
+								class="tab-icon"
+							/>
+							<p class="tab-text">채팅</p>
+						</a>
+					</li>
+					<li>
+						<a href="11.uploadPage.html">
+							<img src="../images/icon/icon-edit.svg" alt="게시물 아이콘" class="tab-icon" />
+							<p class="tab-text">게시물 작성</p>
+						</a>
+					</li>
+					<li>
+						<a href="6.profile.html">
+							<img
+								src="../images/icon/icon-user-fill.png"
+								alt="활성화 프로필 아이콘"
+								class="tab-icon"
+							/>
+							<p class="tab-text activ">프로필</p>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</footer>
+		<script type="module" src="../scripts/initPage.js"></script>
+	</body>
 </html>
