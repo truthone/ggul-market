@@ -5,7 +5,11 @@ import {
   deletePost,
   deleteProduct,
   editPost,
-  editProduct
+  editProduct,
+  GetComment,
+  editComment,
+  deleteComment,
+  reportComment,
 } from './api.js'
 
 
@@ -35,10 +39,12 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
   const goURL = `6.profile.html?${authorName}`
 
   let btnMsg = isMyprofile ? 'modal-my-edit' : 'modal-other-edit';
+  let btnCommentMsg = isMyprofile ? 'modal-my-comment' : 'modal-other-comment';
 
   let images = ''
   let list = document.createElement('article')
-  list.classList = 'home-post'
+  list.classList = 'home-post';
+  list.classList.add(post.id);
 
   let date = post.createdAt.slice(0, 10).split('-')
   // 이미지가 있을 때
@@ -59,22 +65,24 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
   // console.log(post.hearted)
   let heartimage = post.hearted ? '<img src="../images/icon/icon-heart-active.png" alt="좋아요 이미지" class="icon-heart">' : '<img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart">'
 
-  list.innerHTML = `<h5 class="txt-hide">피드 게시글</h5>
-  <ul class="wrap-profile">
-    <li>
-      <a href=${goURL}><img src=${post.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-    </li>
-    <a href=${goURL}>
+  list.innerHTML = `<section>
+    <h5 class="txt-hide">피드 게시글</h5>
+    <ul class="wrap-profile">
       <li>
-        <ul class="wrap-right">
-          <li class="user-name">${post.author.username}</li>
-          <li class="user-id">@ ${post.author.accountname}</li>
-        </ul>
+        <a href=${goURL}><img src=${post.author.image} alt="기본프로필 소형" class="basic-profile"></a>
       </li>
-    </a>
-    <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-  </ul>
-  <div class="main-feed">
+      <a href=${goURL}>
+        <li>
+          <ul class="wrap-right">
+            <li class="user-name">${post.author.username}</li>
+            <li class="user-id">@ ${post.author.accountname}</li>
+          </ul>
+        </li>
+      </a>
+      <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+    </ul>
+  </section>
+  <section class="main-feed">
     <p class="txt-feed">
     ${post.content}
     </p>
@@ -88,9 +96,35 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
       </li>
     </ul>
     <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
-  </div>`
+  </section>
+  <section class="comment hidden">
+    <p>comment 파트 입니다</p>
+  </section>`
   return list;
 }
+
+// <section class="comment hidden"></section>안에 추가될 부분
+// `
+// <ul class="wrap-profile">
+// <li>
+//   <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
+// </li>
+// <a href=${goURL}>
+//   <li>
+//     <ul class="wrap-right">
+//       <li class="user-name">${comment.author.username}</li>
+//     </ul>
+//   </li>
+// </a>
+// <li>
+//   <small class="txt-date">${comment.createdAt}</small>
+// </li>
+// <li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+// </ul>
+// <p class="txt-feed">
+// ${comment.content}
+// </p>
+// `
 
 // 다중 이미지 슬라이드(스크롤)
 export function handleImageScroll(idx, imageLength) {
@@ -329,81 +363,82 @@ export async function getBtn() {
   });
 }
 
-// 댓글 리스트
-export  async function GetComment(postId) {
-  const url = API_URL + `/post/${postId}/comments`;
-  const res = await fetch(url, {
-    method:"GET",
-    headers:{
-      "Authorization" : `Bearer ${TOKEN}`,
-      "Content-type" : "application/json"
-    }
-  })
-  const data = await res.json();
-  console.log(data);
-}
-// 댓글 작성
-export async function editComment(postId) {
-  const url = API_URL + `/post/${postId}/comments`;
-  const res = await fetch(url, {
-    method:"POST",
-    headers:{
-      "Authorization" : `Bearer ${TOKEN}`,
-      "Content-type" : "application/json"
-    }
-  })
-  const data = await res.json();
-  console.log(data);
-}
-// 댓글 삭제
-export async function deleteComment(postId) {
-  const url = API_URL + `/post/${postId}/comments/${commentId}`;
-  const res = await fetch(url, {
-    method:"DELETE",
-    headers:{
-        "Authorization" : `Bearer ${TOKEN}`,
-        "Content-type" : "application/json"
-    }
-  })
-}
-// 댓글 신고
-export async function reportComment(postId) {
-  const url = API_URL + `/post/${postId}/comments/${commentId}/report`;
-  const res = await fetch(url, {
-    method:"POST",
-    headers:{
-      "Authorization" : `Bearer ${TOKEN}`,
-      "Content-type" : "application/json"
-    }
-  })
-  const data = await res.json();
-  console.log(data);
-}
 // 댓글
 export async function BtnComment () {
-  const btn_comment = document.querySelectorAll('.btn-comment');
-  btn_comment.forEach(btn => {
-    btn.addEventListener('click', () => {
-      let postId = btn.classList.item(0);
-      // const goURL = `6.profile.html?${authorName}`;
-      // // profile.classList = 'box-profile'
-      // list.innerHTML = `<h5 class="txt-hide">피드 댓글</h5>
-      // <ul class="wrap-profile">
-      //   <li>
-      //     <a href=${goURL}><img src=${post.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-      //   </li>
-      //   <a href=${goURL}>
-      //     <li>
-      //       <ul class="wrap-right">
-      //         <li class="user-name">${post.author.username}</li>
-      //         <li class="user-id">@ ${post.author.accountname}</li>
-      //       </ul>
-      //     </li>
-      //   </a>
-      //   <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-      // </ul>`
+  // const btn_comment = document.querySelectorAll('.btn-comment');
+  // const home_post = document.querySelectorAll('.home-post');
+  const btn_comment = document.getElementsByClassName('btn-comment');
+  const home_post = document.getElementsByClassName('home-post');
+  const comment = document.getElementsByClassName('comment');
+  const top_nav = document.querySelector('.wrap-top-nav');
+  // console.log(home_post)
+  // console.log(home_post.length)
+  for (let i = 0; i < home_post.length; i++) {
+    btn_comment[i].addEventListener('click', () => {
+      let postId = btn_comment[i].classList[0];
       console.log(postId)
+      for (let j = 0; j < home_post.length; j++) {
+        if (home_post[j].classList[1] != postId) {
+          comment[i].classList.remove('hidden');
+          home_post[j].style.display = "none";
+        }
+      }
       GetComment(postId);
+      console.log(postId)
+      //페이지 그리기
+      // home_post[i].innerHTML = `
+      // `
     })
-  })
+  }
 }
+
+  // btn_comment.forEach(btn => {
+  //   btn.addEventListener('click', () => {
+  //     // const home_post = document.querySelector('.home-post');
+  //     postId = btn.classList.item(0);
+  //     localStorage.setItem('postId', postId)
+  //     console.log(postId)
+  //     // console.log('postId:', postId)
+  //     // console.log('home_post:', home_post.classList.item(1))
+  //     // if (home_post.classList.item(1) != postId)
+  //     // {
+  //     //   home_post.style.display = "none";
+  //     // }
+  //     // GetComment(postId);
+  //     // window.location.href = "../pages/10.comment_page.html";
+  //     // let btnMsg = isMyprofile ? 'modal-my-edit' : 'modal-other-edit';
+  //     // let list = document.createElement('section');
+  //     // const goURL = `6.profile.html?${authorName}`;
+  //     // loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName);
+  //     // console.log(localStorage.getItem(postId))
+  //   })
+  //   postId = localStorage.getItem(postId);
+  // })
+
+
+// <section class="wrap-comment active">
+// <ul class="wrap-profile">
+//   <li>
+//     <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
+//   </li>
+//   <a href=${goURL}>
+//     <li>
+//       <ul class="wrap-right">
+//         <li class="user-name">${comment.author.username}</li>
+//       </ul>
+//     </li>
+//   </a>
+//   <small>${comment.createdAt}</small>
+//   <li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+// </ul>
+// <p class="txt-feed">
+// ${comment.content}
+// </p>
+// <div class="wrap-comment">
+//   <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
+//   <form class="form-comment">
+//     <input class="input-comment" type="text" placeholder="댓글 입력하기...">
+//     <button class="btn-send">게시</button>
+//   </form>
+// </div>
+// </section>
