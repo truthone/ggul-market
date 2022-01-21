@@ -25,21 +25,30 @@
 //   return mainElement;
 // }
 const mainElement = document.querySelector(".container");
+
 // 상품 정보 가져오기
-async function getProductData() {
-  const response = await fetch(`http://146.56.183.55:5050/product/detail/${this.productId}`, {
-    headers: {
-      "Authorization": "Bearer " + localStorage.getItem("Token")
-    }
-  });
-  this.productData = await response.json();
-}
+let productId = '';
+productId = localStorage.getItem('productId',productId);
+// "61e8f7b7458f1ddd2e29643f"; //일단 하드코딩. test 계정의 상품-노트북의 아이디 
+
+// async function getProductData() {
+//   // const response = await fetch(`http://146.56.183.55:5050/product/detail/${productId}`, {
+//   //   headers: {
+//   //     "Authorization": "Bearer " + localStorage.getItem("Token")
+//   //   }
+//   // });
+//   // const productData = await response.json();
+//   setCurrentData(productData);
+// }
+
+
 
 // 첨부된 이미지 나타나기
 function postProductImg() {
   console.log("첨부된 이미지 나타내기")
+
   const imgInput = document.querySelector("#productImgInput");
-  const productImgBox = document.querySelector("#product-img-box");
+  const productImgBox = document.querySelector("#product-img-box"); 
   let productImgElement = document.querySelector("#product-img-box img");
 
   imgInput.addEventListener("change", (e) => {
@@ -70,7 +79,6 @@ function postProductImg() {
       .then((res) => res.json())
       .then((data) => {
         this.productImgName = data["filename"];
-        console.log("파일이름 받아옴요")
         btnActive();
       })
       .catch((err) => console.err(err));
@@ -83,27 +91,46 @@ async function setCurrentData() {
   const productName = document.querySelector("#productNameInput");
   const productPrice = document.querySelector("#priceInput");
   const storeLink = document.querySelector("#storeLinkInput");
-  const productImgInput = documenthis.querySelector("#productImgInput");
+  const productImgInput = document.querySelector("#productImgInput");
   const productImgBox = document.querySelector("#product-img-box")
-
   const productImgElement = document.createElement("img");
   productImgBox.append(productImgElement);
 
-  await this.getProductData();
+  const response = await fetch(`http://146.56.183.55:5050/product/detail/${productId}`, {
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem("Token")
+    }
+  });
+  const productData = await response.json();
 
-  const data = this.productData["product"];
-  this.productImgName = data["itemImage"];
+  // await this.getProductData();
+
+  // productImgElement.src = data.product.itemImage;
+  // imgInput.setAttribute("data-state", 1);
+  
+  // this.productImgName = data["filename"];
+  // btnActive();
+
+  // const data = productData.product["product"];
+  // productImgName = data["itemImage"];
+  // productImgElement.src = this.productImgName;
+  // productName.value = data["itemName"];
+  // productPrice.value = data["price"];
+  // storeLink.value = data["link"];
+
+   const data = productData.product;
+  productImgName = data.itemImage;
   productImgElement.src = this.productImgName;
-  productName.value = data["itemName"];
-  productPrice.value = data["price"];
-  storeLink.value = data["link"];
+  productName.value = data.itemName;
+  productPrice.value = data.price;
+  storeLink.value = data.link;
 
   productImgInput.setAttribute("data-state", 1);
   productName.setAttribute("data-state", 1);
   productPrice.setAttribute("data-state", 1);
   storeLink.setAttribute("data-state", 1);
 
-  this.btnActive();
+  btnActive();
 }
 
 // 상품 정보 서버로 전송 - 업로드
@@ -119,7 +146,26 @@ async function postProductData() {
       console.log(`productImgName : ${this.productImgName}`)
 
       const price = parseInt(productPrice.value.replaceAll(",", ""), 10);
-      const response = await fetch(`http://146.56.183.55:5050/product`, {
+      let response = '';
+
+      if (productId) {
+          response = await fetch(`http://146.56.183.55:5050/product/${productId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": 'Bearer ' + localStorage.getItem("Token")
+          },
+          body: JSON.stringify({
+            "product": {
+              "itemName": productName.value,
+              "price": price,
+              "link": storeLink.value,
+              "itemImage": this.productImgName
+            }
+          })
+        });
+      } else {
+        response = await fetch(`http://146.56.183.55:5050/product`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,6 +180,7 @@ async function postProductData() {
           }
         })
       });
+    }
 
       const data = await response.json();
 
@@ -154,44 +201,45 @@ function href(pageName) {
 }
 
 // 상품 정보 서버로 전송 - 수정
-function editProductData(saveBtn) {
-  console.log("상품 정보 서버로 전송 -수정")
-  saveBtn.addEventListener("click", async () => {
-    if (!saveBtn.classList.contains("disabled")) {
-      const productName = document.querySelector("#productNameInput");
-      const productPrice = document.querySelector("#priceInput");
-      const storeLink = document.querySelector("#storeLinkInput");
+// function editProductData() {
+//   console.log("상품 정보 서버로 전송 -수정")
+//   saveBtn.addEventListener("click", async () => {
+//     if (!saveBtn.classList.contains("disabled")) {
+//       const productName = document.querySelector("#productNameInput");
+//       const productPrice = document.querySelector("#priceInput");
+//       const storeLink = document.querySelector("#storeLinkInput");
 
-      const price = parseInt(productPrice.value.replaceAll(",", ""), 10);
-      const response = await fetch(`http://146.56.183.55:5050/product/${this.productId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": 'Bearer ' + localStorage.getItem("Token")
-        },
-        body: JSON.stringify({
-          "product": {
-            "itemName": productName.value,
-            "price": price,
-            "link": storeLink.value,
-            "itemImage": this.productImgName
-          }
-        })
-      });
+//       const price = parseInt(productPrice.value.replaceAll(",", ""), 10);
+//       const response = await fetch(`http://146.56.183.55:5050/product/${this.productId}`, {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "Authorization": 'Bearer ' + localStorage.getItem("Token")
+//         },
+//         body: JSON.stringify({
+//           "product": {
+//             "itemName": productName.value,
+//             "price": price,
+//             "link": storeLink.value,
+//             "itemImage": this.productImgName
+//           }
+//         })
+//       });
 
-      const data = await response.json();
+//       const data = await response.json();
 
-      if (data) {
-        this.dataReset();
-        href("/profile");
-      }
-    }
-  });
-}
+//       if (data) {
+//         this.dataReset();
+//         href("/profile");
+//       }
+//     }
+//   });
+// }
 
 // 상품 정보 전송 후 데이터 리셋
 function dataReset() {
-  console.log("상품 정보 전송 후 데이터 리셋vv")
+  console.log("상품 정보 전송 후 데이터, productId 리셋")
+  localStorage.setItem("productId",'');
   const inputs = document.querySelectorAll("INPUT");
   inputs.forEach((item) => {
     item.value = "";
@@ -340,4 +388,6 @@ function clickImgBtn() {
 window.addEventListener("DOMContentLoaded", () => {
   inputEvent()
   postProductImg()
+  // getProductData();
+  setCurrentData();
 });
