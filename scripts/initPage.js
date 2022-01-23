@@ -233,19 +233,19 @@ function profilePage() {
 
 	// 목록형, 앨범형 토글
 	function toggleView(show, hide) {
-		show.firstChild.classList.toggle("off-view");
-		show.firstChild.classList.toggle("on-view");
-		show.lastChild.classList.toggle("on-view");
-		show.lastChild.classList.toggle("off-view");
+		show.firstElementChild.classList.toggle("off-view");
+		show.firstElementChild.classList.toggle("on-view");
+		show.lastElementChild.classList.toggle("on-view");
+		show.lastElementChild.classList.toggle("off-view");
 
-		hide.firstChild.classList.toggle("on-view");
-		hide.firstChild.classList.toggle("off-view");
-		hide.lastChild.classList.toggle("off-view");
-		hide.lastChild.classList.toggle("on-view");
+		hide.firstElementChild.classList.toggle("on-view");
+		hide.firstElementChild.classList.toggle("off-view");
+		hide.lastElementChild.classList.toggle("off-view");
+		hide.lastElementChild.classList.toggle("on-view");
 	}
 
 	btnViewList.addEventListener("click", () => {
-		if (btnViewList.firstChild.classList.contains("off-view")) {
+		if (btnViewList.firstElementChild.classList.contains("off-view")) {
 			toggleView(btnViewList, btnViewAlbum);
 			viewList.style.display = "block";
 			viewAlbum.style.display = "none";
@@ -253,7 +253,7 @@ function profilePage() {
 	});
 
 	btnViewAlbum.addEventListener("click", () => {
-		if (btnViewAlbum.firstChild.classList.contains("off-view")) {
+		if (btnViewAlbum.firstElementChild.classList.contains("off-view")) {
 			toggleView(btnViewAlbum, btnViewList);
 			viewAlbum.style.display = "grid";
 			viewList.style.display = "none";
