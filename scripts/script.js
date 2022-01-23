@@ -256,9 +256,10 @@ export async function getBtn() {
   const Alert_btnTwo = document.querySelector('.alert-btn-two');
   btnMoreModal.forEach(btn => {
     btn.addEventListener('click', () => {
-      let postId = btn.classList.item(0);
+      let postId = btn.classList.item(0) ;
       let productId = btn.dataset.productId;
       localStorage.setItem('productId', productId);
+      localStorage.setItem('postId', postId);
       Modal.classList.toggle('open')
 
       if (Modal.classList.contains('open')) {
@@ -275,7 +276,7 @@ export async function getBtn() {
           })
           btnTwo.addEventListener('click', () => {
             window.location.href = "../pages/11.uploadPage.html";
-            editPost(postId);
+            // editPost(postId);
           })
           // close_modal();
         } else if (btn.classList.contains('modal-other-edit')) {
