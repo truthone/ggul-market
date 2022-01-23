@@ -98,7 +98,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
     <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
   </section>
   <section class="comment hidden">
-    COMMENT
+    
   </section>`;
 	return list;
 }
