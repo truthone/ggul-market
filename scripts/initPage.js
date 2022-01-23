@@ -273,6 +273,14 @@ function profilePage() {
     }
   })
 
+  // 게시물작성 버튼 누르면 로컬스토리지의 postId 초기화
+  const addPostBtn = document.querySelector('#btn-add-post');
+  
+  addPostBtn.addEventListener('click', () => {
+    if(localStorage.getItem('postId')){
+      localStorage.setItem('postId','');
+    }
+  })
 }
 
 function followPage() {
