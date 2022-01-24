@@ -105,25 +105,25 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 
 // <section class="comment hidden"></section>안에 추가될 부분
 // `
-// <ul class="wrap-profile">
-// <li>
-//   <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-// </li>
-// <a href=${goURL}>
-//   <li>
-//     <ul class="wrap-right">
-//       <li class="user-name">${comment.author.username}</li>
-//     </ul>
-//   </li>
-// </a>
-// <li>
-//   <small class="txt-date">${comment.createdAt}</small>
-// </li>
-// <li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-// </ul>
-// <p class="txt-feed">
-// ${comment.content}
-// </p>
+/* <ul class="wrap-profile">
+<li>
+  <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
+</li>
+<a href=${goURL}>
+  <li>
+    <ul class="wrap-right">
+      <li class="user-name">${comment.author.username}</li>
+    </ul>
+  </li>
+</a>
+<li>
+  <small class="txt-date">${comment.createdAt}</small>
+</li>
+<li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+</ul>
+<p class="txt-feed">
+${comment.content}
+</p> */
 // `
 
 // 다중 이미지 슬라이드(스크롤)
@@ -296,6 +296,7 @@ export async function getBtn() {
       localStorage.setItem('postId', postId);
 			Modal.classList.toggle("open");
 			if (Modal.classList.contains("open")) {
+				
 				if (btn.classList.contains("modal-my-edit")) {
 					Modal.style.bottom = "-90px";
 					btnOne.addEventListener("click", () => {
@@ -311,7 +312,6 @@ export async function getBtn() {
 						window.location.href = "../pages/11.uploadPage.html";
 						editPost(postId);
 					});
-					// close_modal();
 				} else if (btn.classList.contains("modal-other-edit")) {
 					Modal.style.bottom = "-140px";
 					btnOne.textContent = "신고하기";
@@ -377,14 +377,29 @@ export async function BtnComment() {
 	for (let i = 0; i < home_post.length; i++) {
 		btn_comment[i].addEventListener("click", () => {
 			let postId = btn_comment[i].classList[0];
-			// console.log(postId);
+			// let commentContent;
+			// GetComment(postId).then(comment => {
+			// 	commentContent = comment.content})
+			// console.log(commentContent)
+			// comments.forEach(comment => {
+			// 	const commentAuthorImage = comment.author.image;
+			// 	const commentAuthorUsername = comment.author.username;
+			// 	const commentCreatedAt = comment.createdAt;
+				let commentContent = comment.content;
+			// })
+			GetComment(postId, commentContent)
 			for (let j = 0; j < home_post.length; j++) {
 				if (home_post[j].classList[1] != postId) {
-					comment[i].classList.remove("hidden");
 					home_post[j].style.display = "none";
+					comment[i].classList.remove("hidden");
+					// console.log(comment[i]);
+					comment[i].innerHTML = `
+					<p>안녕하세요</p>
+					<p>${commentContent}</p>
+					`
 				}
 			}
-			GetComment(postId).then((value) => viewComment(value, home_post[i]));
+			// GetComment(postId).then((value) => viewComment(value, home_post[i]));
 		});
 	}
 	function viewComment(comment, post) {
@@ -413,7 +428,6 @@ export async function BtnComment() {
 		// </p>`
 	}
 }
-
 // btn_comment.forEach(btn => {
 //   btn.addEventListener('click', () => {
 //     // const home_post = document.querySelector('.home-post');
