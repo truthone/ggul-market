@@ -293,7 +293,7 @@ function close_modal(Modal) {
 					}
 				}, true)
 			}
-		}, true)
+		})
 	// window.addEventListener('click', (e) => {
 	// 	console.log(e.target)
 	// 	if (e.target != Modal) {
