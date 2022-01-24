@@ -291,9 +291,9 @@ function close_modal(Modal) {
 						Modal.classList.remove('open')
 						return;
 					}
-				})
+				}, true)
 			}
-		})
+		}, true)
 	// window.addEventListener('click', (e) => {
 	// 	console.log(e.target)
 	// 	if (e.target != Modal) {
