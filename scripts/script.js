@@ -1,18 +1,8 @@
-import {
-	likePost,
-	cancellikePost,
-	reportPost,
-	deletePost,
-	deleteProduct,
-	editPost,
-	editProduct,
-	GetComment,
-	editComment,
-	deleteComment,
-	reportComment,
-} from "./api.js";
+import { likePost, cancellikePost, reportPost, deletePost, deleteProduct, editPost, editProduct, GetComment, editComment, deleteComment, reportComment } from "./api.js";
 
-export function getMiniProfile(target) {
+export function getMiniProfile(target, key) {
+	let name = target.username.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
+	let accountname = target.accountname.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
 	const goURL = `6.profile.html?${target.accountname}`;
 	let profile = document.createElement("article");
 	profile.classList = "box-profile";
@@ -23,8 +13,8 @@ export function getMiniProfile(target) {
     <li>
       <a href=${goURL}>
         <ul class="wrap-right">
-          <li class="user-name">${target.username}</li>
-          <li class="user-id">@ ${target.accountname}</li>
+          <li class="user-name" style="display: block;">${name}</li>
+          <li class="user-id" style="display: block;">@ ${accountname}</li>
         </ul>
       </a>
     </li>
@@ -280,20 +270,24 @@ function alert_message(option) {
 }
 
 function close_modal(Modal) {
-	window.addEventListener('click', () => {
-		console.log("1")
-		if (Modal.classList.contains('open')) {
-			console.log("2")
-			window.addEventListener('click', (e) => {
-				  console.log(e.target)
+	window.addEventListener("click", () => {
+		console.log("1");
+		if (Modal.classList.contains("open")) {
+			console.log("2");
+			window.addEventListener(
+				"click",
+				(e) => {
+					console.log(e.target);
 					if (e.target != Modal) {
-						Modal.style.bottom = '-240px';
-						Modal.classList.remove('open')
+						Modal.style.bottom = "-240px";
+						Modal.classList.remove("open");
 						return;
 					}
-				}, true)
-			}
-		})
+				},
+				true
+			);
+		}
+	});
 	// window.addEventListener('click', (e) => {
 	// 	console.log(e.target)
 	// 	if (e.target != Modal) {
@@ -301,7 +295,6 @@ function close_modal(Modal) {
 	// 	}
 	// 	})
 }
-
 
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
 export async function getBtn() {
@@ -316,8 +309,8 @@ export async function getBtn() {
 		btn.addEventListener("click", () => {
 			let postId = btn.classList.item(0);
 			let productId = btn.classList.item(0);
-			localStorage.setItem('productId', productId);
-			localStorage.setItem('postId', postId);
+			localStorage.setItem("productId", productId);
+			localStorage.setItem("postId", postId);
 			Modal.classList.add("open");
 			if (Modal.classList.contains("open")) {
 				close_modal(Modal);
@@ -381,8 +374,7 @@ export async function getBtn() {
 						close_alert();
 					});
 				}
-			} 
-			else {
+			} else {
 				Modal.style.bottom = "-240px";
 			}
 		});
@@ -410,10 +402,10 @@ export async function BtnComment() {
 			// 	const commentAuthorImage = comment.author.image;
 			// 	const commentAuthorUsername = comment.author.username;
 			// 	const commentCreatedAt = comment.createdAt;
-				let commentContent = comment.content;
+			let commentContent = comment.content;
 			// })
 			GetComment(postId).then((value) => {
-				console.log(value)
+				console.log(value);
 				for (let j = 0; j < home_post.length; j++) {
 					if (home_post[j].classList[1] != postId) {
 						// console.log(comment)
@@ -422,7 +414,7 @@ export async function BtnComment() {
 						comment[i].innerHTML = `
 						<p>안녕하세요</p>
 						<p>${value}</p>
-						`
+						`;
 					}
 				}
 			});

@@ -1,12 +1,5 @@
-import {
-  API_URL,
-  ACCOUNT_NAME,
-  TOKEN,
-  ID
-} from './constants.js'
-import {getMiniProfile, loadPost, handleImageScroll, BtnLike,
-   getBtn, BtnComment} from './script.js'
-
+import { API_URL, ACCOUNT_NAME, TOKEN, ID } from "./constants.js";
+import { getMiniProfile, loadPost, handleImageScroll, BtnLike, getBtn, BtnComment } from "./script.js";
 
 // login API
 export async function login() {
@@ -211,36 +204,35 @@ export async function getFeed() {
 	});
 	const json = await res.json();
 
-  // 게시물 없음
-  if (json.posts.length == 0) {
-    const feed = document.querySelector('.feed-cont')
-    if (feed) {
-      feed.style.display = "block"
-    }
-    return;
-  }
-  let idx = 0;
-  let isMyprofile = false;
-  for (let post of json.posts) {
-    const authorAccount = post.author.accountname
-    if (ACCOUNT_NAME == post.author.accountname) {
-      isMyprofile = true;
-    } else {
-      isMyprofile = false;
-    }
-    const container = document.querySelector('.container');
-    let imageArr = post.image.split(',')
-    let imageLength = imageArr.length;
-    let list = loadPost(idx, post, imageArr, imageLength, isMyprofile, authorAccount);
-    if (container)
-      container.appendChild(list)
-    if (imageLength > 1) {
-      handleImageScroll(++idx, imageLength)
-    }
-  }
-  BtnLike();
-  BtnComment();
-  getBtn();
+	// 게시물 없음
+	if (json.posts.length == 0) {
+		const feed = document.querySelector(".feed-cont");
+		if (feed) {
+			feed.style.display = "block";
+		}
+		return;
+	}
+	let idx = 0;
+	let isMyprofile = false;
+	for (let post of json.posts) {
+		const authorAccount = post.author.accountname;
+		if (ACCOUNT_NAME == post.author.accountname) {
+			isMyprofile = true;
+		} else {
+			isMyprofile = false;
+		}
+		const container = document.querySelector(".container");
+		let imageArr = post.image.split(",");
+		let imageLength = imageArr.length;
+		let list = loadPost(idx, post, imageArr, imageLength, isMyprofile, authorAccount);
+		if (container) container.appendChild(list);
+		if (imageLength > 1) {
+			handleImageScroll(++idx, imageLength);
+		}
+	}
+	BtnLike();
+	BtnComment();
+	getBtn();
 }
 
 // 팔로잉 리스트
@@ -269,10 +261,12 @@ export async function getFollowingList() {
 export async function getAccount(searching) {
 	const wrapProfile = document.querySelector(".res-search");
 
-	while (wrapProfile.firstChild) {
-		wrapProfile.removeChild(wrapProfile.firstChild);
+	while (wrapProfile.firstElementChild) {
+		wrapProfile.removeChild(wrapProfile.firstElementChild);
 	}
 	const key = searching.value;
+	console.log(key);
+
 	const url = API_URL + `/user/searchuser/?keyword=${key}`;
 	// 계정 정보가 없을 때
 	if (!ACCOUNT_NAME) {
@@ -459,18 +453,16 @@ async function getPost(currentProfile) {
 			grid.classList = "cont-grid";
 			grid.innerHTML = `<img src=${imageArr[0]} alt="피드 이미지">`;
 
-      // 앨범형에서 더보기 버튼이 보이지 않음
-      if (imageLength == 1) {
-        grid.style.setProperty('--single', "hidden");
-
-      }
-      document.querySelector('.grid-post').appendChild(grid)
-    }
-  }
-  BtnLike();
-  BtnComment();
-  getBtn();
-
+			// 앨범형에서 더보기 버튼이 보이지 않음
+			if (imageLength == 1) {
+				grid.style.setProperty("--single", "hidden");
+			}
+			document.querySelector(".grid-post").appendChild(grid);
+		}
+	}
+	BtnLike();
+	BtnComment();
+	getBtn();
 }
 
 //게시글 신고
@@ -670,74 +662,74 @@ export async function cancellikePost(postId) {
 
 // 게시글 좋아요
 export async function likePost(postId) {
-  const url = API_URL + `/post/${postId}/heart`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${TOKEN}`,
-      "Content-type": "application/json"
-    }
-  })
+	const url = API_URL + `/post/${postId}/heart`;
+	const res = await fetch(url, {
+		method: "POST",
+		headers: {
+			Authorization: `Bearer ${TOKEN}`,
+			"Content-type": "application/json",
+		},
+	});
 }
 
 // 댓글 리스트
 export async function GetComment(postId) {
-  const url = API_URL + `/post/${postId}/comments`;
-  const res = await fetch(url, {
-    method:"GET",
-    headers:{
-      "Authorization" : `Bearer ${TOKEN}`,
-      "Content-type" : "application/json"
-    }
-  })
-  const data = await res.json();
-  const comments = data.comments;
-//   console.log(comments)
-let commentAuthorUsername;
-let commentContent;
-  comments.forEach(comment => {
-	const commentAuthorImage = comment.author.image;
-	commentAuthorUsername = comment.author.username;
-	const commentCreatedAt = comment.createdAt;
-	commentContent = comment.content;
-	console.log(commentContent)
-  })
-  return(commentContent);
+	const url = API_URL + `/post/${postId}/comments`;
+	const res = await fetch(url, {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${TOKEN}`,
+			"Content-type": "application/json",
+		},
+	});
+	const data = await res.json();
+	const comments = data.comments;
+	//   console.log(comments)
+	let commentAuthorUsername;
+	let commentContent;
+	comments.forEach((comment) => {
+		const commentAuthorImage = comment.author.image;
+		commentAuthorUsername = comment.author.username;
+		const commentCreatedAt = comment.createdAt;
+		commentContent = comment.content;
+		console.log(commentContent);
+	});
+	return commentContent;
 }
 // 댓글 작성
 export async function editComment(postId) {
-  const url = API_URL + `/post/${postId}/comments`;
-  const res = await fetch(url, {
-    method:"POST",
-    headers:{
-      "Authorization" : `Bearer ${TOKEN}`,
-      "Content-type" : "application/json"
-    }
-  })
-  const data = await res.json();
-  console.log(data);
+	const url = API_URL + `/post/${postId}/comments`;
+	const res = await fetch(url, {
+		method: "POST",
+		headers: {
+			Authorization: `Bearer ${TOKEN}`,
+			"Content-type": "application/json",
+		},
+	});
+	const data = await res.json();
+	console.log(data);
 }
 // 댓글 삭제
 export async function deleteComment(postId) {
-  const url = API_URL + `/post/${postId}/comments/${commentId}`;
-  const res = await fetch(url, {
-    method:"DELETE",
-    headers:{
-        "Authorization" : `Bearer ${TOKEN}`,
-        "Content-type" : "application/json"
-    }
-  })
+	const url = API_URL + `/post/${postId}/comments/${commentId}`;
+	const res = await fetch(url, {
+		method: "DELETE",
+		headers: {
+			Authorization: `Bearer ${TOKEN}`,
+			"Content-type": "application/json",
+		},
+	});
 }
 // 댓글 신고
 export async function reportComment(postId) {
-  const url = API_URL + `/post/${postId}/comments/${commentId}/report`;
-  const res = await fetch(url, {
-    method:"POST",
-    headers:{
-      "Authorization" : `Bearer ${TOKEN}`,
-      "Content-type" : "application/json"
-    }
-  })
-  const data = await res.json();
-  console.log(data);
+	const url = API_URL + `/post/${postId}/comments/${commentId}/report`;
+	const res = await fetch(url, {
+		method: "POST",
+		headers: {
+			Authorization: `Bearer ${TOKEN}`,
+			"Content-type": "application/json",
+		},
+	});
+	const data = await res.json();
+	console.log(data);
 }

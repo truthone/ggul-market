@@ -1,54 +1,55 @@
 body {
-  font-family: Spoqa Han Sans Neo;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0em;
-  background-color: #ffffff;
+	font-family: Spoqa Han Sans Neo;
+	font-style: normal;
+	font-weight: 400;
+	letter-spacing: 0em;
+	background-color: #ffffff;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  width: 100%;
-  padding: 10px 16px;
-  box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 10px 16px;
+	box-sizing: border-box;
 }
 
 .wrap-profile {
-  position: relative;
-  display: flex;
+	position: relative;
 }
 
 .chat {
-  padding: 10px 0;
-  box-sizing: border-box;
+	padding: 10px 0;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 .wrap-profile .chat > li {
-  position : relative;
+	position: relative;
 }
 
 .wrap-profile .wrap-right {
-  padding-top: 4px;
-  height: 38px;
-  width: 304px;
+	padding-top: 4px;
+	height: 38px;
+	width: 304px;
 }
 
 .unread-mark {
-  position: absolute;
-  background-color: #F26E22;
-  border-radius: 100%;
-  width: 12px;
-  height: 12px;
+	position: absolute;
+	background-color: #f26e22;
+	border-radius: 100%;
+	width: 12px;
+	height: 12px;
 }
 
 .wrap-profile .wrap-right .user-name {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  line-height: 18px;
-  color: #000000;
+	display: flex;
+	justify-content: space-between;
+	font-size: 14px;
+	line-height: 18px;
+	color: #000000;
 }
 
 /* .wrap-profile .wrap-right .user-id {
@@ -59,23 +60,22 @@ body {
 } */
 
 .wrap-profile .wrap-right .chat-desc {
-  font-size: 12px;
-  margin-top: 2px;
-  line-height: 14px;
-  color: #767676;
+	font-size: 12px;
+	margin-top: 2px;
+	line-height: 14px;
+	color: #767676;
 }
 
-.wrap-profile .wrap-right .chat-date{
-  font-size: 10px;
-  margin-top: 2px;
-  line-height: 14px;
-  color: #DBDBDB;
-
+.wrap-profile .wrap-right .chat-date {
+	font-size: 10px;
+	margin-top: 2px;
+	line-height: 14px;
+	color: #dbdbdb;
 }
 
 .wrap-chat-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 4px;
 }
