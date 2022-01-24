@@ -1,10 +1,14 @@
-oldImgStorage = []; // 기존 이미지 src 저장소
-currentImgStorage = []; // 현재 총 이미지 스토리지
+import { API_URL, ACCOUNT_NAME, TOKEN, POST_ID } from "./constants.js";
+
+
+let oldImgStorage = []; // 기존 이미지 src 저장소
+let currentImgStorage = []; // 현재 총 이미지 스토리지
 let newImgNames = ""; // 변환된 이미지이름(들) 저장소
 let oldImgNames = ""; // 받아온 변환된 이미지이름 문자열.
 
-submitState = false;
-uploadBtn = document.querySelector("#save-btn");
+let submitState = false;
+
+const uploadBtn = document.querySelector("#save-btn");
 
 
 // textarea 높이 자동 조절.
@@ -17,17 +21,15 @@ function textareaResize() {
   activeUploadBtn();
 }
 
-// 기존 게시물 수정 시 게시물데이터 불러와서 세팅.
-let postId = '';
-postId = localStorage.getItem('postId', postId);
+// 기존 게시물 수정 
 
 async function setCurrentData() {
   const textareaElement = document.querySelector(".textarea-input");
   const postImgList = document.querySelector(".upload-img-list");
 
-  const response = await fetch(`http://146.56.183.55:5050/post/${postId}`, {
+  const response = await fetch(`${API_URL}/post/${POST_ID}`, {
     headers: {
-      "Authorization": "Bearer " + localStorage.getItem("Token"),
+      "Authorization": "Bearer " + TOKEN,
       "Content-type": "application/json"
     }
   });
@@ -106,7 +108,7 @@ function deleteImg(){
 async function getImgSrc(formData) {
   let name = [];
   try {
-    const response = await fetch("http://146.56.183.55:5050/image/uploadfiles", {
+    const response = await fetch(`${API_URL}/image/uploadfiles`, {
       method: "POST",
       body: formData
     });
@@ -114,7 +116,7 @@ async function getImgSrc(formData) {
     const data = await response.json();
 
     for (let i of data) {
-      name.push(`http://146.56.183.55:5050/${i["filename"]}`);
+      name.push(`${API_URL}/${i["filename"]}`);
     }
     if (name.length > 1) {
       return name.join(",")
@@ -157,7 +159,7 @@ function postUpload() {
       //헤더, 바디 설정
       headers = {
         "Content-Type": "application/json",
-        "Authorization": 'Bearer ' + localStorage.getItem("Token")
+        "Authorization": 'Bearer ' + TOKEN
       }
       body = JSON.stringify({
         "post": {
@@ -167,8 +169,8 @@ function postUpload() {
       })
 
       // 기존 게시물 수정이면
-      if (postId) {
-        fetch(`http://146.56.183.55:5050/post/${postId}`, {
+      if (POST_ID) {
+        fetch(`${API_URL}/post/${POST_ID}`, {
             method: "PUT",
             headers,
             body
@@ -182,7 +184,7 @@ function postUpload() {
           })
           .catch(err => console.log(err));
       } else { // 새 게시물 업로드이면
-        fetch("http://146.56.183.55:5050/post", {
+        fetch(`${API_URL}/post`, {
             method: "POST",
             headers,
             body
@@ -203,9 +205,9 @@ function postUpload() {
 function dataReset() {
   const inputs = document.querySelectorAll("INPUT");
   const textarea = document.querySelector("TEXTAREA");
-  //postId 초기화
+  
   localStorage.setItem('postId', '');
-  postId = '';
+  
   // 텍스트, 이미지값 초기화
   inputs.forEach(item => {
     item.value = "";
