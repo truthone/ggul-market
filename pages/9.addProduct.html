@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +14,7 @@
     <nav class="wrap-top-nav">
       <a onclick="location.href='javascript:history.back();'" class="btn-back"><img
           src="../images/icon/icon-arrow-left.png" alt="" class="icon-arrow-left"></a>
-      <button type="button" id="save-btn" class="Ms-button btn disabled" onclick="postProductData()">저장</button>
+      <button type="button" id="save-btn" class="Ms-button btn disabled">저장</button>
     </nav>
   </header>
   <div class="container">
@@ -31,7 +30,7 @@
       <div class="input-container">
         <div class="form-user">
           <label for="product-name">상품명</label>
-          <input id="productNameInput" class="input-txt" placeholder="2-15자 이내여야 합니다" type="text">
+          <input id="productNameInput" class="input-txt" placeholder="2-15자 이내여야 합니다" type="text" minlength="2" maxlength="15">
         </div>
         <div class="form-user">
           <label for="product-price">가격</label>
@@ -46,5 +45,4 @@
   </div>
   <script type="module" src="../scripts/9.addProduct.js"></script>
 </body>
-
 </html>
