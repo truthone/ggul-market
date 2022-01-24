@@ -279,6 +279,30 @@ function alert_message(option) {
 	ModalAlert.style.display = "block";
 }
 
+function close_modal(Modal) {
+	window.addEventListener('click', () => {
+		console.log("1")
+		if (Modal.classList.contains('open')) {
+			console.log("2")
+			window.addEventListener('click', (e) => {
+				  console.log(e.target)
+					if (e.target != Modal) {
+						Modal.style.bottom = '-240px';
+						Modal.classList.remove('open')
+						return;
+					}
+				})
+			}
+		})
+	// window.addEventListener('click', (e) => {
+	// 	console.log(e.target)
+	// 	if (e.target != Modal) {
+	// 	  Modal.style.bottom = '-240px';
+	// 	}
+	// 	})
+}
+
+
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
 export async function getBtn() {
 	const btnOne = document.querySelector(".btn-one");
@@ -292,11 +316,11 @@ export async function getBtn() {
 		btn.addEventListener("click", () => {
 			let postId = btn.classList.item(0);
 			let productId = btn.classList.item(0);
-      localStorage.setItem('productId', productId);
-      localStorage.setItem('postId', postId);
-			Modal.classList.toggle("open");
+			localStorage.setItem('productId', productId);
+			localStorage.setItem('postId', postId);
+			Modal.classList.add("open");
 			if (Modal.classList.contains("open")) {
-				
+				close_modal(Modal);
 				if (btn.classList.contains("modal-my-edit")) {
 					Modal.style.bottom = "-90px";
 					btnOne.addEventListener("click", () => {
@@ -357,7 +381,8 @@ export async function getBtn() {
 						close_alert();
 					});
 				}
-			} else {
+			} 
+			else {
 				Modal.style.bottom = "-240px";
 			}
 		});
@@ -387,18 +412,20 @@ export async function BtnComment() {
 			// 	const commentCreatedAt = comment.createdAt;
 				let commentContent = comment.content;
 			// })
-			GetComment(postId, commentContent)
-			for (let j = 0; j < home_post.length; j++) {
-				if (home_post[j].classList[1] != postId) {
-					home_post[j].style.display = "none";
-					comment[i].classList.remove("hidden");
-					// console.log(comment[i]);
-					comment[i].innerHTML = `
-					<p>안녕하세요</p>
-					<p>${commentContent}</p>
-					`
+			GetComment(postId).then((value) => {
+				console.log(value)
+				for (let j = 0; j < home_post.length; j++) {
+					if (home_post[j].classList[1] != postId) {
+						// console.log(comment)
+						home_post[j].style.display = "none";
+						comment[i].classList.remove("hidden");
+						comment[i].innerHTML = `
+						<p>안녕하세요</p>
+						<p>${value}</p>
+						`
+					}
 				}
-			}
+			});
 			// GetComment(postId).then((value) => viewComment(value, home_post[i]));
 		});
 	}

@@ -681,7 +681,7 @@ export async function likePost(postId) {
 }
 
 // 댓글 리스트
-export async function GetComment(postId, commentContent) {
+export async function GetComment(postId) {
   const url = API_URL + `/post/${postId}/comments`;
   const res = await fetch(url, {
     method:"GET",
@@ -693,14 +693,16 @@ export async function GetComment(postId, commentContent) {
   const data = await res.json();
   const comments = data.comments;
 //   console.log(comments)
+let commentAuthorUsername;
+let commentContent;
   comments.forEach(comment => {
 	const commentAuthorImage = comment.author.image;
-	const commentAuthorUsername = comment.author.username;
+	commentAuthorUsername = comment.author.username;
 	const commentCreatedAt = comment.createdAt;
 	commentContent = comment.content;
 	console.log(commentContent)
   })
-  return(data);
+  return(commentContent);
 }
 // 댓글 작성
 export async function editComment(postId) {
