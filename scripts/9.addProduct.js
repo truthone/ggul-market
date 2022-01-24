@@ -1,6 +1,7 @@
+import { API_URL, TOKEN, PRODUCT_ID } from "./constants.js";
 // 상품 정보 가져오기
 let productId = '';
-productId = localStorage.getItem('productId',productId);
+productId = PRODUCT_ID;
 
 // 첨부된 이미지 나타나기
 function postProductImg() {
@@ -29,7 +30,7 @@ function postProductImg() {
     const formData = new FormData();
     formData.append("image", imgInput.files[0]);
 
-    fetch(`http://146.56.183.55:5050/image/uploadfile`, {
+    fetch(`${API_URL}/image/uploadfile`, {
         method: "POST",
         body: formData
       })
@@ -53,9 +54,9 @@ async function setCurrentData() {
   const productImgElement = document.createElement("img");
   productImgBox.append(productImgElement);
 
-  const response = await fetch(`http://146.56.183.55:5050/product/detail/${productId}`, {
+  const response = await fetch(`${API_URL}/product/detail/${productId}`, {
     headers: {
-      "Authorization": "Bearer " + localStorage.getItem("Token")
+      "Authorization": "Bearer " + TOKEN
     }
   });
   const productData = await response.json();
@@ -86,11 +87,11 @@ async function postProductData() {
     let response = '';
 
     if (productId) {
-        response = await fetch(`http://146.56.183.55:5050/product/${productId}`, {
+        response = await fetch(`${API_URL}/product/${productId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Bearer ' + localStorage.getItem("Token")
+          "Authorization": 'Bearer ' + TOKEN
         },
         body: JSON.stringify({
           "product": {
@@ -102,18 +103,18 @@ async function postProductData() {
         })
       });
     } else {
-      response = await fetch(`http://146.56.183.55:5050/product`, {
+      response = await fetch(`${API_URL}/product`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": 'Bearer ' + localStorage.getItem("Token")
+        "Authorization": 'Bearer ' + TOKEN
       },
       body: JSON.stringify({
         "product": {
           "itemName": productName.value,
           "price": price,
           "link": storeLink.value,
-          "itemImage": `http://146.56.183.55:5050/${this.productImgName}`
+          "itemImage": `${API_URL}/${this.productImgName}`
         }
       })
     });
