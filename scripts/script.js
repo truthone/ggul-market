@@ -292,6 +292,8 @@ export async function getBtn() {
 		btn.addEventListener("click", () => {
 			let postId = btn.classList.item(0);
 			let productId = btn.classList.item(0);
+      localStorage.setItem('productId', productId);
+      localStorage.setItem('postId', postId);
 			Modal.classList.toggle("open");
 			if (Modal.classList.contains("open")) {
 				if (btn.classList.contains("modal-my-edit")) {
@@ -339,7 +341,7 @@ export async function getBtn() {
 					});
 					btnTwo.addEventListener("click", () => {
 						window.location.href = "../pages/9.addProduct.html";
-						editProduct(productId);
+						//editProduct(productId);
 					});
 				} else if (btn.classList.contains("modal-my-comment")) {
 					Modal.style.bottom = "-90px";
