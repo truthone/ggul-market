@@ -1,50 +1,75 @@
 import { API_URL, TOKEN, PRODUCT_ID } from "./constants.js";
-// 상품 정보 가져오기
-let productId = '';
-productId = PRODUCT_ID;
 
+window.addEventListener("DOMContentLoaded", () => {
+  checkNewOrEdit(PRODUCT_ID);
+  postProductImg();
+  inputEvent();
+  clickUploadBtn();
+});
+
+// 상품수정인지 새상품업로드인지 판단
+function checkNewOrEdit(productId) {
+  if(productId) {
+    setProductData(productId);
+  }
+}
+
+let productImgName = "";
 // 첨부된 이미지 나타나기
-function postProductImg() {
+async function postProductImg() {
   const imgInput = document.querySelector("#productImgInput");
   const productImgBox = document.querySelector("#product-img-box"); 
   let productImgElement = document.querySelector("#product-img-box img");
 
   imgInput.addEventListener("change", (e) => {
-    this.productImgName = "";
-
+    
     if (!productImgElement) {
       productImgElement = document.createElement("img");
       productImgBox.append(productImgElement);
     }
 
     if (e.target.files && e.target.files[0]) {
-      imgInput.setAttribute("data-state", 1);
       let reader = new FileReader();
-
       reader.onload = (e) => {
         productImgElement.src = e.target.result;
       }
       reader.readAsDataURL(e.target.files[0]);
     }
 
-    const formData = new FormData();
-    formData.append("image", imgInput.files[0]);
+    apiProductImgName(imgInput).then((data)=>{
+      productImgName = data["filename"];
+      imgInput.setAttribute("data-state", 1);
+      btnActive();
+    })
+  })
+}
 
-    fetch(`${API_URL}/image/uploadfile`, {
-        method: "POST",
-        body: formData
-      })
-      .then((res) => res.json())
-      .then((data) => {
-        this.productImgName = data["filename"];
-        btnActive();
-      })
-      .catch((err) => console.err(err));
+//서버에서 이미지파일이름 변환받기 
+async function apiProductImgName(imgInput) {
+  const formData = new FormData();
+  formData.append("image", imgInput.files[0]);
+
+  const response = await fetch(`${API_URL}/image/uploadfile`, {
+      method: "POST",
+      body: formData
+    })
+  
+  return await response.json();
+    
+}
+
+//상품 상세 정보 api 
+async function apiProductData(productId) {
+  const response = await fetch(`${API_URL}/product/detail/${productId}`, {
+    headers: {
+      "Authorization": "Bearer " + TOKEN
+    }
   });
+  return await response.json();
 }
 
 // 현재 상품 정보 세팅
-async function setCurrentData() {
+async function setProductData(productId) {
   console.log("현재 상품 정보 세팅")
   const productName = document.querySelector("#productNameInput");
   const productPrice = document.querySelector("#priceInput");
@@ -54,79 +79,98 @@ async function setCurrentData() {
   const productImgElement = document.createElement("img");
   productImgBox.append(productImgElement);
 
-  const response = await fetch(`${API_URL}/product/detail/${productId}`, {
-    headers: {
-      "Authorization": "Bearer " + TOKEN
-    }
+  apiProductData(productId).then((product) => {
+    console.log(`apiProductData : ${product}`)
+    productImgElement.src = product.itemImage;
+    productName.value = product.itemName;
+    productPrice.value = product.price;
+    storeLink.value = product.link;
+  
+    productImgInput.setAttribute("data-state", 1);
+    productName.setAttribute("data-state", 1);
+    productPrice.setAttribute("data-state", 1);
+    storeLink.setAttribute("data-state", 1);
+  
+    checkBtnActive();
   });
-  const productData = await response.json();
+}
 
-   const data = productData.product;
-  productImgName = data.itemImage;
-  productImgElement.src = this.productImgName;
-  productName.value = data.itemName;
-  productPrice.value = data.price;
-  storeLink.value = data.link;
+// 상품 수정 || 새상품 업로드 라우터 
+function router() {
 
-  productImgInput.setAttribute("data-state", 1);
-  productName.setAttribute("data-state", 1);
-  productPrice.setAttribute("data-state", 1);
-  storeLink.setAttribute("data-state", 1);
+}
 
-  btnActive();
+// 상품정보수정 api 
+async function apiEditProduct(productName,storeLink,price) {
+  const response = await fetch(`${API_URL}/product/${PRODUCT_ID}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": 'Bearer ' + TOKEN
+    },
+    body: JSON.stringify({
+      "product": {
+        "itemName": productName.value,
+        "price": price,
+        "link": storeLink.value,
+        "itemImage": productImgName
+      }
+    })
+  });
+  return await response.json();
+}
+
+// 새 상품 업로드 api 
+async function apiUploadProduct(productName,storeLink,price) {
+  const response = await fetch(`${API_URL}/product`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": 'Bearer ' + TOKEN
+    },
+    body: JSON.stringify({
+      "product": {
+        "itemName": productName.value,
+        "price": price,
+        "link": storeLink.value,
+        "itemImage": `${API_URL}/${productImgName}`
+      }
+    })
+  });
+  return await response.json();
+}
+
+// 업로드 버튼 클릭시 
+function clickUploadBtn() {
+  const saveBtn = document.querySelector("#save-btn");
+  saveBtn.addEventListener("click",() => {
+    if (!saveBtn.classList.contains("disabled")) {
+      postProductData()
+    }
+  })
 }
 
 // 상품 정보 서버로 전송 - 업로드
 async function postProductData() {
-  const saveBtn = document.querySelector("#save-btn");
-  if (!saveBtn.classList.contains("disabled")) {
-    const productName = document.querySelector("#productNameInput");
-    const productPrice = document.querySelector("#priceInput");
-    const storeLink = document.querySelector("#storeLinkInput");
-    const price = parseInt(productPrice.value.replaceAll(",", ""), 10);
-    let response = '';
+  const productPrice = document.querySelector("#priceInput");
+  const productName = document.querySelector("#productNameInput");
+  const storeLink = document.querySelector("#storeLinkInput");
+  const price = parseInt(productPrice.value.replaceAll(",", ""), 10);
 
-    if (productId) {
-        response = await fetch(`${API_URL}/product/${productId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": 'Bearer ' + TOKEN
-        },
-        body: JSON.stringify({
-          "product": {
-            "itemName": productName.value,
-            "price": price,
-            "link": storeLink.value,
-            "itemImage": this.productImgName
-          }
-        })
-      });
-    } else {
-      response = await fetch(`${API_URL}/product`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": 'Bearer ' + TOKEN
-      },
-      body: JSON.stringify({
-        "product": {
-          "itemName": productName.value,
-          "price": price,
-          "link": storeLink.value,
-          "itemImage": `${API_URL}/${this.productImgName}`
-        }
-      })
+  if (PRODUCT_ID) {
+    apiEditProduct(productName,storeLink,price).then((res) => {
+      resetAndMove();
+    });
+  } else {
+    apiUploadProduct(productName,storeLink,price).then((res) => {
+      resetAndMove();
     });
   }
+}
 
-    const data = await response.json();
-
-    if (data) {
-      this.dataReset();
-      href("/6.profile.html");
-    }
-  }
+function resetAndMove() {
+  dataReset();
+  href("/6.profile.html");
 }
 
 function href(pageName) {
@@ -141,13 +185,13 @@ function href(pageName) {
 function dataReset() {
   localStorage.setItem("productId",'');
   const inputs = document.querySelectorAll("INPUT");
+
   inputs.forEach((item) => {
     item.value = "";
-
     if (item.getAttribute("type") == "file") {
       const imgTag = document.querySelector("#product-img-box img");
       imgTag.remove();
-      this.productImgName = "";
+      productImgName = "";
     }
   });
 }
@@ -155,34 +199,47 @@ function dataReset() {
 // input 입력 또는 포커스 잃을 때 이벤트 발생
 function inputEvent() {
   const inputs = document.querySelectorAll(".input-container input");
+  
+  checkPriceValue();
 
   inputs.forEach((item) => {
     item.addEventListener("blur", () => {
-      this.checkValidation(item);
-      this.btnActive();
+      checkValidation(item);
+      btnActive();
     });
   });
 
   inputs.forEach((item) => {
     item.addEventListener("input", () => {
-      this.checkValidation(item);
-      this.btnActive();
+      checkValidation(item);
+      btnActive();
     });
   });
-
-  this.checkPriceValue();
 }
 
-// 유효성 검사
+// 저장 버튼 활성화
+function btnActive() {
+  let state = inputValueCheck();
+  const saveBtn = document.querySelector("#save-btn")
+  let btnState = saveBtn.classList.contains("disabled");
+
+  if (state) { //인풋 오케이
+    if (btnState) { saveBtn.classList.remove("disabled"); } // 버튼안켜졌어
+  } else { // 인풋 낫오케이
+    if (!btnState) { //버튼까지 켜져있어
+      saveBtn.classList.add("disabled");
+    }
+  }
+}
+
+// input 값 입력유무 체크  
 function checkValidation(element) {
   let value = element.value;
   let inputId = element.getAttribute("id");
 
   if (value.length != 0) {
     if (inputId == "productNameInput") {
-      if (value.length > 1) {
         element.setAttribute("data-state", 1);
-      }
     }
 
     if (inputId == "priceInput") {
@@ -190,21 +247,14 @@ function checkValidation(element) {
     }
 
     if (inputId == "storeLinkInput") {
-      console.log("판매링크 검사 ")
-      const urlReg = /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
-
-      if (urlReg.test(value)) {
         element.setAttribute("data-state", 1);
-      } else {
-        element.setAttribute("data-state", 0);
-      }
     }
   } else {
     element.setAttribute("data-state", 0);
   }
 }
 
-// 상품 가격 체크 이벤트
+// 상품가격값 유효성 체크 & 원단위로 변환
 function checkPriceValue() {
   const priceInput = document.querySelector("#priceInput");
 
@@ -221,7 +271,7 @@ function checkPriceValue() {
   });
 }
 
-// input value 체크
+// input value 입력 전부 됐는지 체크 
 function inputValueCheck() {
   const inputs = document.querySelectorAll("form input");
 
@@ -243,32 +293,4 @@ function inputValueCheck() {
   return valueState;
 }
 
-// 저장 버튼 이벤트
-function btnActive() {
-  let state = this.inputValueCheck();
-  console.log(`btnActive state: + ${state}`)
-  const saveBtn = document.querySelector("#save-btn")
-  let btnState = saveBtn.classList.contains("disabled");
 
-  if (state) {
-    if (btnState) {
-      saveBtn.classList.remove("disabled");
-    }
-  } else {
-    if (!btnState) {
-      saveBtn.classList.add("disabled");
-    }
-  }
-}
-
-function clickImgBtn() {
-  const imgInput = document.querySelector("#productImgInput")
-  imgInput.click();
-  postProductImg();
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  inputEvent()
-  postProductImg()
-  setCurrentData();
-});
