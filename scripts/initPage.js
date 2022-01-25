@@ -1,23 +1,8 @@
-import { TOKEN, ACCOUNT_NAME } from "./constants.js";
-import {
-	checkEmailValid,
-	imageUpload,
-	checkUserIdValid,
-	join,
-	getFeed,
-	login,
-	getAccount,
-	getFollowingList,
-	getProfile,
-	getFollowing,
-	getFollower,
-	loadUserData,
-	updateProfile,
-	profileImage,
-} from "./api.js";
-import { API_URL } from "./constants.js";
+import { ORIGIN, TOKEN, ACCOUNT_NAME } from "./constants.js";
+import { checkEmailValid, checkUserIdValid, join, getFeed, login, getAccount, getFollowingList, getProfile, getFollowing, getFollower, loadUserData, updateProfile, profileImage } from "./api.js";
 
 let loc = [];
+// 현재 페이지 읽기
 if (document.location.href.includes("/pages")) {
 	loc = document.location.href.split("/pages/")[1];
 	if (loc.includes("?")) {
@@ -25,6 +10,8 @@ if (document.location.href.includes("/pages")) {
 	}
 }
 console.log(loc);
+
+// 페이지별 init 함수 실행
 switch (loc) {
 	case "2.login_email.html":
 		loginPage();
@@ -36,18 +23,22 @@ switch (loc) {
 		joinPage();
 		break;
 	case "4.home.html":
-		homePage();
+		checkToken();
 		break;
 	case "5.search.html":
+		checkToken();
 		searchPage();
 		break;
 	case "6.profile.html":
+		checkToken();
 		profilePage();
 		break;
 	case "7.followers.html":
+		checkToken();
 		followPage();
 		break;
 	case "8.profile_modification.html":
+		checkToken();
 		profileModifyPage();
 		break;
 	default:
@@ -55,19 +46,28 @@ switch (loc) {
 		break;
 }
 
-function splashPage() {
-	// index.html 화면이 로드되고 2초 뒤 로그인 화면으로 이동
-	window.onload = setTimeout(splashpage, 1000);
-	// 토큰이 있는 경우 홈피드로 이동
-	function splashpage() {
-		if (TOKEN != "") {
-			location.href = "pages/4.home.html";
-		} else {
-			location.href = "pages/2.login.html";
-		}
+// 로그인 상태가 아니면 메인 페이지로 이동
+function checkToken() {
+	if (!TOKEN) {
+		location.href = `${ORIGIN}`;
 	}
 }
 
+// 메인 페이지
+function splashPage() {
+	// index.html 화면이 로드되고 2초 뒤 로그인 화면으로 이동
+	window.onload = setTimeout(() => {
+		if (!!TOKEN) {
+			// 토큰이 있는 경우 홈피드로 이동
+			location.href = `${ORIGIN}/pages/4.home.html`;
+		} else {
+			// 토큰이 없는 경우 로그인 페이지로 이동
+			location.href = `${ORIGIN}/pages/2.login.html`;
+		}
+	}, 1000);
+}
+
+// 로그인 페이지
 function loginPage() {
 	const loginEmailInput = document.querySelector("#login-cont-email");
 	const loginPwdInput = document.querySelector("#login-cont-pwd");
@@ -106,6 +106,7 @@ function loginPage() {
 	}
 }
 
+// 회원가입 페이지
 function joinPage() {
 	const joinEmailInput = document.querySelector("#join-cont-email");
 	const joinPwdInput = document.querySelector("#join-cont-pwd");
@@ -188,15 +189,7 @@ function joinPage() {
 	joinBtnSubmit.addEventListener("click", join);
 }
 
-function homePage() {
-	// home
-	if (TOKEN) {
-		getFeed();
-	} else {
-		location.href = "./2.login.html";
-	}
-}
-
+// 유저 검색
 function searchPage() {
 	const input = document.querySelector("#search-id");
 
@@ -206,6 +199,7 @@ function searchPage() {
 		});
 }
 
+// 프로필 페이지
 function profilePage() {
 	let targetAccount = ACCOUNT_NAME;
 	let isMyprofile = false;
@@ -216,10 +210,12 @@ function profilePage() {
 		if (ACCOUNT_NAME == targetAccount) {
 			isMyprofile = true;
 		}
-		console.log(isMyprofile);
+
 		document.querySelector(".cont-followers").href = `7.followers.html?${targetAccount}?follower`;
 		document.querySelector(".cont-followings").href = `7.followers.html?${targetAccount}?following`;
-	} else {
+	}
+	else {
+		isMyprofile = true;
 		document.querySelector(".cont-followers").href = `7.followers.html?${ACCOUNT_NAME}?follower`;
 		document.querySelector(".cont-followings").href = `7.followers.html?${ACCOUNT_NAME}?following`;
 	}
