@@ -1,9 +1,11 @@
 import { likePost, cancellikePost, reportPost, deletePost, deleteProduct, editPost, editProduct, GetComment, editComment, deleteComment, reportComment } from "./api.js";
 
+// 미니 프로필 반환 함수
 export function getMiniProfile(target, key) {
 	let name = target.username.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
 	let accountname = target.accountname.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
-	const goURL = `6.profile.html?${target.accountname}`;
+	const goURL = `6.profile.html?${target.accountname}`; // 프로필 바로가기 링크
+
 	let profile = document.createElement("article");
 	profile.classList = "box-profile";
 	profile.innerHTML = `<ul class="wrap-profile">
@@ -23,6 +25,7 @@ export function getMiniProfile(target, key) {
 	return profile;
 }
 
+// 개별 게시물 로드
 export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
 	const goURL = `6.profile.html?${authorName}`;
 
@@ -116,7 +119,7 @@ ${comment.content}
 </p> */
 // `
 
-// 다중 이미지 슬라이드(스크롤)
+// 다중 이미지 슬라이드(스크롤) 유틸 함수
 export function handleImageScroll(idx, imageLength) {
 	let btnImage = document.querySelectorAll(`.btn-image${idx - 1}`);
 	let wrapImages = document.querySelector(`#wrap-images${idx - 1}`);
@@ -288,12 +291,6 @@ function close_modal(Modal) {
 			);
 		}
 	});
-	// window.addEventListener('click', (e) => {
-	// 	console.log(e.target)
-	// 	if (e.target != Modal) {
-	// 	  Modal.style.bottom = '-240px';
-	// 	}
-	// 	})
 }
 
 // 버튼이 동적으로 생성되고 나서 호출됩니다.

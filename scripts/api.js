@@ -314,12 +314,7 @@ export async function getProfile(currentProfile) {
 		const json = await res.json();
 		const profile = json.profile;
 
-		let followerCount = profile.followerCount ? json.profile.followerCount : 0;
 		let followingCount = profile.followingCount ? json.profile.followingCount : 0;
-		let name = profile.username;
-		let desc = profile.intro;
-		let img = profile.image;
-		let accountname = profile.accountname;
 		let isfollow = profile.isfollow;
 
 		// 팔로우/언팔로우 버튼 변화
@@ -353,12 +348,12 @@ export async function getProfile(currentProfile) {
 		const userId = document.querySelector(".id-user");
 		const descUser = document.querySelector(".desc-user");
 
-		userImage.src = img;
-		followers.textContent = followerCount;
+		userImage.src = profile.image;
+		followers.textContent = profile.followerCount ? json.profile.followerCount : 0;
 		followings.textContent = followingCount;
-		userName.textContent = name;
-		userId.textContent = `@ ${accountname}`;
-		descUser.textContent = desc;
+		userName.textContent = profile.username;
+		userId.textContent = `@ ${profile.accountname}`;
+		descUser.textContent = profile.intro;
 		await getProductList(currentProfile);
 		await getPost(currentProfile);
 	} catch (err) {
@@ -584,6 +579,7 @@ export async function getFollower(accountName) {
 // 팔로우 프로필
 function getFollowProfile(target) {
 	const goURL = `6.profile.html?${target.accountname}`;
+	// console.log(getMiniProfile(target.accountname));
 	let state = target.follower.includes(ID)
 		? `<li><button type="button" class="S-button btn activ btn-follower_view_follow" id=${target.accountname}>취소</button></li>`
 		: `<li><button type="button" class="S-button btn btn-follower_view_follow" id=${target.accountname}>팔로우</button></li>`;
