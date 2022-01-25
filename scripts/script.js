@@ -273,24 +273,14 @@ function alert_message(option) {
 }
 
 function close_modal(Modal) {
-	window.addEventListener("click", () => {
-		console.log("1");
-		if (Modal.classList.contains("open")) {
-			console.log("2");
-			window.addEventListener(
-				"click",
-				(e) => {
-					console.log(e.target);
-					if (e.target != Modal) {
-						Modal.style.bottom = "-240px";
-						Modal.classList.remove("open");
-						return;
-					}
-				},
-				true
-			);
-		}
-	});
+  window.addEventListener('click', () => {
+    window.addEventListener('click', (e) => {
+      if (e.target != (Modal)) {
+        Modal.style.bottom = '-240px';
+        Modal.classList.remove('open');
+      }
+    }, true)
+  })
 }
 
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
@@ -308,7 +298,7 @@ export async function getBtn() {
 			let productId = btn.classList.item(0);
 			localStorage.setItem("productId", productId);
 			localStorage.setItem("postId", postId);
-			Modal.classList.add("open");
+			Modal.classList.toggle("open");
 			if (Modal.classList.contains("open")) {
 				close_modal(Modal);
 				if (btn.classList.contains("modal-my-edit")) {
@@ -355,7 +345,7 @@ export async function getBtn() {
 					});
 					btnTwo.addEventListener("click", () => {
 						window.location.href = "../pages/9.addProduct.html";
-						//editProduct(productId);
+						editProduct(productId);
 					});
 				} else if (btn.classList.contains("modal-my-comment")) {
 					Modal.style.bottom = "-90px";
