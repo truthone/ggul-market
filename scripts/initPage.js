@@ -1,5 +1,5 @@
 import { ORIGIN, TOKEN, ACCOUNT_NAME } from "./constants.js";
-import { checkEmailValid, checkUserIdValid, join, getFeed, login, getAccount, getFollowingList, getProfile, getFollowing, getFollower, loadUserData, updateProfile, profileImage } from "./api.js";
+import { checkEmailValid, checkUserIdValid, join, getFeed, login, getAccount, getProfile, getFollowing, getFollower, loadUserData, updateProfile, profileImage } from "./api.js";
 
 let loc = [];
 // 현재 페이지 읽기
@@ -224,7 +224,6 @@ function profilePage() {
 		document.querySelector(".cont-followings").href = `followers.html?${ACCOUNT_NAME}?following`;
 	}
 	getProfile(targetAccount);
-	getFollowingList();
 
 	const btnViewList = document.querySelector("#toggle-list"); // 목록형 버튼
 	const btnViewAlbum = document.querySelector("#toggle-album"); // 앨범형 버튼

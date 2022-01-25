@@ -186,7 +186,7 @@ export async function updateProfile() {
 		localStorage.setItem("AccountName", id);
 
 		// 버튼 누르면 프로필로 이동
-		location.href = `${ORIGIN}/profile.html`;
+		location.href = `${ORIGIN}/pages/profile.html`;
 	} catch (err) {
 		console.log(err);
 	}
@@ -222,7 +222,12 @@ export async function getFeed() {
 			isMyprofile = false;
 		}
 		const container = document.querySelector(".container");
-		let imageArr = post.image.split(",");
+		let imageArr = [];
+		try {
+			imageArr = post.image.split(",");
+		} catch {
+			imageArr.push(post.image);
+		}
 		let imageLength = imageArr.length;
 		let list = loadPost(idx, post, imageArr, imageLength, isMyprofile, authorAccount);
 		if (container) container.appendChild(list);
@@ -233,28 +238,6 @@ export async function getFeed() {
 	BtnLike();
 	BtnComment();
 	getBtn();
-}
-
-// 팔로잉 리스트
-export async function getFollowingList() {
-	const url = API_URL + `/profile/${ACCOUNT_NAME}`;
-	// 계정 정보가 없을 때
-	if (!ACCOUNT_NAME) {
-		return;
-	}
-	try {
-		const res = await fetch(url, {
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${TOKEN}`,
-				"Content-type": "application/json",
-			},
-		});
-		const json = await res.json();
-		const profile = json.profile;
-	} catch (err) {
-		console.log(err);
-	}
 }
 
 // 계정 프로필
@@ -587,7 +570,7 @@ function getFollowProfile(target) {
 	follow.classList = "box-profile";
 	follow.innerHTML = `<ul class="wrap-profile">
     <li>
-      <a href=${goURL}><img src=${target.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
+      <a href=${goURL}><img src=${target.image} onerror="this.src='${ORIGIN}/images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
     </li>
     <li>
       <a href=${goURL}>

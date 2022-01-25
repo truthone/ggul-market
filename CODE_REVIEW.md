@@ -118,7 +118,6 @@
 - reportPost() : 게시글 신고
 - deletePost() : 게시글 삭제
 - editPost() : 게시글 수정
-- getFollowingList() : 팔로잉 리스트 불러오기
 - getFollowing(): 팔로잉 목록 가져오기
 - getFollower() : 팔로워 목록 가져오기
 - getFollowProfile() : 팔로잉/팔로워 미니 프로필 가져오기

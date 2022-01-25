@@ -11,7 +11,7 @@ export function getMiniProfile(target, key) {
 	profile.classList = "box-profile";
 	profile.innerHTML = `<ul class="wrap-profile">
     <li>
-      <a href=${goURL}><img src=${target.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
+      <a href=${goURL}><img src=${target.image} onerror="this.src='${ORIGIN}/images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
     </li>
     <li>
       <a href=${goURL}>
@@ -42,7 +42,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 	// 이미지가 있을 때
 	if (post.image) {
 		for (let image of imageArr) {
-			images += `<div><img src=${image} alt="피드 이미지" class="img-feed"></div>`;
+			images += `<div><img src=${image} alt="피드 이미지" onerror="this.src='${ORIGIN}/images/post-img-example.png';" class="img-feed"></div>`;
 		}
 		// 다중 이미지 처리
 		if (imageLength > 1) {
@@ -56,14 +56,14 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 	}
 	// console.log(post.hearted)
 	let heartimage = post.hearted
-		? '<img src="../images/icon/icon-heart-active.png" alt="좋아요 이미지" class="icon-heart">'
-		: '<img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart">';
+		? `<img src="${ORIGIN}/images/icon/icon-heart-active.png" alt="좋아요 이미지" class="icon-heart">`
+		: `<img src="${ORIGIN}/images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart">`;
 
 	list.innerHTML = `<section>
     <h5 class="txt-hide">피드 게시글</h5>
     <ul class="wrap-profile">
       <li>
-        <a href=${goURL}><img src=${post.author.image} alt="기본프로필 소형" class="basic-profile"></a>
+        <a href=${goURL}><img src=${post.author.image} onerror="this.src='${ORIGIN}/images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
       </li>
       <a href=${goURL}>
         <li>
@@ -73,7 +73,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
           </ul>
         </li>
       </a>
-      <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+      <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="${ORIGIN}/images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
     </ul>
   </section>
   <section class="main-feed">
@@ -86,7 +86,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
       <button>${heartimage}</button><span class="like-count">${post.heartCount}</span>
       </li>
       <li>
-        <button class="${post.id} btn-comment"><img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></button><span>${post.commentCount}</span>
+        <button class="${post.id} btn-comment"><img src="${ORIGIN}/images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></button><span>${post.commentCount}</span>
       </li>
     </ul>
     <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
@@ -177,7 +177,7 @@ export function BtnLike() {
 				btn_like[i].classList.remove(btn_like[i].classList[2]);
 				btn_like[i].classList.add(HeartCount);
 				btn_like[i].classList.add(isHearted);
-				icon_heart[i].src = "../images/icon/icon-heart-active.png";
+				icon_heart[i].src = `${ORIGIN}/images/icon/icon-heart-active.png`;
 			} else {
 				cancellikePost(postId);
 				isHearted = "false";
@@ -186,7 +186,7 @@ export function BtnLike() {
 				btn_like[i].classList.remove(btn_like[i].classList[2]);
 				btn_like[i].classList.add(HeartCount);
 				btn_like[i].classList.add(isHearted);
-				icon_heart[i].src = "../images/icon/icon-heart.png";
+				icon_heart[i].src = `${ORIGIN}/images/icon/icon-heart.png`;
 			}
 			console.log(isHearted);
 			console.log(HeartCount);
@@ -213,12 +213,12 @@ if (document.querySelector(".top-btn-more-modal")) {
 					close_alert();
 					Alert_btnTwo.addEventListener("click", () => {
 						localStorage.clear();
-						window.location.href = "../pages/2.login.html";
+						window.location.href = `${ORIGIN}/pages/login.html`;
 					});
 				});
 			} else if (topbtnMoreModal.classList.contains("modal-chat-room")) {
 				topbtnOne.innerHTML = "채팅방 나가기";
-				topbtnOne.href = "../pages/chat_list.html";
+				topbtnOne.href = `${ORIGIN}/pages/chat_list.html`;
 				topModal.style.bottom = "-140px";
 			}
 		} else {
