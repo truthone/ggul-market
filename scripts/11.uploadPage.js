@@ -148,32 +148,51 @@ async function getImgName(formData) {
   } catch (err) {
     console.log(err);
   }
+
+  // fetch(`${API_URL}/image/uploadfiles`, {
+  //   method: "POST",
+  //   body: formData
+  // })
+  // .then((response) => {
+  //   const data = await response.json()
+  //   for (let i of data) {
+  //     filenames.push(`${API_URL}/${i["filename"]}`);
+  //   }
+  //   if (filenames.length > 1) {
+  //     return filenames.join(",")
+  //   } else {
+  //     return filenames[0];
+  //   }
+  // })
+  // .catch(error => { 
+  //   console.log(error)
+  // })
+
 }
 
-// 이미지 변환위한 처리 & 받아오기 
+// 이미지 변환위한 처리 & 받아오기
 async function setImgFilenames() {
-  
-  let uploadImgNames = '';
-  // 업로드 전 이미지 변환하기 
-  if (currentImgStorage.length > 0) {
-    const imgFormData = new FormData();
+	let uploadImgNames = "";
+	let result = ""; // 리턴할 변수
+	// 업로드 전 이미지 변환하기
+	if (currentImgStorage.length > 0) {
+		const imgFormData = new FormData();
 
-    currentImgStorage.forEach((item, idx) => {
-      if (typeof (item) == "string") {
-
-        uploadImgNames = item;
-        if ((item.length + 1) != idx) uploadImgNames += ',';
-
-      } else {
-        imgFormData.append("image", item)
-      }
-    });
-
-    await getImgName(imgFormData).then(result => {
-      uploadImgNames += result;      
-      return uploadImgNames;  
-    })
-  }
+		currentImgStorage.forEach((item, idx) => {
+			if (typeof item == "string") {
+				uploadImgNames = item;
+				if (item.length + 1 != idx) uploadImgNames += ",";
+			} else {
+				imgFormData.append("image", item);
+			}
+		});
+                // 리턴할 변수에 할당
+		result = getImgName(imgFormData).then((result) => {
+			uploadImgNames += result;
+			return uploadImgNames; // setImgFilenames()이 이 부분을 리턴하지 않습니다!
+		});
+	}
+	return result; // 이미지 로드시 undefined가 반환되지 않습니다!
 }
 
 // 게시물 수정 api 
@@ -218,12 +237,13 @@ async function postUpload() {
       let body;
 
        setImgFilenames().then((result) => {
-         //헤더, 바디 설정
-         headers = {
-           "Content-Type": "application/json",
-           "Authorization": 'Bearer ' + TOKEN
+        //헤더, 바디 설정
+        if(result){
+          headers = {
+            "Content-Type": "application/json",
+            "Authorization": 'Bearer ' + TOKEN
           }
-
+  
           body = JSON.stringify({
             "post": {
               "content": textareaElement.value,
@@ -231,28 +251,26 @@ async function postUpload() {
             }
           })
           console.log(result)
-      })
-      .then(() => {
-        // 기존 게시물 수정이면
-        if (POST_ID) {
-          apiEditPost(headers,body)
-          .then(data => {
-            if (data) { resetAndMove() }})
-          .catch(err => console.log(err));
+          if (POST_ID) {
+            apiEditPost(headers,body)
+            .then(data => {
+              if (data) { resetAndMove() }})
+            .catch(err => console.log(err));
 
-        } else { // 새 게시물 업로드이면
-          apiUploadPost(headers,body)
-          .then(data => { if (data) { resetAndMove() } })
-          .catch(err => console.log(err));
-        } 
-      })  
+          } else { // 새 게시물 업로드이면
+            apiUploadPost(headers,body)
+            .then(data => { if (data) { resetAndMove() } })
+            .catch(err => console.log(err));
+          } 
+        }
+      })
     }
   });
 }
 
 function resetAndMove() {
   dataReset();
-  // href("/6.profile.html");
+  href("/6.profile.html");
 }
 
 function dataReset() {
