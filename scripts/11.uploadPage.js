@@ -150,7 +150,7 @@ async function getImgName(formData) {
   }
 }
 
-// 이미지 변환해오기 
+// 이미지 변환위한 처리 & 받아오기 
 async function setImgFilenames() {
   
   let uploadImgNames = '';
@@ -169,13 +169,11 @@ async function setImgFilenames() {
       }
     });
 
-     getImgName(imgFormData).then(result => {
-      uploadImgNames += result;
-      console.log(uploadImgNames);
+    await getImgName(imgFormData).then(result => {
+      uploadImgNames += result;      
+      return uploadImgNames;  
     })
   }
-  console.log(uploadImgNames);
-  return uploadImgNames;
 }
 
 // 게시물 수정 api 
@@ -185,7 +183,8 @@ async function apiEditPost(headers,body) {
     headers,
     body
   })
-  return await response.json();
+  const data = await response.json(); 
+  return data;
 }
 // 새 게시물 업로드 api 
 async function apiUploadPost(headers,body) {
@@ -194,7 +193,8 @@ async function apiUploadPost(headers,body) {
     headers,
     body
   })
-  return await response.json();
+  const data = await response.json(); 
+  return data;
 }
 
 // 업로드 버튼 클릭시 
@@ -209,61 +209,50 @@ function clickUploadBtn() {
 
 // 업로드 버튼 기능
 async function postUpload() {
-  let uploadImgNames = '';
   const textareaElement = document.querySelector(".textarea-input");
 
   uploadBtn.addEventListener("click", async event => {
     if (submitState) {
 
-      uploadImgNames = setImgFilenames().then((result) => {
-        return result;
-      })  
-      console.log(uploadImgNames)
       let headers;
       let body;
 
-      //헤더, 바디 설정
-     headers = {
-        "Content-Type": "application/json",
-        "Authorization": 'Bearer ' + TOKEN
-      }
-     body = JSON.stringify({
-        "post": {
-          "content": textareaElement.value,
-          "image": uploadImgNames
-        }
-      })
-
-      console.log(headers)
-      console.log(body)
-
-      // 기존 게시물 수정이면
-      if (POST_ID) {
-        apiEditPost(headers,body)
-
-        .then(data => {
-          if (data) { 
-            resetAndMove() 
-          } 
-        })
-        .catch(err => console.log(err));
-      } else { // 새 게시물 업로드이면
-        apiUploadPost(headers,body)
-
-        .then(data => {
-          if (data) { 
-            resetAndMove() 
+       setImgFilenames().then((result) => {
+         //헤더, 바디 설정
+         headers = {
+           "Content-Type": "application/json",
+           "Authorization": 'Bearer ' + TOKEN
           }
-        })
-        .catch(err => console.log(err));
-      }
+
+          body = JSON.stringify({
+            "post": {
+              "content": textareaElement.value,
+              "image": result
+            }
+          })
+          console.log(result)
+      })
+      .then(() => {
+        // 기존 게시물 수정이면
+        if (POST_ID) {
+          apiEditPost(headers,body)
+          .then(data => {
+            if (data) { resetAndMove() }})
+          .catch(err => console.log(err));
+
+        } else { // 새 게시물 업로드이면
+          apiUploadPost(headers,body)
+          .then(data => { if (data) { resetAndMove() } })
+          .catch(err => console.log(err));
+        } 
+      })  
     }
   });
 }
 
 function resetAndMove() {
   dataReset();
-  href("/6.profile.html");
+  // href("/6.profile.html");
 }
 
 function dataReset() {
