@@ -5,10 +5,10 @@
 @import 'signin.css';
 @import 'join_membership.css';
 @import 'home.css';
-/*@import 'search.css';
+@import 'search.css';
 @import 'profile.css';
 @import 'followers.css';
-@import 'profile_modification.css';
+/* @import 'profile_modification.css';
 @import 'addProduct.css';
 @import 'uploadPage.css';
 @import 'chat_list.css';
