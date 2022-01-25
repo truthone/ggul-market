@@ -118,7 +118,7 @@ function joinPage() {
 	// 이메일 형식 유효성 검사
 	joinEmailInput.addEventListener("focusout", async () => {
 		const email = joinEmailInput.value;
-		const regExp = new RegExp("^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+.[A-Za-z0-9-]+");
+		const regExp = new RegExp("^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\\.[A-Za-z0-9-]+");
 
 		const validEmail = await checkEmailValid(email);
 		if (validEmail && email != "" && regExp.test(email) == true) {
@@ -259,14 +259,14 @@ function profilePage() {
 			viewList.style.display = "none";
 		}
 	});
-    // 게시물작성 버튼 누르면 로컬스토리지의 postId 초기화
-  const addPostBtn = document.querySelector('#btn-add-post');
-  
-  addPostBtn.addEventListener('click', () => {
-    if(localStorage.getItem('postId')){
-      localStorage.setItem('postId','');
-    }
-  })
+	// 게시물작성 버튼 누르면 로컬스토리지의 postId 초기화
+	const addPostBtn = document.querySelector("#btn-add-post");
+
+	addPostBtn.addEventListener("click", () => {
+		if (localStorage.getItem("postId")) {
+			localStorage.setItem("postId", "");
+		}
+	});
 }
 
 function followPage() {
