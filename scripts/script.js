@@ -1,10 +1,11 @@
 import { likePost, cancellikePost, reportPost, deletePost, deleteProduct, editPost, editProduct, GetComment, editComment, deleteComment, reportComment } from "./api.js";
+import { ORIGIN } from "./constants.js";
 
 // 미니 프로필 반환 함수
 export function getMiniProfile(target, key) {
 	let name = target.username.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
 	let accountname = target.accountname.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
-	const goURL = `6.profile.html?${target.accountname}`; // 프로필 바로가기 링크
+	const goURL = `${ORIGIN}/pages/profile.html?${target.accountname}`; // 프로필 바로가기 링크
 
 	let profile = document.createElement("article");
 	profile.classList = "box-profile";
@@ -27,7 +28,7 @@ export function getMiniProfile(target, key) {
 
 // 개별 게시물 로드
 export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
-	const goURL = `6.profile.html?${authorName}`;
+	const goURL = `${ORIGIN}/pages/profile.html?${authorName}`;
 
 	let btnMsg = isMyprofile ? "modal-my-edit" : "modal-other-edit";
 	let btnCommentMsg = isMyprofile ? "modal-my-comment" : "modal-other-comment";
@@ -217,7 +218,7 @@ if (document.querySelector(".top-btn-more-modal")) {
 				});
 			} else if (topbtnMoreModal.classList.contains("modal-chat-room")) {
 				topbtnOne.innerHTML = "채팅방 나가기";
-				topbtnOne.href = "../pages/12.chat_list.html";
+				topbtnOne.href = "../pages/chat_list.html";
 				topModal.style.bottom = "-140px";
 			}
 		} else {
@@ -323,7 +324,7 @@ export async function getBtn() {
 						});
 					});
 					btnTwo.addEventListener("click", () => {
-						window.location.href = "../pages/11.uploadPage.html";
+						window.location.href = `${ORIGIN}/pages/uploadPage.html`;
 						editPost(postId);
 					});
 				} else if (btn.classList.contains("modal-other-edit")) {
@@ -354,7 +355,7 @@ export async function getBtn() {
 						});
 					});
 					btnTwo.addEventListener("click", () => {
-						window.location.href = "../pages/9.addProduct.html";
+						window.location.href = `${ORIGIN}/pages/addProduct.html`;
 						//editProduct(productId);
 					});
 				} else if (btn.classList.contains("modal-my-comment")) {

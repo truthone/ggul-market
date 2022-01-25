@@ -110,7 +110,8 @@ function deleteImg() {
 	const imgList = document.querySelector(".upload-img-list");
 
 	imgList.addEventListener("click", (e) => {
-		const postImgListItem = document.querySelectorAll(".upload-img-list li");
+    const postImgListItem = document.querySelectorAll(".upload-img-list li");
+
 		for (let idx = 0; idx < e.currentTarget.children.length; idx++) {
 			if (e.target === imgList.children[idx].firstElementChild.firstElementChild) {
 				currentImgStorage.splice(idx, 1);

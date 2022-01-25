@@ -1,4 +1,4 @@
-import { API_URL, ACCOUNT_NAME, TOKEN, ID } from "./constants.js";
+import { API_URL, ACCOUNT_NAME, TOKEN, ID, ORIGIN } from "./constants.js";
 import { getMiniProfile, loadPost, handleImageScroll, BtnLike, getBtn, BtnComment } from "./script.js";
 
 // login API
@@ -28,7 +28,7 @@ export async function login() {
 		localStorage.setItem("Token", token);
 		localStorage.setItem("AccountName", json.user.accountname);
 		localStorage.setItem("Id", json.user._id);
-		location.href = "./4.home.html";
+		location.href = "./home.html";
 	} catch (err) {
 		// console.log('로그인 실패. input을 초기화합니다.')
 		document.querySelector(".login-warn").classList.add("on");
@@ -99,7 +99,7 @@ export async function join() {
 				},
 			}),
 		});
-		location.href = "./2.login.html";
+		location.href = `${ORIGIN}/pages/login.html`;
 	} catch (err) {
 		alert(err);
 	}
@@ -186,7 +186,7 @@ export async function updateProfile() {
 		localStorage.setItem("AccountName", id);
 
 		// 버튼 누르면 프로필로 이동
-		location.href = "./6.profile.html";
+		location.href = `${ORIGIN}/profile.html`;
 	} catch (err) {
 		console.log(err);
 	}
@@ -578,7 +578,7 @@ export async function getFollower(accountName) {
 
 // 팔로우 프로필
 function getFollowProfile(target) {
-	const goURL = `6.profile.html?${target.accountname}`;
+	const goURL = `${ORIGIN}/pages/profile.html?${target.accountname}`;
 	// console.log(getMiniProfile(target.accountname));
 	let state = target.follower.includes(ID)
 		? `<li><button type="button" class="S-button btn activ btn-follower_view_follow" id=${target.accountname}>취소</button></li>`

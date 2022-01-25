@@ -13,31 +13,32 @@ console.log(loc);
 
 // 페이지별 init 함수 실행
 switch (loc) {
-	case "2.login_email.html":
+	case "login_email.html":
 		loginPage();
 		break;
-	case "2.login.html":
+	case "login.html":
 		loginPage();
 		break;
-	case "3.join_email.html":
+	case "join_email.html":
 		joinPage();
 		break;
-	case "4.home.html":
+	case "home.html":
 		checkToken();
+		homePage();
 		break;
-	case "5.search.html":
+	case "search.html":
 		checkToken();
 		searchPage();
 		break;
-	case "6.profile.html":
+	case "profile.html":
 		checkToken();
 		profilePage();
 		break;
-	case "7.followers.html":
+	case "followers.html":
 		checkToken();
 		followPage();
 		break;
-	case "8.profile_modification.html":
+	case "profile_modification.html":
 		checkToken();
 		profileModifyPage();
 		break;
@@ -59,10 +60,10 @@ function splashPage() {
 	window.onload = setTimeout(() => {
 		if (!!TOKEN) {
 			// 토큰이 있는 경우 홈피드로 이동
-			location.href = `${ORIGIN}/pages/4.home.html`;
+			location.href = `${ORIGIN}/pages/home.html`;
 		} else {
 			// 토큰이 없는 경우 로그인 페이지로 이동
-			location.href = `${ORIGIN}/pages/2.login.html`;
+			location.href = `${ORIGIN}/pages/login.html`;
 		}
 	}, 1000);
 }
@@ -189,6 +190,10 @@ function joinPage() {
 	joinBtnSubmit.addEventListener("click", join);
 }
 
+function homePage() {
+	getFeed();
+}
+
 // 유저 검색
 function searchPage() {
 	const input = document.querySelector("#search-id");
@@ -211,13 +216,12 @@ function profilePage() {
 			isMyprofile = true;
 		}
 
-		document.querySelector(".cont-followers").href = `7.followers.html?${targetAccount}?follower`;
-		document.querySelector(".cont-followings").href = `7.followers.html?${targetAccount}?following`;
-	}
-	else {
+		document.querySelector(".cont-followers").href = `followers.html?${targetAccount}?follower`;
+		document.querySelector(".cont-followings").href = `followers.html?${targetAccount}?following`;
+	} else {
 		isMyprofile = true;
-		document.querySelector(".cont-followers").href = `7.followers.html?${ACCOUNT_NAME}?follower`;
-		document.querySelector(".cont-followings").href = `7.followers.html?${ACCOUNT_NAME}?following`;
+		document.querySelector(".cont-followers").href = `followers.html?${ACCOUNT_NAME}?follower`;
+		document.querySelector(".cont-followings").href = `followers.html?${ACCOUNT_NAME}?following`;
 	}
 	getProfile(targetAccount);
 	getFollowingList();
