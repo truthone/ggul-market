@@ -107,8 +107,7 @@
 
 <p align="center">
     <img src="./preview/homefeed.gif">
-</p>
-<p align="center">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <img src="./preview/nofeed.gif">
 </p>
 
