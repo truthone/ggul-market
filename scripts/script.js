@@ -113,7 +113,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 <li>
   <small class="txt-date">${comment.createdAt}</small>
 </li>
-<li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+<li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="${ORIGIN}/images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
 </ul>
 <p class="txt-feed">
 ${comment.content}
