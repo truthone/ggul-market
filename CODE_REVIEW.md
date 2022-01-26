@@ -26,7 +26,7 @@
 
 - 범위
 
-  - 11.uploadPage.js 115-128줄.
+  - uploadPage.js 115-128줄.
 
 - 전체 개요
 
@@ -164,7 +164,7 @@
 ## 6번 리뷰 : 모달 로직
 
 - 범위 :
-  모달창(Modal), 모달확인창(ModalAlert)(4.home.html 26 ~ 40 line, 6.profile.html 121~141 line, modal.css)  
+  모달창(Modal), 모달확인창(ModalAlert)(home.html 26 ~ 40 line, profile.html 121~141 line, modal.css)  
   화면 상단 nav바 더보기버튼(scrpit.js파일 197 ~ 227 line)
   close_alert(scrpit.js파일 228 ~ 239 line),  
   alert_message(scrpit.js파일 240 ~ 273 line),  
@@ -175,11 +175,11 @@
 
 ### 기능 내용
 
-1. 4.home.html
+1. home.html
 
 - 모달창과 모달알림창은 화면 하단에 숨겨져있다 open클래스가 생기면 상단으로 이동합니다. (ex) Modal.style.bottom = "-240px" => Modal.style.bottom = "-40px")
 
-2. 6.profile.html
+2. profile.html
 
 - 모달창과 모달알림창, 상단모달창은 화면 하단에 숨겨져있다 open클래스가 생기면 상단으로 이동합니다.
   화면 상단 nav바를 위한 모달창(topModal)이 추가되었습니다.
