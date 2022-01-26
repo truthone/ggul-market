@@ -663,17 +663,7 @@ export async function GetComment(postId) {
 	});
 	const data = await res.json();
 	const comments = data.comments;
-	//   console.log(comments)
-	let commentAuthorUsername;
-	let commentContent;
-	comments.forEach((comment) => {
-		const commentAuthorImage = comment.author.image;
-		commentAuthorUsername = comment.author.username;
-		const commentCreatedAt = comment.createdAt;
-		commentContent = comment.content;
-		console.log(commentContent);
-	});
-	return commentContent;
+	return comments;
 }
 // 댓글 작성
 export async function editComment(postId) {

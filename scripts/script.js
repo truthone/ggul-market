@@ -374,117 +374,36 @@ export async function getBtn() {
 }
 
 // 댓글
+export async function RenderComment(list, postId) {
+  console.log(list)
+  const container = document.querySelector(".feed-container");
+  container.appendChild(list);
+  GetComment(postId).then((value) => {
+    console.log(value);
+
+  });
+}
+
 export async function BtnComment() {
-	// const btn_comment = document.querySelectorAll('.btn-comment');
-	// const home_post = document.querySelectorAll('.home-post');
 	const btn_comment = document.getElementsByClassName("btn-comment");
 	const home_post = document.getElementsByClassName("home-post");
 	const comment = document.getElementsByClassName("comment");
-	const top_nav = document.querySelector(".wrap-top-nav");
 	// console.log(home_post)
 	// console.log(home_post.length)
 	for (let i = 0; i < home_post.length; i++) {
 		btn_comment[i].addEventListener("click", () => {
-			let postId = btn_comment[i].classList[0];
-			// let commentContent;
-			// GetComment(postId).then(comment => {
-			// 	commentContent = comment.content})
-			// console.log(commentContent)
-			// comments.forEach(comment => {
-			// 	const commentAuthorImage = comment.author.image;
-			// 	const commentAuthorUsername = comment.author.username;
-			// 	const commentCreatedAt = comment.createdAt;
-			let commentContent = comment.content;
-			// })
-			GetComment(postId).then((value) => {
-				console.log(value);
-				for (let j = 0; j < home_post.length; j++) {
-					if (home_post[j].classList[1] != postId) {
-						// console.log(comment)
-						home_post[j].style.display = "none";
-						comment[i].classList.remove("hidden");
-						comment[i].innerHTML = `
-						<p>안녕하세요</p>
-						<p>${value}</p>
-						`;
-					}
-				}
-			});
-			// GetComment(postId).then((value) => viewComment(value, home_post[i]));
+      let postId = btn_comment[i].classList[0];
+      let list = home_post[i];
+      console.log(list)
+      location.href = `${ORIGIN}/pages/chat_page.html?${postId}`;
+      console.log(list)
+      RenderComment(list, postId);
+      // const container = document.querySelector(".feed-container");
+      // container.appendChild(list);
+			// GetComment(postId).then((value) => {
+			// 	console.log(value);
+
+			// });
 		});
 	}
-	function viewComment(comment, post) {
-		console.log(comment);
-		console.log(post);
-
-		// 포스트에 댓글 섹션 추가
-		// 		`<ul class="wrap-profile">
-		// <li>
-		//   <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-		// </li>
-		// <a href=${goURL}>
-		//   <li>
-		//     <ul class="wrap-right">
-		//       <li class="user-name">${comment.author.username}</li>
-		//     </ul>
-		//   </li>
-		// </a>
-		// <li>
-		//   <small class="txt-date">${comment.createdAt}</small>
-		// </li>
-		// <li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-		// </ul>
-		// <p class="txt-feed">
-		// ${comment.content}
-		// </p>`
-	}
 }
-// btn_comment.forEach(btn => {
-//   btn.addEventListener('click', () => {
-//     // const home_post = document.querySelector('.home-post');
-//     postId = btn.classList.item(0);
-//     localStorage.setItem('postId', postId)
-//     console.log(postId)
-//     // console.log('postId:', postId)
-//     // console.log('home_post:', home_post.classList.item(1))
-//     // if (home_post.classList.item(1) != postId)
-//     // {
-//     //   home_post.style.display = "none";
-//     // }
-//     // GetComment(postId);
-//     // window.location.href = "../pages/10.comment_page.html";
-//     // let btnMsg = isMyprofile ? 'modal-my-edit' : 'modal-other-edit';
-//     // let list = document.createElement('section');
-//     // const goURL = `6.profile.html?${authorName}`;
-//     // loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName);
-//     // console.log(localStorage.getItem(postId))
-//   })
-//   postId = localStorage.getItem(postId);
-// })
-
-// <section class="wrap-comment active">
-// <ul class="wrap-profile">
-//   <li>
-//     <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-//   </li>
-//   <a href=${goURL}>
-//     <li>
-//       <ul class="wrap-right">
-//         <li class="user-name">${comment.author.username}</li>
-//       </ul>
-//     </li>
-//   </a>
-//   <small>${comment.createdAt}</small>
-//   <li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-// </ul>
-// <p class="txt-feed">
-// ${comment.content}
-// </p>
-// <div class="wrap-comment">
-//   <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
-//   <form class="form-comment">
-//     <input class="input-comment" type="text" placeholder="댓글 입력하기...">
-//     <button class="btn-send">게시</button>
-//   </form>
-// </div>
-// </section>
