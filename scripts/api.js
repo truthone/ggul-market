@@ -297,12 +297,12 @@ export async function getProfile(currentProfile) {
 		const json = await res.json();
 		const profile = json.profile;
 
-		let followingCount = profile.followingCount ? json.profile.followingCount : 0;
+		let followerCount = profile.followerCount ? json.profile.followerCount : 0;
 		let isfollow = profile.isfollow;
 
 		// 팔로우/언팔로우 버튼 변화
 		const btnFollowUnfollow = document.querySelector("#btn-profile_view_follow");
-		const numberFollowing = document.querySelector(".number-following");
+		const numberFollower = document.querySelector(".number-follower");
 
 		if (isfollow) {
 			btnFollowUnfollow.classList.add("activ");
@@ -316,11 +316,11 @@ export async function getProfile(currentProfile) {
 			if (btnFollowUnfollow.classList.contains("activ")) {
 				btnFollowUnfollow.textContent = "언팔로우";
 				follow(currentProfile);
-				numberFollowing.textContent = isfollow ? followingCount : followingCount + 1;
+				numberFollower.textContent = isfollow ? followerCount : followerCount + 1;
 			} else {
 				btnFollowUnfollow.textContent = "팔로우";
 				unfollow(currentProfile);
-				numberFollowing.textContent = isfollow ? followingCount - 1 : followingCount;
+				numberFollower.textContent = isfollow ? followerCount - 1 : followerCount;
 			}
 		});
 
@@ -332,8 +332,8 @@ export async function getProfile(currentProfile) {
 		const descUser = document.querySelector(".desc-user");
 
 		userImage.src = profile.image;
-		followers.textContent = profile.followerCount ? json.profile.followerCount : 0;
-		followings.textContent = followingCount;
+		followers.textContent = followerCount;
+		followings.textContent = profile.followingCount ? profile.followingCount : 0;
 		userName.textContent = profile.username;
 		userId.textContent = `@ ${profile.accountname}`;
 		descUser.textContent = profile.intro;
