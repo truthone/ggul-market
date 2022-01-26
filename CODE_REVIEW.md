@@ -188,20 +188,20 @@
 
 - 모든 더보기버튼(btnMoreModal)을 클릭했을 때 모달창(Modal)에 open 클래스를 toggle합니다. open클래스가 없으면 Modal을 닫습니다.
 
-4. close_modal
+  4. close_modal
 
-- Modal에 open클래스가 있을때 Modal 외의 부분을 클릭한다면 Modal을 닫습니다.
+  - Modal에 open클래스가 있을때 Modal 외의 부분을 클릭한다면 Modal을 닫습니다.
 
 - btnMoreModal이 가진 클래스명(modal-my-edit: 내 게시글, modal-other-edit: 다른사람 게시글, modal-product: 내 상품, modal-my-comment: 내 댓글, modal-other-comment: 다른사람 댓글)에 따라 Modal을 엽니다. 클래스명에 따라 Modal이 오픈되는 정도가 다릅니다.(Modal.style.bottom = "-40px" or "-90px" or "-140px")
 - btnMoreModal이 가진 클래스명에 따라 Modal의 버튼(btnOne,btnTwo) 텍스트를 변경합니다.(ex) btnOne: 삭제하기 => 신고하기)
 - btnOne을 클릭한다면 alert_message 함수를 실행합니다.
 
-5. alert_message
+  5. alert_message
 
-- 모달확인창(ModalAlert)을 열고, Modal을 닫습니다.
-- 인자값에 따라 ModalAlert의 버튼(Alert_btnOne, Alert_btnTwo) 텍스트를 변경합니다.
+  - 모달확인창(ModalAlert)을 열고, Modal을 닫습니다.
+  - 인자값에 따라 ModalAlert의 버튼(Alert_btnOne, Alert_btnTwo) 텍스트를 변경합니다.
 
-6. close_alert
+  6. close_alert
    - ModalAlert의 Alert_btnOne(취소 버튼)을 클릭하면 ModalAlert를 닫습니다. 모든 open클래스를 제거합니다.
 
 - Alert_btnTwo(삭제, 신고)를 클릭하면 삭제(deletePost), 신고(reportPost)API함수를 실행한 뒤 ModalAlert를 닫고 Modal의 open클래스를 제거합니다. 화면을 새로고침합니다.
