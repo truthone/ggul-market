@@ -38,10 +38,44 @@
   margin-bottom: 24px;
 }
 
-.comment {
-  /* width: 100vw; */
-  border-top: 0.5px solid #DBDBDB;
+/* 댓글 */
+
+.feed-container {
+  background-color: white;
 }
-.hidden {
-  display: none;
+.comment {
+  width: 100vw;
+  /* border-top: 0.5px solid #DBDBDB; */
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+.comment .txt-date {
+  font-size: 10px;
+  color: #767676;
+  padding: 4px 0px 0px 4px;
+
+}
+
+.comment p {
+  padding: 0px 0px 20px 54px;
+}
+
+.basic-profile {
+  border-radius: 50%;
+}
+
+.comment .wrap-right {
+  display: flex;
+  align-content: center; 
+}
+
+.wrap-comment .btn-send {
+  width: 33px;
+  font-size: 14px;
+  /* margin-right: 20px; */
+} 
+
+.wrap-comment .active {
+  color: #F26E22;
 }

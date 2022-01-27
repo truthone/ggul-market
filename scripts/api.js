@@ -663,21 +663,27 @@ export async function GetComment(postId) {
 	});
 	const data = await res.json();
 	const comments = data.comments;
+	// console.log(url)
 	return comments;
 }
 // 댓글 작성
-export async function editComment(postId) {
+export async function editComment(postId, input) {
 	const url = API_URL + `/post/${postId}/comments`;
 	const res = await fetch(url, {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${TOKEN}`,
-			"Content-type": "application/json",
-		},
-	});
+	  method:"POST",
+	  headers:{
+		"Authorization" : `Bearer ${TOKEN}`,
+		"Content-type" : "application/json"
+	  },
+	  body: JSON.stringify({
+		  comment: {
+			  content: input
+		  }
+	  })
+	})
 	const data = await res.json();
 	console.log(data);
-}
+  }
 // 댓글 삭제
 export async function deleteComment(postId) {
 	const url = API_URL + `/post/${postId}/comments/${commentId}`;

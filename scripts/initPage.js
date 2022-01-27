@@ -1,5 +1,5 @@
 import { ORIGIN, TOKEN, ACCOUNT_NAME } from "./constants.js";
-import { checkEmailValid, checkUserIdValid, join, getFeed, login, getAccount, getProfile, getFollowing, getFollower, loadUserData, updateProfile, profileImage } from "./api.js";
+import { checkEmailValid, checkUserIdValid, join, getFeed, login, getAccount, getProfile, getFollowing, getFollower, loadUserData, updateProfile, profileImage, GetComment, editComment } from "./api.js";
 
 let loc = [];
 // 현재 페이지 읽기
@@ -25,6 +25,10 @@ switch (loc) {
 	case "home.html":
 		checkToken();
 		homePage();
+		break;
+	case "chat_page.html":
+		checkToken();
+		chatPage();
 		break;
 	case "search.html":
 		checkToken();
@@ -323,4 +327,69 @@ function profileModifyPage() {
 			btnSave.classList.add("disabled");
 		}
 	});
+}
+
+function chatPage() {
+	const container = document.querySelector(".feed-container");
+	// let item = localStorage.getItem('selectPage');
+	let postId = localStorage.getItem('postId');
+	console.log(postId)
+	// console.log(item)
+	GetComment(postId).then((value) => {
+		console.log(value)
+		for (let comment of value) {
+			let commentAuthorImage = comment.author.image;
+            let commentAuthorUsername = comment.author.username;
+            let commentAuthorAccountname = comment.author.accountname;
+            let commentCreatedAt = comment.createdAt;
+            let commentContent = comment.content;
+            let commentId = comment.id;
+			let isMyprofile;
+
+            if (ACCOUNT_NAME == commentAuthorAccountname) {
+              isMyprofile = true;
+            } 
+			else {
+              isMyprofile = false;
+            }
+            let btnCommentMsg = isMyprofile ? "modal-my-comment" : "modal-other-comment";
+            const goURL = `6.profile.html?${commentAuthorAccountname}`;
+
+            container.innerHTML = `
+              <ul class="wrap-profile comment">
+                <li>
+                  <a href=${goURL}><img src=${commentAuthorImage} alt="기본프로필 소형" class="basic-profile"></a>
+                </li>
+                <a href=>
+                  <li>
+                    <ul class="wrap-right">
+                      <li class="user-name">${commentAuthorUsername}</li>
+                      <small class="txt-date">&#183; ${commentCreatedAt}</small>
+                    </ul>
+                  </li>
+                </a>
+                <li><button type="button" class="${commentId} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+              </ul>
+              <p>${commentContent}</p>
+              `
+		}
+		const wrapComment = document.querySelector('.wrap-comment');
+        const btnSend = document.querySelector('.btn-send');
+        const inputComment = document.querySelector('.input-comment');
+        wrapComment.addEventListener('input', () => {
+          btnSend.classList.add('active');
+          if (inputComment.value == "") {
+            btnSend.classList.remove('active');
+          }
+          else {
+            btnSend.classList.add('active');
+			console.log(inputComment.value)
+            btnSend.addEventListener('click', () => {
+              editComment(postId, inputComment.value);
+            })
+          }
+        })
+	})
+	// container.innerHTML = `${item}`
+	// container.appendChild(item);
 }

@@ -387,23 +387,19 @@ export async function RenderComment(list, postId) {
 export async function BtnComment() {
 	const btn_comment = document.getElementsByClassName("btn-comment");
 	const home_post = document.getElementsByClassName("home-post");
-	const comment = document.getElementsByClassName("comment");
-	// console.log(home_post)
-	// console.log(home_post.length)
 	for (let i = 0; i < home_post.length; i++) {
 		btn_comment[i].addEventListener("click", () => {
       let postId = btn_comment[i].classList[0];
+	  localStorage.setItem('postId', postId);
       let list = home_post[i];
       console.log(list)
+	  console.log(typeof(list))
+	//   localStorage.setItem('selectPage', JSON.stringify(list));
+    //   let item = localStorage.getItem('selectPage');
+	//   console.log(JSON.parse(item))
       location.href = `${ORIGIN}/pages/chat_page.html?${postId}`;
-      console.log(list)
-      RenderComment(list, postId);
-      // const container = document.querySelector(".feed-container");
-      // container.appendChild(list);
-			// GetComment(postId).then((value) => {
-			// 	console.log(value);
-
-			// });
+    //   console.log(list)
+    //   RenderComment(list, postId);
 		});
 	}
 }
