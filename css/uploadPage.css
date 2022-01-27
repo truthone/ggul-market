@@ -10,7 +10,7 @@
   margin-top: 20px;
 }
 
-.container {
+#feed-upload-page .container {
   background-color: #ffffff;
   padding: 20px 16px; 
   display: flex;
@@ -26,13 +26,13 @@
   margin-right: 16px;
 }
 
-form {
+.uploadForm {
   width: 100%;
   margin-left: 12px;
   overflow-x: hidden;
 }
 
-input {
+.uploadForm input {
   border: 0;
 }
 

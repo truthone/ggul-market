@@ -1,3 +1,11 @@
+#chatroomPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: calc(100vh - 120px);
+}
+
+
 .chat-space {
     padding-top: 224px;
     width: 100vw;
