@@ -2,14 +2,14 @@
   background-color: #ffffff;
 }
 
-.container {
+#product-upload-page .container {
   background-color: #ffffff;
   padding: 0 34px; 
   display: flex;
   justify-content: center;
 }
 
-form {
+.formStyle {
   width: 100%;
 }
 
