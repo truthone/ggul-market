@@ -1,10 +1,11 @@
 /* login-email.html */
-body {
+#Signin {
   background-color: #FFFFFF;
   padding: 0;
 }
 
 #emailLogin, #emailJoinin {
+  background-color: #FFFFFF;
   width: 100%;
   /* background-color: #FFFFFF; */
   padding: 0;
@@ -55,7 +56,7 @@ body {
   margin-bottom: 16px;
 }
 
-.btn {
+.submit-btn.btn, .login-submit.btn {
   width: 100%;
   margin-bottom: 20px;
 }
@@ -84,12 +85,11 @@ body {
   margin-top: 16px;
 }
 
-/* 3-2. join_membership */
+/* join_membership */
 #setProfile {
   display: none;
   width: 100%;
   background-color: #FFFFFF;
-  padding: 0;
   padding: 54px 34px;
   box-sizing: border-box;
 }
@@ -159,7 +159,7 @@ body {
   margin-top: 16px;
 }
 
-.btn {
+#emailJoinin .btn {
   width: 100%;
   margin-top: 30px;
 }

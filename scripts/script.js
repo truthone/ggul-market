@@ -1,14 +1,17 @@
 import { likePost, cancellikePost, reportPost, deletePost, deleteProduct, editPost, editProduct, GetComment, editComment, deleteComment, reportComment } from "./api.js";
+import { ORIGIN } from "./constants.js";
 
+// 미니 프로필 반환 함수
 export function getMiniProfile(target, key) {
 	let name = target.username.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
 	let accountname = target.accountname.replace(key, `<span style="color:orange; font-weight:500;">${key}</span>`);
-	const goURL = `6.profile.html?${target.accountname}`;
+	const goURL = `${ORIGIN}/pages/profile.html?${target.accountname}`; // 프로필 바로가기 링크
+
 	let profile = document.createElement("article");
 	profile.classList = "box-profile";
 	profile.innerHTML = `<ul class="wrap-profile">
     <li>
-      <a href=${goURL}><img src=${target.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
+      <a href=${goURL}><img src=${target.image} onerror="this.src='${ORIGIN}/images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
     </li>
     <li>
       <a href=${goURL}>
@@ -23,8 +26,9 @@ export function getMiniProfile(target, key) {
 	return profile;
 }
 
+// 개별 게시물 로드
 export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName) {
-	const goURL = `6.profile.html?${authorName}`;
+	const goURL = `${ORIGIN}/pages/profile.html?${authorName}`;
 
 	let btnMsg = isMyprofile ? "modal-my-edit" : "modal-other-edit";
 	let btnCommentMsg = isMyprofile ? "modal-my-comment" : "modal-other-comment";
@@ -38,7 +42,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 	// 이미지가 있을 때
 	if (post.image) {
 		for (let image of imageArr) {
-			images += `<div><img src=${image} alt="피드 이미지" class="img-feed"></div>`;
+			images += `<div><img src=${image} alt="피드 이미지" onerror="this.src='${ORIGIN}/images/post-img-example.png';" class="img-feed"></div>`;
 		}
 		// 다중 이미지 처리
 		if (imageLength > 1) {
@@ -52,14 +56,14 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 	}
 	// console.log(post.hearted)
 	let heartimage = post.hearted
-		? '<img src="../images/icon/icon-heart-active.png" alt="좋아요 이미지" class="icon-heart">'
-		: '<img src="../images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart">';
+		? `<img src="${ORIGIN}/images/icon/icon-heart-active.png" alt="좋아요 이미지" class="icon-heart">`
+		: `<img src="${ORIGIN}/images/icon/icon-heart.png" alt="좋아요 이미지" class="icon-heart">`;
 
 	list.innerHTML = `<section>
     <h5 class="txt-hide">피드 게시글</h5>
     <ul class="wrap-profile">
       <li>
-        <a href=${goURL}><img src=${post.author.image} alt="기본프로필 소형" class="basic-profile"></a>
+        <a href=${goURL}><img src=${post.author.image} onerror="this.src='${ORIGIN}/images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
       </li>
       <a href=${goURL}>
         <li>
@@ -69,7 +73,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
           </ul>
         </li>
       </a>
-      <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+      <li><button type="button" class="${post.id} btn-more-modal ${btnMsg}"><img src="${ORIGIN}/images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
     </ul>
   </section>
   <section class="main-feed">
@@ -82,7 +86,7 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
       <button>${heartimage}</button><span class="like-count">${post.heartCount}</span>
       </li>
       <li>
-        <button class="${post.id} btn-comment"><img src="../images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></button><span>${post.commentCount}</span>
+        <button class="${post.id} btn-comment"><img src="${ORIGIN}/images/icon/icon-message-circle.png" alt="댓글 이미지" class="chat-icon-message-circle"></button><span>${post.commentCount}</span>
       </li>
     </ul>
     <small class="txt-date">${date[0]}년 ${date[1]}월 ${date[2]}일</small>
@@ -109,14 +113,14 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 <li>
   <small class="txt-date">${comment.createdAt}</small>
 </li>
-<li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
+<li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="${ORIGIN}/images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
 </ul>
 <p class="txt-feed">
 ${comment.content}
 </p> */
 // `
 
-// 다중 이미지 슬라이드(스크롤)
+// 다중 이미지 슬라이드(스크롤) 유틸 함수
 export function handleImageScroll(idx, imageLength) {
 	let btnImage = document.querySelectorAll(`.btn-image${idx - 1}`);
 	let wrapImages = document.querySelector(`#wrap-images${idx - 1}`);
@@ -173,7 +177,7 @@ export function BtnLike() {
 				btn_like[i].classList.remove(btn_like[i].classList[2]);
 				btn_like[i].classList.add(HeartCount);
 				btn_like[i].classList.add(isHearted);
-				icon_heart[i].src = "../images/icon/icon-heart-active.png";
+				icon_heart[i].src = `${ORIGIN}/images/icon/icon-heart-active.png`;
 			} else {
 				cancellikePost(postId);
 				isHearted = "false";
@@ -182,7 +186,7 @@ export function BtnLike() {
 				btn_like[i].classList.remove(btn_like[i].classList[2]);
 				btn_like[i].classList.add(HeartCount);
 				btn_like[i].classList.add(isHearted);
-				icon_heart[i].src = "../images/icon/icon-heart.png";
+				icon_heart[i].src = `${ORIGIN}/images/icon/icon-heart.png`;
 			}
 			console.log(isHearted);
 			console.log(HeartCount);
@@ -209,12 +213,12 @@ if (document.querySelector(".top-btn-more-modal")) {
 					close_alert();
 					Alert_btnTwo.addEventListener("click", () => {
 						localStorage.clear();
-						window.location.href = "../pages/2.login.html";
+						window.location.href = `${ORIGIN}/pages/login.html`;
 					});
 				});
 			} else if (topbtnMoreModal.classList.contains("modal-chat-room")) {
 				topbtnOne.innerHTML = "채팅방 나가기";
-				topbtnOne.href = "../pages/12.chat_list.html";
+				topbtnOne.href = `${ORIGIN}/pages/chat_list.html`;
 				topModal.style.bottom = "-140px";
 			}
 		} else {
@@ -271,29 +275,17 @@ function alert_message(option) {
 
 function close_modal(Modal) {
 	window.addEventListener("click", () => {
-		console.log("1");
-		if (Modal.classList.contains("open")) {
-			console.log("2");
-			window.addEventListener(
-				"click",
-				(e) => {
-					console.log(e.target);
-					if (e.target != Modal) {
-						Modal.style.bottom = "-240px";
-						Modal.classList.remove("open");
-						return;
-					}
-				},
-				true
-			);
-		}
+		window.addEventListener(
+			"click",
+			(e) => {
+				if (e.target != Modal) {
+					Modal.style.bottom = "-240px";
+					Modal.classList.remove("open");
+				}
+			},
+			true
+		);
 	});
-	// window.addEventListener('click', (e) => {
-	// 	console.log(e.target)
-	// 	if (e.target != Modal) {
-	// 	  Modal.style.bottom = '-240px';
-	// 	}
-	// 	})
 }
 
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
@@ -311,7 +303,7 @@ export async function getBtn() {
 			let productId = btn.classList.item(0);
 			localStorage.setItem("productId", productId);
 			localStorage.setItem("postId", postId);
-			Modal.classList.add("open");
+			Modal.classList.toggle("open");
 			if (Modal.classList.contains("open")) {
 				close_modal(Modal);
 				if (btn.classList.contains("modal-my-edit")) {
@@ -326,7 +318,7 @@ export async function getBtn() {
 						});
 					});
 					btnTwo.addEventListener("click", () => {
-						window.location.href = "../pages/11.uploadPage.html";
+						window.location.href = `${ORIGIN}/pages/uploadPage.html`;
 						editPost(postId);
 					});
 				} else if (btn.classList.contains("modal-other-edit")) {
@@ -357,8 +349,8 @@ export async function getBtn() {
 						});
 					});
 					btnTwo.addEventListener("click", () => {
-						window.location.href = "../pages/9.addProduct.html";
-						//editProduct(productId);
+						window.location.href = `${ORIGIN}/pages/addProduct.html`;
+						editProduct(productId);
 					});
 				} else if (btn.classList.contains("modal-my-comment")) {
 					Modal.style.bottom = "-90px";
@@ -382,117 +374,36 @@ export async function getBtn() {
 }
 
 // 댓글
+export async function RenderComment(list, postId) {
+  console.log(list)
+  const container = document.querySelector(".feed-container");
+  container.appendChild(list);
+  GetComment(postId).then((value) => {
+    console.log(value);
+
+  });
+}
+
 export async function BtnComment() {
-	// const btn_comment = document.querySelectorAll('.btn-comment');
-	// const home_post = document.querySelectorAll('.home-post');
 	const btn_comment = document.getElementsByClassName("btn-comment");
 	const home_post = document.getElementsByClassName("home-post");
 	const comment = document.getElementsByClassName("comment");
-	const top_nav = document.querySelector(".wrap-top-nav");
 	// console.log(home_post)
 	// console.log(home_post.length)
 	for (let i = 0; i < home_post.length; i++) {
 		btn_comment[i].addEventListener("click", () => {
-			let postId = btn_comment[i].classList[0];
-			// let commentContent;
-			// GetComment(postId).then(comment => {
-			// 	commentContent = comment.content})
-			// console.log(commentContent)
-			// comments.forEach(comment => {
-			// 	const commentAuthorImage = comment.author.image;
-			// 	const commentAuthorUsername = comment.author.username;
-			// 	const commentCreatedAt = comment.createdAt;
-			let commentContent = comment.content;
-			// })
-			GetComment(postId).then((value) => {
-				console.log(value);
-				for (let j = 0; j < home_post.length; j++) {
-					if (home_post[j].classList[1] != postId) {
-						// console.log(comment)
-						home_post[j].style.display = "none";
-						comment[i].classList.remove("hidden");
-						comment[i].innerHTML = `
-						<p>안녕하세요</p>
-						<p>${value}</p>
-						`;
-					}
-				}
-			});
-			// GetComment(postId).then((value) => viewComment(value, home_post[i]));
+      let postId = btn_comment[i].classList[0];
+      let list = home_post[i];
+      console.log(list)
+      location.href = `${ORIGIN}/pages/chat_page.html?${postId}`;
+      console.log(list)
+      RenderComment(list, postId);
+      // const container = document.querySelector(".feed-container");
+      // container.appendChild(list);
+			// GetComment(postId).then((value) => {
+			// 	console.log(value);
+
+			// });
 		});
 	}
-	function viewComment(comment, post) {
-		console.log(comment);
-		console.log(post);
-
-		// 포스트에 댓글 섹션 추가
-		// 		`<ul class="wrap-profile">
-		// <li>
-		//   <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-		// </li>
-		// <a href=${goURL}>
-		//   <li>
-		//     <ul class="wrap-right">
-		//       <li class="user-name">${comment.author.username}</li>
-		//     </ul>
-		//   </li>
-		// </a>
-		// <li>
-		//   <small class="txt-date">${comment.createdAt}</small>
-		// </li>
-		// <li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-		// </ul>
-		// <p class="txt-feed">
-		// ${comment.content}
-		// </p>`
-	}
 }
-// btn_comment.forEach(btn => {
-//   btn.addEventListener('click', () => {
-//     // const home_post = document.querySelector('.home-post');
-//     postId = btn.classList.item(0);
-//     localStorage.setItem('postId', postId)
-//     console.log(postId)
-//     // console.log('postId:', postId)
-//     // console.log('home_post:', home_post.classList.item(1))
-//     // if (home_post.classList.item(1) != postId)
-//     // {
-//     //   home_post.style.display = "none";
-//     // }
-//     // GetComment(postId);
-//     // window.location.href = "../pages/10.comment_page.html";
-//     // let btnMsg = isMyprofile ? 'modal-my-edit' : 'modal-other-edit';
-//     // let list = document.createElement('section');
-//     // const goURL = `6.profile.html?${authorName}`;
-//     // loadPost(idx, post, imageArr, imageLength, isMyprofile, authorName);
-//     // console.log(localStorage.getItem(postId))
-//   })
-//   postId = localStorage.getItem(postId);
-// })
-
-// <section class="wrap-comment active">
-// <ul class="wrap-profile">
-//   <li>
-//     <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-//   </li>
-//   <a href=${goURL}>
-//     <li>
-//       <ul class="wrap-right">
-//         <li class="user-name">${comment.author.username}</li>
-//       </ul>
-//     </li>
-//   </a>
-//   <small>${comment.createdAt}</small>
-//   <li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="../images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-// </ul>
-// <p class="txt-feed">
-// ${comment.content}
-// </p>
-// <div class="wrap-comment">
-//   <img src="../images/basic-profile-img.png" alt="기본프로필 소형" class="basic-profile">
-//   <form class="form-comment">
-//     <input class="input-comment" type="text" placeholder="댓글 입력하기...">
-//     <button class="btn-send">게시</button>
-//   </form>
-// </div>
-// </section>

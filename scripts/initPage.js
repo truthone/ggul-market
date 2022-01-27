@@ -1,23 +1,8 @@
-import { TOKEN, ACCOUNT_NAME } from "./constants.js";
-import {
-	checkEmailValid,
-	imageUpload,
-	checkUserIdValid,
-	join,
-	getFeed,
-	login,
-	getAccount,
-	getFollowingList,
-	getProfile,
-	getFollowing,
-	getFollower,
-	loadUserData,
-	updateProfile,
-	profileImage,
-} from "./api.js";
-import { API_URL } from "./constants.js";
+import { ORIGIN, TOKEN, ACCOUNT_NAME } from "./constants.js";
+import { checkEmailValid, checkUserIdValid, join, getFeed, login, getAccount, getProfile, getFollowing, getFollower, loadUserData, updateProfile, profileImage } from "./api.js";
 
 let loc = [];
+// 현재 페이지 읽기
 if (document.location.href.includes("/pages")) {
 	loc = document.location.href.split("/pages/")[1];
 	if (loc.includes("?")) {
@@ -25,29 +10,36 @@ if (document.location.href.includes("/pages")) {
 	}
 }
 console.log(loc);
+
+// 페이지별 init 함수 실행
 switch (loc) {
-	case "2.login_email.html":
+	case "login_email.html":
 		loginPage();
 		break;
-	case "2.login.html":
+	case "login.html":
 		loginPage();
 		break;
-	case "3.join_email.html":
+	case "join_email.html":
 		joinPage();
 		break;
-	case "4.home.html":
+	case "home.html":
+		checkToken();
 		homePage();
 		break;
-	case "5.search.html":
+	case "search.html":
+		checkToken();
 		searchPage();
 		break;
-	case "6.profile.html":
+	case "profile.html":
+		checkToken();
 		profilePage();
 		break;
-	case "7.followers.html":
+	case "followers.html":
+		checkToken();
 		followPage();
 		break;
-	case "8.profile_modification.html":
+	case "profile_modification.html":
+		checkToken();
 		profileModifyPage();
 		break;
 	default:
@@ -55,19 +47,28 @@ switch (loc) {
 		break;
 }
 
-function splashPage() {
-	// index.html 화면이 로드되고 2초 뒤 로그인 화면으로 이동
-	window.onload = setTimeout(splashpage, 1000);
-	// 토큰이 있는 경우 홈피드로 이동
-	function splashpage() {
-		if (TOKEN != "") {
-			location.href = "pages/4.home.html";
-		} else {
-			location.href = "pages/2.login.html";
-		}
+// 로그인 상태가 아니면 메인 페이지로 이동
+function checkToken() {
+	if (!TOKEN) {
+		location.href = `${ORIGIN}`;
 	}
 }
 
+// 메인 페이지
+function splashPage() {
+	// index.html 화면이 로드되고 2초 뒤 로그인 화면으로 이동
+	window.onload = setTimeout(() => {
+		if (!!TOKEN) {
+			// 토큰이 있는 경우 홈피드로 이동
+			location.href = `${ORIGIN}/pages/home.html`;
+		} else {
+			// 토큰이 없는 경우 로그인 페이지로 이동
+			location.href = `${ORIGIN}/pages/login.html`;
+		}
+	}, 1000);
+}
+
+// 로그인 페이지
 function loginPage() {
 	const loginEmailInput = document.querySelector("#login-cont-email");
 	const loginPwdInput = document.querySelector("#login-cont-pwd");
@@ -106,6 +107,7 @@ function loginPage() {
 	}
 }
 
+// 회원가입 페이지
 function joinPage() {
 	const joinEmailInput = document.querySelector("#join-cont-email");
 	const joinPwdInput = document.querySelector("#join-cont-pwd");
@@ -118,7 +120,7 @@ function joinPage() {
 	// 이메일 형식 유효성 검사
 	joinEmailInput.addEventListener("focusout", async () => {
 		const email = joinEmailInput.value;
-		const regExp = new RegExp("^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+.[A-Za-z0-9-]+");
+		const regExp = new RegExp("^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\\.[A-Za-z0-9-]+");
 
 		const validEmail = await checkEmailValid(email);
 		if (validEmail && email != "" && regExp.test(email) == true) {
@@ -189,14 +191,10 @@ function joinPage() {
 }
 
 function homePage() {
-	// home
-	if (TOKEN) {
-		getFeed();
-	} else {
-		location.href = "./2.login.html";
-	}
+	getFeed();
 }
 
+// 유저 검색
 function searchPage() {
 	const input = document.querySelector("#search-id");
 
@@ -206,6 +204,7 @@ function searchPage() {
 		});
 }
 
+// 프로필 페이지
 function profilePage() {
 	let targetAccount = ACCOUNT_NAME;
 	let isMyprofile = false;
@@ -216,15 +215,15 @@ function profilePage() {
 		if (ACCOUNT_NAME == targetAccount) {
 			isMyprofile = true;
 		}
-		console.log(isMyprofile);
-		document.querySelector(".cont-followers").href = `7.followers.html?${targetAccount}?follower`;
-		document.querySelector(".cont-followings").href = `7.followers.html?${targetAccount}?following`;
+
+		document.querySelector(".cont-followers").href = `followers.html?${targetAccount}?follower`;
+		document.querySelector(".cont-followings").href = `followers.html?${targetAccount}?following`;
 	} else {
-		document.querySelector(".cont-followers").href = `7.followers.html?${ACCOUNT_NAME}?follower`;
-		document.querySelector(".cont-followings").href = `7.followers.html?${ACCOUNT_NAME}?following`;
+		isMyprofile = true;
+		document.querySelector(".cont-followers").href = `followers.html?${ACCOUNT_NAME}?follower`;
+		document.querySelector(".cont-followings").href = `followers.html?${ACCOUNT_NAME}?following`;
 	}
 	getProfile(targetAccount);
-	getFollowingList();
 
 	const btnViewList = document.querySelector("#toggle-list"); // 목록형 버튼
 	const btnViewAlbum = document.querySelector("#toggle-album"); // 앨범형 버튼
@@ -259,14 +258,14 @@ function profilePage() {
 			viewList.style.display = "none";
 		}
 	});
-    // 게시물작성 버튼 누르면 로컬스토리지의 postId 초기화
-  const addPostBtn = document.querySelector('#btn-add-post');
-  
-  addPostBtn.addEventListener('click', () => {
-    if(localStorage.getItem('postId')){
-      localStorage.setItem('postId','');
-    }
-  })
+	// 게시물작성 버튼 누르면 로컬스토리지의 postId 초기화
+	const addPostBtn = document.querySelector("#btn-add-post");
+
+	addPostBtn.addEventListener("click", () => {
+		if (localStorage.getItem("postId")) {
+			localStorage.setItem("postId", "");
+		}
+	});
 }
 
 function followPage() {

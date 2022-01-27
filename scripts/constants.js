@@ -1,3 +1,4 @@
+export const ORIGIN = location.origin.includes("git") ? `${location.origin}/ggul-market` : location.origin;
 export const API_URL = "https://api.mandarin.cf";
 export const ACCOUNT_NAME = localStorage.getItem("AccountName");
 export const TOKEN = localStorage.getItem("Token");

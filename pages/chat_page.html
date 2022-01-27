@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Page</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+    <header class="top-nav">
+        <h1 class="txt-hide">감귤 마켓</h1>
+        <nav class="wrap-top-nav">
+            <a href="javascript:location.href = document.referrer;" class="btn-back">
+                <img src="../images/icon/icon-arrow-left.png" alt="뒤로가기 버튼" class="icon-arrow-left" />
+            </a>
+            <button type="button" class="modal-profile top-btn-more top-btn-more-modal">
+                <img src="../images/icon/icon-more-vertical.png" alt="더보기 버튼" class="icon-more-vertical" />
+            </button>
+        </nav>
+    </header>
+    <main class="feed-container"></main>
+    <section class="wrap-comment">
+        <input type="file" name="" id="upload-profile" class="txt-hide">
+        <label for="upload-profile"><img src="../images/img-button.png" alt="파일업로드" class="basic-profile"></label>
+        <form class="form-comment">
+          <input class="input-comment" type="text" placeholder="댓글 입력하기..." cols="40" rows="5">
+          <button class="btn-send">게시</button>
+        </form>
+      </section>
+    <article class="top-modal">
+        <ul>
+            <li><a href="#" class="top-btn-one">설정 및 개인정보</a></li>
+            <li><a href="#" class="top-btn-two">로그아웃</a></li>
+        </ul>
+    </article>
+    <article class="modal">
+        <ul>
+            <li><a href="#" class="btn-one">삭제</a></li>
+            <li><a href="#" class="btn-two">수정</a></li>
+            <li><a href="#">웹사이트에서 상품보기</a></li>
+        </ul>
+    </article>
+    <article class="modal-alert">
+        <h1 class="txt-hide">확인 메세지 모달창</h1>
+        <p class="alert-message">상품을 삭제할까요?</p>
+        <ul class="wrap-modal-alert">
+            <li><button type="button" class="btn-modal alert-btn-one">취소</button></li>
+            <li><button type="button" class="btn-modal btn-modal2 alert-btn-two">삭제</button></li>
+        </ul>
+    </article>
+    <!-- <script type="module" src="../scripts/initPage.js"></script> -->
+</body>
+</html>

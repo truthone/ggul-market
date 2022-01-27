@@ -24,6 +24,7 @@ body {
 	padding: 10px 0;
 	width: 100%;
 	box-sizing: border-box;
+  justify-content: space-between;
 }
 
 .wrap-profile .chat > li {
@@ -34,6 +35,7 @@ body {
 	padding-top: 4px;
 	height: 38px;
 	width: 304px;
+  flex-grow: 1;
 }
 
 .unread-mark {

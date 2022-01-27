@@ -170,7 +170,7 @@ async function postProductData() {
 
 function resetAndMove() {
   dataReset();
-  href("/6.profile.html");
+  href("/profile.html");
 }
 
 function href(pageName) {

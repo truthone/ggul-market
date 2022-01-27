@@ -1,4 +1,4 @@
-import { API_URL, ACCOUNT_NAME, TOKEN, ID } from "./constants.js";
+import { API_URL, ACCOUNT_NAME, TOKEN, ID, ORIGIN } from "./constants.js";
 import { getMiniProfile, loadPost, handleImageScroll, BtnLike, getBtn, BtnComment } from "./script.js";
 
 // login API
@@ -28,7 +28,7 @@ export async function login() {
 		localStorage.setItem("Token", token);
 		localStorage.setItem("AccountName", json.user.accountname);
 		localStorage.setItem("Id", json.user._id);
-		location.href = "./4.home.html";
+		location.href = "./home.html";
 	} catch (err) {
 		// console.log('로그인 실패. input을 초기화합니다.')
 		document.querySelector(".login-warn").classList.add("on");
@@ -99,7 +99,7 @@ export async function join() {
 				},
 			}),
 		});
-		location.href = "./2.login.html";
+		location.href = `${ORIGIN}/pages/login.html`;
 	} catch (err) {
 		alert(err);
 	}
@@ -186,7 +186,7 @@ export async function updateProfile() {
 		localStorage.setItem("AccountName", id);
 
 		// 버튼 누르면 프로필로 이동
-		location.href = "./6.profile.html";
+		location.href = `${ORIGIN}/pages/profile.html`;
 	} catch (err) {
 		console.log(err);
 	}
@@ -222,7 +222,12 @@ export async function getFeed() {
 			isMyprofile = false;
 		}
 		const container = document.querySelector(".container");
-		let imageArr = post.image.split(",");
+		let imageArr = [];
+		try {
+			imageArr = post.image.split(",");
+		} catch {
+			imageArr.push(post.image);
+		}
 		let imageLength = imageArr.length;
 		let list = loadPost(idx, post, imageArr, imageLength, isMyprofile, authorAccount);
 		if (container) container.appendChild(list);
@@ -233,28 +238,6 @@ export async function getFeed() {
 	BtnLike();
 	BtnComment();
 	getBtn();
-}
-
-// 팔로잉 리스트
-export async function getFollowingList() {
-	const url = API_URL + `/profile/${ACCOUNT_NAME}`;
-	// 계정 정보가 없을 때
-	if (!ACCOUNT_NAME) {
-		return;
-	}
-	try {
-		const res = await fetch(url, {
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${TOKEN}`,
-				"Content-type": "application/json",
-			},
-		});
-		const json = await res.json();
-		const profile = json.profile;
-	} catch (err) {
-		console.log(err);
-	}
 }
 
 // 계정 프로필
@@ -314,12 +297,7 @@ export async function getProfile(currentProfile) {
 		const json = await res.json();
 		const profile = json.profile;
 
-		let followerCount = profile.followerCount ? json.profile.followerCount : 0;
 		let followingCount = profile.followingCount ? json.profile.followingCount : 0;
-		let name = profile.username;
-		let desc = profile.intro;
-		let img = profile.image;
-		let accountname = profile.accountname;
 		let isfollow = profile.isfollow;
 
 		// 팔로우/언팔로우 버튼 변화
@@ -353,12 +331,12 @@ export async function getProfile(currentProfile) {
 		const userId = document.querySelector(".id-user");
 		const descUser = document.querySelector(".desc-user");
 
-		userImage.src = img;
-		followers.textContent = followerCount;
+		userImage.src = profile.image;
+		followers.textContent = profile.followerCount ? json.profile.followerCount : 0;
 		followings.textContent = followingCount;
-		userName.textContent = name;
-		userId.textContent = `@ ${accountname}`;
-		descUser.textContent = desc;
+		userName.textContent = profile.username;
+		userId.textContent = `@ ${profile.accountname}`;
+		descUser.textContent = profile.intro;
 		await getProductList(currentProfile);
 		await getPost(currentProfile);
 	} catch (err) {
@@ -583,7 +561,8 @@ export async function getFollower(accountName) {
 
 // 팔로우 프로필
 function getFollowProfile(target) {
-	const goURL = `6.profile.html?${target.accountname}`;
+	const goURL = `${ORIGIN}/pages/profile.html?${target.accountname}`;
+	// console.log(getMiniProfile(target.accountname));
 	let state = target.follower.includes(ID)
 		? `<li><button type="button" class="S-button btn activ btn-follower_view_follow" id=${target.accountname}>취소</button></li>`
 		: `<li><button type="button" class="S-button btn btn-follower_view_follow" id=${target.accountname}>팔로우</button></li>`;
@@ -591,7 +570,7 @@ function getFollowProfile(target) {
 	follow.classList = "box-profile";
 	follow.innerHTML = `<ul class="wrap-profile">
     <li>
-      <a href=${goURL}><img src=${target.image} onerror="this.src='../images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
+      <a href=${goURL}><img src=${target.image} onerror="this.src='${ORIGIN}/images/basic-profile-img.png';" alt="기본프로필 소형" class="basic-profile"></a>
     </li>
     <li>
       <a href=${goURL}>
@@ -684,17 +663,7 @@ export async function GetComment(postId) {
 	});
 	const data = await res.json();
 	const comments = data.comments;
-	//   console.log(comments)
-	let commentAuthorUsername;
-	let commentContent;
-	comments.forEach((comment) => {
-		const commentAuthorImage = comment.author.image;
-		commentAuthorUsername = comment.author.username;
-		const commentCreatedAt = comment.createdAt;
-		commentContent = comment.content;
-		console.log(commentContent);
-	});
-	return commentContent;
+	return comments;
 }
 // 댓글 작성
 export async function editComment(postId) {

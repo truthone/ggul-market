@@ -30,6 +30,7 @@ body {
   width: 42px;
   height: 42px;
   margin-right: 12px;
+  border-radius: 50%;
 }
 
 .wrap-profile .wrap-right {
@@ -210,9 +211,10 @@ body {
   border-radius: 32px;
 }
 
-/* .top-search {
-  width: 100rem;
-} */
+.top-search {
+  box-sizing: border-box;
+  width: calc(100% - 40px);
+}
 
 .top-nav .wrap-top-nav .chat-partner {
   font-size: 14px;
