@@ -30,6 +30,12 @@ switch (loc) {
 		checkToken();
 		chatPage();
 		break;
+	case "chat_list.html":
+		checkToken();
+		break;
+	case "chat_room.html":
+		checkToken();
+		break;
 	case "search.html":
 		checkToken();
 		searchPage();
