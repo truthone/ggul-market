@@ -26,9 +26,9 @@ switch (loc) {
 		checkToken();
 		homePage();
 		break;
-	case "chat_page.html":
+	case "commentPage.html":
 		checkToken();
-		chatPage();
+		commentPage();
 		break;
 	case "chat_list.html":
 		checkToken();
@@ -335,7 +335,7 @@ function profileModifyPage() {
 	});
 }
 
-function chatPage() {
+function commentPage() {
 	const container = document.querySelector(".feed-container");
 	// let item = localStorage.getItem('selectPage');
 	let postId = localStorage.getItem('postId');

@@ -397,7 +397,7 @@ export async function BtnComment() {
 	//   localStorage.setItem('selectPage', JSON.stringify(list));
     //   let item = localStorage.getItem('selectPage');
 	//   console.log(JSON.parse(item))
-      location.href = `${ORIGIN}/pages/chat_page.html?${postId}`;
+      location.href = `${ORIGIN}/pages/commentPage.html?${postId}`;
     //   console.log(list)
     //   RenderComment(list, postId);
 		});
