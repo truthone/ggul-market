@@ -1,8 +1,9 @@
 /* 8. profile_modification */
-#setProfile {
+#setProfile.modiProfile {
+  display: block;
   width: 100%;
   background-color: #FFFFFF;
-  /* padding: 54px 34px; */
+  padding: 54px 0 0;
   box-sizing: border-box;
 }
 
