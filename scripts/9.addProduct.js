@@ -91,7 +91,7 @@ async function setProductData(productId) {
     productPrice.setAttribute("data-state", 1);
     storeLink.setAttribute("data-state", 1);
   
-    checkBtnActive();
+    btnActive();
   });
 }
 
@@ -113,7 +113,7 @@ async function apiEditProduct(productName,storeLink,price) {
         "itemName": productName.value,
         "price": price,
         "link": storeLink.value,
-        "itemImage": productImgName
+        "itemImage": `${API_URL}/${productImgName}`
       }
     })
   });
