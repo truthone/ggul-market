@@ -170,15 +170,7 @@ async function postProductData() {
 
 function resetAndMove() {
   dataReset();
-  href("/profile.html");
-}
-
-function href(pageName) {
-  const routeTag = document.createElement('a');
-  routeTag.id = "routeTag";
-  routeTag.href = `/pages${pageName}`;
-  document.querySelector(".container").appendChild(routeTag);
-  document.querySelector("#routeTag").click();
+  location.href ="./profile.html";
 }
 
 // 상품 정보 전송 후 데이터 리셋
