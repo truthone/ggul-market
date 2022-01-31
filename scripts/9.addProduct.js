@@ -70,7 +70,6 @@ async function apiProductData(productId) {
 
 // 현재 상품 정보 세팅
 async function setProductData(productId) {
-  console.log("현재 상품 정보 세팅")
   const productName = document.querySelector("#productNameInput");
   const productPrice = document.querySelector("#priceInput");
   const storeLink = document.querySelector("#storeLinkInput");
@@ -80,7 +79,6 @@ async function setProductData(productId) {
   productImgBox.append(productImgElement);
 
   apiProductData(productId).then((data) => {
-    console.log(`apiProductData : ${data.product}`)
     productImgElement.src = data.product.itemImage;
     productName.value = data.product.itemName;
     productPrice.value = data.product.price;
@@ -93,11 +91,6 @@ async function setProductData(productId) {
   
     btnActive();
   });
-}
-
-// 상품 수정 || 새상품 업로드 라우터 
-function router() {
-
 }
 
 // 상품정보수정 api 
