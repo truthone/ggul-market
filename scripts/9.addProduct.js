@@ -79,12 +79,12 @@ async function setProductData(productId) {
   const productImgElement = document.createElement("img");
   productImgBox.append(productImgElement);
 
-  apiProductData(productId).then((product) => {
-    console.log(`apiProductData : ${product}`)
-    productImgElement.src = product.itemImage;
-    productName.value = product.itemName;
-    productPrice.value = product.price;
-    storeLink.value = product.link;
+  apiProductData(productId).then((data) => {
+    console.log(`apiProductData : ${data.product}`)
+    productImgElement.src = data.product.itemImage;
+    productName.value = data.product.itemName;
+    productPrice.value = data.product.price;
+    storeLink.value = data.product.link;
   
     productImgInput.setAttribute("data-state", 1);
     productName.setAttribute("data-state", 1);
