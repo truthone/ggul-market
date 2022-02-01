@@ -34,7 +34,6 @@ function checkNewOrEdit(postId) {
 }
 
 // 기존 게시물 내용 로딩
-
 async function apiPostData(postId) {
 	const response = await fetch(`${API_URL}/post/${postId}`, {
 		headers: {
@@ -56,19 +55,20 @@ async function setPostData() {
 
 		// 기존 이미지 가져와서 달아주기.
 		if (oldImgNames) {
-			oldImgStorage = oldImgNames.split(",", 3); // 이미지 최대 3장 까지 : 현재 이미지 10장까지 올리는 사람이 있음
-			for (i in oldImgStorage) {
+			oldImgStorage = oldImgNames.split(',', 3); // 이미지 최대 3장 까지 : 현재 이미지 10장까지 올리는 사람이 있음
+			for (let image of oldImgStorage) {
+				currentImgStorage.push(image);
 				let imgItem = `
               <li class="imgItem">
                 <button type="button" class="btn-close">
                   <img src="../images/x.png" alt="" class="x">
                 </button>
-                <img src="${oldImgStorage[i]}" alt="" />
+                <img src="${image}" alt="" />
               </li>`;
 				postImgList.insertAdjacentHTML("beforeend", imgItem);
 			}
 		}
-		activeUploadBtn();
+		checkBtnActive();
 	});
 }
 
@@ -153,11 +153,13 @@ async function setImgFilenames() {
 	// 업로드 전 이미지 변환하기
 	if (currentImgStorage.length > 0) {
 		const imgFormData = new FormData();
-
 		currentImgStorage.forEach((item, idx) => {
-			if (typeof item == "string") {
-				uploadImgNames = item;
-				if (item.length + 1 != idx) uploadImgNames += ",";
+			if ((typeof (item)) == "string") {
+				console.log("기존 불러온 이미지임")
+				uploadImgNames += item;
+				if ((currentImgStorage.length+1) != idx){
+					uploadImgNames += ',';
+				}
 			} else {
 				imgFormData.append("image", item);
 			}
@@ -168,6 +170,7 @@ async function setImgFilenames() {
 			return uploadImgNames;
 		});
 	}
+	console.log(result)
 	return result;
 }
 
