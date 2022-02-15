@@ -177,8 +177,6 @@ function close_alert() {
 	const Alert_btnOne = document.querySelector(".alert-btn-one");
 	const Modal = document.querySelector(".modal");
 	const ModalAlert = document.querySelector(".modal-alert");
-
-	document.querySelector(".top-modal").style.bottom = "-240px";
 	Alert_btnOne.addEventListener("click", () => {
 		ModalAlert.style.display = "none";
 		Modal.classList.remove("open");
@@ -323,11 +321,7 @@ export async function getBtn() {
 					btnOne.textContent = "신고하기";
 					btnOne.addEventListener("click", () => {
 						alert_message("report_edit");
-						// close_alert();
-						Alert_btnOne.addEventListener("click", () => {
-							ModalAlert.style.display = "none";
-							Modal.classList.remove("open");
-						});
+						close_alert();
 						Alert_btnTwo.addEventListener("click", async () => {
 							reportPost(postId);
 							ModalAlert.style.display = "none";
