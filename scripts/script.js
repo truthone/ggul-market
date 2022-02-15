@@ -309,7 +309,7 @@ export async function getBtn() {
 						Alert_btnTwo.addEventListener("click", async () => {
 							deletePost(postId);
 							ModalAlert.style.display = "none";
-							document.location.reload(true);
+							window.location.href = `${ORIGIN}/pages/profile.html`;
 						});
 					});
 					btnTwo.addEventListener("click", () => {
