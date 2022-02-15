@@ -220,22 +220,34 @@ function alert_message(option) {
 	ModalAlert.style.display = "block";
 }
 
+// function close_modal(Modal) {
+// 	window.addEventListener("click", () => {
+// 		window.addEventListener(
+// 			"click",
+// 			(e) => {
+// 				if (e.target != Modal) {
+// 					console.log(e.target)
+// 					Modal.style.bottom = "-240px";
+// 					Modal.classList.remove("open");
+// 				}
+// 				// if (e.target.tagName == "IMG") {
+// 				// 	console.log("1")
+// 				// 	console.log(e.target)
+// 				// 	Modal.style.bottom = "-240px";
+// 				// 	Modal.classList.remove("open");
+// 				// }
+// 			},
+// 			true
+// 		);
+// 	});
+// }
+
 function close_modal(Modal) {
 	window.addEventListener("click", () => {
 		window.addEventListener(
 			"click",
-			(e) => {
-				if (e.target != Modal) {
-					console.log(e.target)
+			() => {
 					Modal.style.bottom = "-240px";
-					Modal.classList.remove("open");
-				}
-				// if (e.target.tagName == "IMG") {
-				// 	console.log("1")
-				// 	console.log(e.target)
-				// 	Modal.style.bottom = "-240px";
-				// 	Modal.classList.remove("open");
-				// }
 			},
 			true
 		);
