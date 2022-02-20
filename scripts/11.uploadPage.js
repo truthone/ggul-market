@@ -4,7 +4,6 @@ let oldImgStorage = []; // 기존 이미지 src 저장소
 let currentImgStorage = []; // 현재 총 이미지 스토리지
 let newImgNames = ""; // 변환된 이미지이름(들) 저장소
 let oldImgNames = ""; // 받아온 변환된 이미지이름 문자열.
-
 let submitState = false;
 let uploadBtn;
 
@@ -14,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	textarea.addEventListener("input", textareaResize, false);
 	uploadBtn = document.querySelector("#save-btn");
 	checkNewOrEdit(POST_ID);
-	showSelectedImg();
+	addPreviewImg();
 	deleteImg();
 	clickUploadBtn();
 });
@@ -73,39 +72,47 @@ async function setPostData() {
 }
 
 // 새로 선택한 이미지 미리보기 처리
-function showSelectedImg() {
+function addPreviewImg() {
 	const imgInput = document.querySelector("#feedImgInput");
 	const postImgList = document.querySelector(".upload-img-list");
-	const postImgListItem = document.querySelectorAll(".upload-img-list li");
 
 	imgInput.addEventListener("change", (e) => {
-		currentImgStorage.push(imgInput.files[0]);
-		if (currentImgStorage.length >= 4) {
-			alert("이미지는 최대 3개까지 업로드할 수 있습니다.");
-			currentImgStorage.pop();
+		if (isFullImgList(postImgList)) {
+			handleFile(e.target.files[0]);
 		} else {
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				if (postImgListItem.length < 4) {
-					let imgItem = `
-          <li class="imgItem">
-            <button type="button" class="btn-close">
-              <img src="../images/x.png" alt="" class="x">
-            </button>
-            <img src="${e.target.result}" alt="" / >
-          </li>`;
-					postImgList.insertAdjacentHTML("beforeend", imgItem);
-					checkBtnActive();
-				}
-			};
-			reader.readAsDataURL(e.target.files[0]);
+			alert("이미지는 최대 3개까지 업로드할 수 있습니다.");
 		}
-		checkBtnActive();
 	});
 }
 
-// 이미지 삭제 버튼 동작
+function isFullImgList(itemList) {
+	if (itemList.childElementCount >= 3) {
+		return false
+	} else {
+		return true
+	}
+}
 
+function handleFile(file) {
+	const postImgList = document.querySelector(".upload-img-list");
+	const reader = new FileReader();
+	reader.onload = (e) => {
+		//딥다이브 책에 나와있던거 참고해서 리팩하기.. fragnent 어쩌고
+		let imgItem = `
+			<li class="imgItem" file="${file}">
+				<button type="button" class="btn-close">
+					<img src="../images/x.png" alt="" class="x">
+				</button>
+				<img src="${e.target.result}" alt="" / >
+			</li>`;
+		postImgList.insertAdjacentHTML("beforeend", imgItem);
+		checkBtnActive();
+	}
+	reader.readAsDataURL(file);
+	handleFilename(file);
+}
+
+// 이미지 삭제 버튼 동작
 function deleteImg() {
 	const imgList = document.querySelector(".upload-img-list");
 
@@ -116,62 +123,47 @@ function deleteImg() {
 			if (e.target === imgList.children[idx].firstElementChild.firstElementChild) {
 				currentImgStorage.splice(idx, 1);
 				postImgListItem[idx].remove();
+				checkBtnActive();
 				return;
 			}
 		}
 	});
 }
 
-// 서버에서 파일이름 변환해오기
-async function getImgName(formData) {
-	let filenames = [];
-	try {
-		const response = await fetch(`${API_URL}/image/uploadfiles`, {
-			method: "POST",
-			body: formData,
-		});
-
-		const data = await response.json();
-
-		for (let i of data) {
-			filenames.push(`${API_URL}/${i["filename"]}`);
-		}
-		if (filenames.length > 1) {
-			return filenames.join(",");
+async function handleFilename(file) {
+	apiGetFilename(file).then((changedFilename) => {
+		if (!changedFilename){
+			addRetryImgBtn();
 		} else {
-			return filenames[0];
-		}
-	} catch (err) {
+			console.log("파일이름 가져오기 성공")
+			currentImgStorage.push(`${API_URL}/${changedFilename}`);
+		} 
+	})
+	.catch((err) => {
 		console.log(err);
-	}
+		// addRetryImgBtn();
+	})
 }
 
-// 이미지 변환위한 처리 & 받아오기
-async function setImgFilenames() {
-	let uploadImgNames = "";
-	let result = "";
-	// 업로드 전 이미지 변환하기
-	if (currentImgStorage.length > 0) {
-		const imgFormData = new FormData();
-		currentImgStorage.forEach((item, idx) => {
-			if ((typeof (item)) == "string") {
-				console.log("기존 불러온 이미지임")
-				uploadImgNames += item;
-				if ((currentImgStorage.length+1) != idx){
-					uploadImgNames += ',';
-				}
-			} else {
-				imgFormData.append("image", item);
-			}
+// 서버에서 파일이름 변환해오기
+async function apiGetFilename(file) {
+	const formData = new FormData();
+	formData.append('image',file)
+	try{
+		const response = await fetch(`${API_URL}/image/uploadfile`, {
+			method: "POST",
+			body : formData
 		});
+		const data = await response.json();
+	
+		const changedFilename = data["filename"];
+		console.log(changedFilename)
+		return changedFilename;
 
-		result = getImgName(imgFormData).then((result) => {
-			uploadImgNames += result;
-			return uploadImgNames;
-		});
+	}catch(err){
+		console.log(err)
 	}
-	console.log(result)
-	return result;
+	
 }
 
 // 게시물 수정 api
@@ -213,51 +205,48 @@ async function postUpload() {
 		if (submitState) {
 			let headers;
 			let body;
+			//storage에서 이미지 한 문자열로 만들기 
+			const filenames = currentImgStorage.join(',');
+			console.log(filenames)
+			
+			//헤더, 바디 설정
+			headers = {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + TOKEN,
+			};
 
-			setImgFilenames()
-				.then((result) => {
-					//헤더, 바디 설정
-					headers = {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + TOKEN,
-					};
-
-					body = JSON.stringify({
-						post: {
-							content: textareaElement.value,
-							image: result,
-						},
-					});
-					console.log(result);
-				})
-				.then(() => {
-					// 기존 게시물 수정이면
-					if (POST_ID) {
-						apiEditPost(headers, body)
-							.then((data) => {
-								if (data) {
-									resetAndMove();
-								}
-							})
-							.catch((err) => console.log(err));
-					} else {
-						// 새 게시물 업로드이면
-						apiUploadPost(headers, body)
-							.then((data) => {
-								if (data) {
-									resetAndMove();
-								}
-							})
-							.catch((err) => console.log(err));
-					}
-				});
+			body = JSON.stringify({
+				post: {
+					content: textareaElement.value,
+					image: filenames
+				},
+			});		
+			// 기존 게시물 수정이면
+			if (POST_ID) {
+				apiEditPost(headers, body)
+					.then((data) => {
+						if (data) {
+							resetAndMove();
+						}
+					})
+					.catch((err) => console.log(err));
+			} else {
+				// 새 게시물 업로드이면
+				apiUploadPost(headers, body)
+					.then((data) => {
+						if (data) {
+							resetAndMove();
+						}
+					})
+					.catch((err) => console.log(err));
+			}
 		}
 	});
 }
 
 function resetAndMove() {
 	dataReset();
-	// href("/profile.html");
+	href("/profile.html");
 }
 
 function dataReset() {
@@ -297,7 +286,7 @@ function checkBtnActive() {
 	const textareaElement = document.querySelector(".textarea-input");
 	const imgList = document.querySelectorAll(".upload-img-list li");
 	const uploadBtn = document.querySelector("#save-btn");
-	console.log();
+
 	if (textareaElement.value.length != 0 || imgList.length >= 1) {
 		uploadBtn.classList.remove("disabled");
 		submitState = true;
