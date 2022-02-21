@@ -97,29 +97,6 @@ export function loadPost(idx, post, imageArr, imageLength, isMyprofile, authorNa
 	return list;
 }
 
-// <section class="comment hidden"></section>안에 추가될 부분
-// `
-/* <ul class="wrap-profile">
-<li>
-  <a href=${goURL}><img src=${comment.author.image} alt="기본프로필 소형" class="basic-profile"></a>
-</li>
-<a href=${goURL}>
-  <li>
-    <ul class="wrap-right">
-      <li class="user-name">${comment.author.username}</li>
-    </ul>
-  </li>
-</a>
-<li>
-  <small class="txt-date">${comment.createdAt}</small>
-</li>
-<li><button type="button" class="${comment.id} btn-more-modal ${btnCommentMsg}"><img src="${ORIGIN}/images/icon/s-icon-more-vertical.png" alt="더보기 버튼" class="s-icon-more-vertical"></button></li>
-</ul>
-<p class="txt-feed">
-${comment.content}
-</p> */
-// `
-
 // 다중 이미지 슬라이드(스크롤) 유틸 함수
 export function handleImageScroll(idx, imageLength) {
 	let btnImage = document.querySelectorAll(`.btn-image${idx - 1}`);
@@ -196,42 +173,10 @@ export function BtnLike() {
 }
 
 // 모달창 구현
-if (document.querySelector(".top-btn-more-modal")) {
-	const topbtnMoreModal = document.querySelector(".top-btn-more-modal");
-	const topModal = document.querySelector(".top-modal");
-	const topbtnOne = document.querySelector(".top-btn-one");
-	const topbtnTwo = document.querySelector(".top-btn-two");
-	const Alert_btnTwo = document.querySelector(".alert-btn-two");
-
-	topbtnMoreModal.addEventListener("click", () => {
-		topModal.classList.toggle("open");
-		if (topModal.classList.contains("open")) {
-			if (topbtnMoreModal.classList.contains("modal-profile")) {
-				topModal.style.bottom = "-90px";
-				topbtnTwo.addEventListener("click", () => {
-					alert_message("logout");
-					close_alert();
-					Alert_btnTwo.addEventListener("click", () => {
-						localStorage.clear();
-						window.location.href = `${ORIGIN}/pages/login.html`;
-					});
-				});
-			} else if (topbtnMoreModal.classList.contains("modal-chat-room")) {
-				topbtnOne.innerHTML = "채팅방 나가기";
-				topbtnOne.href = `${ORIGIN}/pages/chat_list.html`;
-				topModal.style.bottom = "-140px";
-			}
-		} else {
-			topModal.style.bottom = "-240px";
-		}
-	});
-}
 function close_alert() {
 	const Alert_btnOne = document.querySelector(".alert-btn-one");
 	const Modal = document.querySelector(".modal");
 	const ModalAlert = document.querySelector(".modal-alert");
-
-	document.querySelector(".top-modal").style.bottom = "-240px";
 	Alert_btnOne.addEventListener("click", () => {
 		ModalAlert.style.display = "none";
 		Modal.classList.remove("open");
@@ -273,21 +218,71 @@ function alert_message(option) {
 	ModalAlert.style.display = "block";
 }
 
+// function close_modal(Modal) {
+// 	window.addEventListener("click", () => {
+// 		window.addEventListener(
+// 			"click",
+// 			(e) => {
+// 				if (e.target != Modal) {
+// 					console.log(e.target)
+// 					Modal.style.bottom = "-240px";
+// 					Modal.classList.remove("open");
+// 				}
+// 				// if (e.target.tagName == "IMG") {
+// 				// 	console.log("1")
+// 				// 	console.log(e.target)
+// 				// 	Modal.style.bottom = "-240px";
+// 				// 	Modal.classList.remove("open");
+// 				// }
+// 			},
+// 			true
+// 		);
+// 	});
+// }
+
 function close_modal(Modal) {
 	window.addEventListener("click", () => {
 		window.addEventListener(
 			"click",
-			(e) => {
-				if (e.target != Modal) {
+			() => {
 					Modal.style.bottom = "-240px";
-					Modal.classList.remove("open");
-				}
 			},
 			true
 		);
 	});
 }
 
+if (document.querySelector(".top-btn-more-modal")) {
+	const topbtnMoreModal = document.querySelector(".top-btn-more-modal");
+	const topModal = document.querySelector(".top-modal");
+	const topbtnOne = document.querySelector(".top-btn-one");
+	const topbtnTwo = document.querySelector(".top-btn-two");
+	const Alert_btnTwo = document.querySelector(".alert-btn-two");
+
+	topbtnMoreModal.addEventListener("click", () => {
+		topModal.classList.toggle("open");
+		if (topModal.classList.contains("open")) {
+			close_modal(topModal);
+			if (topbtnMoreModal.classList.contains("modal-profile")) {
+				topModal.style.bottom = "-90px";
+				topbtnTwo.addEventListener("click", () => {
+					alert_message("logout");
+					close_alert();
+					Alert_btnTwo.addEventListener("click", () => {
+						localStorage.clear();
+						window.location.href = `${ORIGIN}/pages/login.html`;
+					});
+				});
+			} else if (topbtnMoreModal.classList.contains("modal-chat-room")) {
+				topbtnOne.innerHTML = "채팅방 나가기";
+				topbtnOne.href = `${ORIGIN}/pages/chat_list.html`;
+				topModal.style.bottom = "-140px";
+			}
+		} else {
+			topModal.style.bottom = "-240px";
+		}
+	});
+}
 // 버튼이 동적으로 생성되고 나서 호출됩니다.
 export async function getBtn() {
 	const btnOne = document.querySelector(".btn-one");
@@ -314,7 +309,7 @@ export async function getBtn() {
 						Alert_btnTwo.addEventListener("click", async () => {
 							deletePost(postId);
 							ModalAlert.style.display = "none";
-							document.location.reload(true);
+							window.location.href = `${ORIGIN}/pages/profile.html`;
 						});
 					});
 					btnTwo.addEventListener("click", () => {
@@ -326,11 +321,7 @@ export async function getBtn() {
 					btnOne.textContent = "신고하기";
 					btnOne.addEventListener("click", () => {
 						alert_message("report_edit");
-						// close_alert();
-						Alert_btnOne.addEventListener("click", () => {
-							ModalAlert.style.display = "none";
-							Modal.classList.remove("open");
-						});
+						close_alert();
 						Alert_btnTwo.addEventListener("click", async () => {
 							reportPost(postId);
 							ModalAlert.style.display = "none";
@@ -374,32 +365,27 @@ export async function getBtn() {
 }
 
 // 댓글
-export async function RenderComment(list, postId) {
-  console.log(list)
-  const container = document.querySelector(".feed-container");
-  container.appendChild(list);
-  GetComment(postId).then((value) => {
-    console.log(value);
+// export async function RenderComment(list, postId) {
+//   console.log(list)
+//   const container = document.querySelector(".feed-container");
+//   container.appendChild(list);
+//   GetComment(postId).then((value) => {
+//     console.log(value);
 
-  });
-}
+//   });
+// }
 
 export async function BtnComment() {
 	const btn_comment = document.getElementsByClassName("btn-comment");
 	const home_post = document.getElementsByClassName("home-post");
 	for (let i = 0; i < home_post.length; i++) {
 		btn_comment[i].addEventListener("click", () => {
-      let postId = btn_comment[i].classList[0];
-	  localStorage.setItem('postId', postId);
-      let list = home_post[i];
-      console.log(list)
-	  console.log(typeof(list))
-	//   localStorage.setItem('selectPage', JSON.stringify(list));
-    //   let item = localStorage.getItem('selectPage');
-	//   console.log(JSON.parse(item))
-      location.href = `${ORIGIN}/pages/commentPage.html?${postId}`;
-    //   console.log(list)
-    //   RenderComment(list, postId);
+			let postId = btn_comment[i].classList[0];
+			localStorage.setItem('postId', postId);
+			let list = home_post[i];
+			console.log(list)
+			console.log(typeof(list))
+			location.href = `${ORIGIN}/pages/commentPage.html?${postId}`;
 		});
 	}
 }
