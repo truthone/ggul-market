@@ -151,10 +151,8 @@
 **11. 게시글 작성 페이지**☑️
 
 <p align="center">
-    <img src="./preview/add_post.gif">
-</p>
-<p align="center">
-    <img src="./preview/modify_post.gif">
+   <img src="./preview/add_post.gif">
+   <img src="./preview/modify_post.gif">
 </p>
 
 **12. 채팅 목록**
