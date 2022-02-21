@@ -83,6 +83,8 @@ async function setProductData(productId) {
     productName.value = data.product.itemName;
     productPrice.value = data.product.price;
     storeLink.value = data.product.link;
+
+    productImgName = data.product.itemImage;
   
     productImgInput.setAttribute("data-state", 1);
     productName.setAttribute("data-state", 1);

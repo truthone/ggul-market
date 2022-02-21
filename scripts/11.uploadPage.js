@@ -16,6 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	addPreviewImg();
 	deleteImg();
 	clickUploadBtn();
+	setProfileImg();
 });
 
 function textareaResize() {
@@ -30,6 +31,26 @@ function checkNewOrEdit(postId) {
 		console.log(`postid 있음 : ${postId}`);
 		setPostData(postId);
 	}
+}
+
+//프로필 사진 가져오기
+async function apiProfileImg() {
+	const response = await fetch(`${API_URL}/profile/${ACCOUNT_NAME}`, {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${TOKEN}`,
+			"Content-type": "application/json",
+		}
+	});
+	const data = await response.json();
+	return data.profile['image']
+}
+
+async function setProfileImg() {
+	const profileImg = document.querySelector("#feed-profile");
+	const  image = await apiProfileImg();
+	
+	profileImg.src = image;
 }
 
 // 기존 게시물 내용 로딩
