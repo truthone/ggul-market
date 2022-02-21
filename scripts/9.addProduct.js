@@ -70,7 +70,6 @@ async function apiProductData(productId) {
 
 // 현재 상품 정보 세팅
 async function setProductData(productId) {
-  console.log("현재 상품 정보 세팅")
   const productName = document.querySelector("#productNameInput");
   const productPrice = document.querySelector("#priceInput");
   const storeLink = document.querySelector("#storeLinkInput");
@@ -79,25 +78,19 @@ async function setProductData(productId) {
   const productImgElement = document.createElement("img");
   productImgBox.append(productImgElement);
 
-  apiProductData(productId).then((product) => {
-    console.log(`apiProductData : ${product}`)
-    productImgElement.src = product.itemImage;
-    productName.value = product.itemName;
-    productPrice.value = product.price;
-    storeLink.value = product.link;
+  apiProductData(productId).then((data) => {
+    productImgElement.src = data.product.itemImage;
+    productName.value = data.product.itemName;
+    productPrice.value = data.product.price;
+    storeLink.value = data.product.link;
   
     productImgInput.setAttribute("data-state", 1);
     productName.setAttribute("data-state", 1);
     productPrice.setAttribute("data-state", 1);
     storeLink.setAttribute("data-state", 1);
   
-    checkBtnActive();
+    btnActive();
   });
-}
-
-// 상품 수정 || 새상품 업로드 라우터 
-function router() {
-
 }
 
 // 상품정보수정 api 
@@ -113,7 +106,7 @@ async function apiEditProduct(productName,storeLink,price) {
         "itemName": productName.value,
         "price": price,
         "link": storeLink.value,
-        "itemImage": productImgName
+        "itemImage": `${API_URL}/${productImgName}`
       }
     })
   });
@@ -170,15 +163,7 @@ async function postProductData() {
 
 function resetAndMove() {
   dataReset();
-  href("/profile.html");
-}
-
-function href(pageName) {
-  const routeTag = document.createElement('a');
-  routeTag.id = "routeTag";
-  routeTag.href = `/pages${pageName}`;
-  document.querySelector(".container").appendChild(routeTag);
-  document.querySelector("#routeTag").click();
+  location.href ="./profile.html";
 }
 
 // 상품 정보 전송 후 데이터 리셋
