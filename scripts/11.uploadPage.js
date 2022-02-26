@@ -233,36 +233,32 @@ function clickUploadBtn() {
 	const saveBtn = document.querySelector("#save-btn");
 	saveBtn.addEventListener("click", () => {
 		if (!saveBtn.classList.contains("disabled") && submitState) {
-			postUpload();
+			handlePost();
 		}
 	});
 }
 
 // 업로드 버튼 기능
-async function postUpload() {
-	uploadBtn.addEventListener("click", async () => {
-		if (submitState) {	
-			// 기존 게시물 수정이면
-			if (POST_ID) {
-				apiEditPost()
-					.then((data) => {
-						if (data) {
-							resetAndMove();
-						}
-					})
-					.catch((err) => console.log(err));
-			} else {
-				// 새 게시물 업로드이면
-				apiUploadPost()
-					.then((data) => {
-						if (data) {
-							resetAndMove();
-						}
-					})
-					.catch((err) => console.log(err));
-			}
-		}
-	});
+async function handlePost() {
+	// 기존 게시물 수정이면
+	if (POST_ID) {
+		apiEditPost()
+			.then((data) => {
+				if (data) {
+					resetAndMove();
+				}
+			})
+			.catch((err) => console.log(err));
+	} else {
+		// 새 게시물 업로드이면
+		apiUploadPost()
+			.then((data) => {
+				if (data) {
+					resetAndMove();
+				}
+			})
+			.catch((err) => console.log(err));
+	}
 }
 
 function resetAndMove() {
