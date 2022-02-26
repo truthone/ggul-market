@@ -188,21 +188,41 @@ async function apiGetFilename(file) {
 }
 
 // 게시물 수정 api
-async function apiEditPost(headers, body) {
+async function apiEditPost() {
+	const textareaElement = document.querySelector(".textarea-input");
+	const filenames = currentImgStorage.join(',');
 	const response = await fetch(`${API_URL}/post/${POST_ID}`, {
 		method: "PUT",
-		headers,
-		body,
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: "Bearer " + TOKEN,
+		},
+		body: JSON.stringify({
+			post: {
+				content: textareaElement.value,
+				image: filenames
+			},
+		})	
 	});
 	const data = await response.json();
 	return data;
 }
 // 새 게시물 업로드 api
-async function apiUploadPost(headers, body) {
+async function apiUploadPost() {
+	const textareaElement = document.querySelector(".textarea-input");
+	const filenames = currentImgStorage.join(',');
 	const response = await fetch(`${API_URL}/post`, {
 		method: "POST",
-		headers,
-		body,
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: "Bearer " + TOKEN,
+		},
+		body: JSON.stringify({
+			post: {
+				content: textareaElement.value,
+				image: filenames
+			}
+		})	
 	});
 	const data = await response.json();
 	return data;
@@ -212,7 +232,7 @@ async function apiUploadPost(headers, body) {
 function clickUploadBtn() {
 	const saveBtn = document.querySelector("#save-btn");
 	saveBtn.addEventListener("click", () => {
-		if (!saveBtn.classList.contains("disabled")) {
+		if (!saveBtn.classList.contains("disabled") && submitState) {
 			postUpload();
 		}
 	});
@@ -220,31 +240,11 @@ function clickUploadBtn() {
 
 // 업로드 버튼 기능
 async function postUpload() {
-	const textareaElement = document.querySelector(".textarea-input");
-
-	uploadBtn.addEventListener("click", async (event) => {
-		if (submitState) {
-			let headers;
-			let body;
-			//storage에서 이미지 한 문자열로 만들기 
-			const filenames = currentImgStorage.join(',');
-			console.log(filenames)
-			
-			//헤더, 바디 설정
-			headers = {
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + TOKEN,
-			};
-
-			body = JSON.stringify({
-				post: {
-					content: textareaElement.value,
-					image: filenames
-				},
-			});		
+	uploadBtn.addEventListener("click", async () => {
+		if (submitState) {	
 			// 기존 게시물 수정이면
 			if (POST_ID) {
-				apiEditPost(headers, body)
+				apiEditPost()
 					.then((data) => {
 						if (data) {
 							resetAndMove();
@@ -253,7 +253,7 @@ async function postUpload() {
 					.catch((err) => console.log(err));
 			} else {
 				// 새 게시물 업로드이면
-				apiUploadPost(headers, body)
+				apiUploadPost()
 					.then((data) => {
 						if (data) {
 							resetAndMove();
