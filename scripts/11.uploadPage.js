@@ -1,4 +1,4 @@
-import { API_URL, ACCOUNT_NAME, TOKEN, POST_ID } from "./constants.js";
+import { API_URL, ACCOUNT_NAME, TOKEN, POST_ID, ORIGIN } from "./constants.js";
 
 let oldImgStorage = []; // 기존 이미지 src 저장소
 let currentImgStorage = []; // 현재 총 이미지 스토리지
@@ -294,7 +294,7 @@ function removeAllChildNodes(parent) {
 function href(pageName) {
 	const routeTag = document.createElement("a");
 	routeTag.id = "routeTag";
-	routeTag.href = `/pages${pageName}`;
+	routeTag.href = `${ORIGIN}/pages${pageName}`;
 	document.querySelector(".container").appendChild(routeTag);
 	document.querySelector("#routeTag").click();
 }
