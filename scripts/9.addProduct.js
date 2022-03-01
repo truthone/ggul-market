@@ -1,14 +1,14 @@
 import { API_URL, TOKEN, PRODUCT_ID, ORIGIN } from "./constants.js";
 
 window.addEventListener("DOMContentLoaded", () => {
-  checkNewOrEdit(PRODUCT_ID);
+  isEditPost(PRODUCT_ID);
   postProductImg();
   inputEvent();
   clickUploadBtn();
 });
 
-// 상품수정인지 새상품업로드인지 판단
-function checkNewOrEdit(productId) {
+// 상품수정이면  상품정보 불러오기
+function isEditPost(productId) {
   if(productId) {
     setProductData(productId);
   }
