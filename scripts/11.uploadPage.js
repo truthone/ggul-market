@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	const textarea = document.querySelector(".textarea-input");
 	textarea.addEventListener("input", textareaResize, false);
 	uploadBtn = document.querySelector("#save-btn");
-	checkNewOrEdit(POST_ID);
+	isEditPost(POST_ID);
 	addPreviewImg();
 	deleteImg();
 	clickUploadBtn();
@@ -24,11 +24,11 @@ function textareaResize() {
 	checkBtnActive();
 }
 
-// 수정인지 새글인지 판단
-function checkNewOrEdit(postId) {
-	if (postId) {
-		setPostData(postId);
-	}
+// 수정글이면 
+function isEditPost(postId) {
+  if(postId) {
+    setPostData(postId);
+  }
 }
 
 //프로필 사진 가져오기
