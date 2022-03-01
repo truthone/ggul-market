@@ -22,7 +22,6 @@ async function postProductImg() {
   let productImgElement = document.querySelector("#product-img-box img");
 
   imgInput.addEventListener("change", (e) => {
-    
     if (!productImgElement) {
       productImgElement = document.createElement("img");
       productImgBox.append(productImgElement);
@@ -55,16 +54,13 @@ async function apiProductImgName(imgInput) {
       body: formData
     })
   
-  return await response.json();
-    
+  return await response.json(); 
 }
 
 //상품 상세 정보 api 
 async function apiProductData(productId) {
   const response = await fetch(`${API_URL}/product/detail/${productId}`, {
-    headers: {
-      "Authorization": "Bearer " + TOKEN
-    }
+    headers: { "Authorization": "Bearer " + TOKEN }
   });
   return await response.json();
 }
@@ -251,8 +247,6 @@ function checkPriceValue() {
     priceInput.value = priceInput.value.replace(/[^\0-9]/g, '');
     priceInput.value = priceInput.value.replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '');
   });
-
-  // price.toLocaleString();
   // 입력 후 포커스를 잃으면 입력된 가격이 원단위로 표시됩니다.
   priceInput.addEventListener("blur", () => {
     priceInput.value = priceInput.value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -262,7 +256,6 @@ function checkPriceValue() {
 // input value 입력 전부 됐는지 체크 
 function inputValueCheck() {
   const inputs = document.querySelectorAll("form input");
-
   let valueState = true;
   let addState = 0;
 
