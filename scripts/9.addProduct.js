@@ -1,14 +1,14 @@
-import { API_URL, TOKEN, PRODUCT_ID } from "./constants.js";
+import { API_URL, TOKEN, PRODUCT_ID, ORIGIN } from "./constants.js";
 
 window.addEventListener("DOMContentLoaded", () => {
-  checkNewOrEdit(PRODUCT_ID);
+  isEditPost(PRODUCT_ID);
   postProductImg();
   inputEvent();
   clickUploadBtn();
 });
 
-// 상품수정인지 새상품업로드인지 판단
-function checkNewOrEdit(productId) {
+// 상품수정이면  상품정보 불러오기
+function isEditPost(productId) {
   if(productId) {
     setProductData(productId);
   }
@@ -22,7 +22,6 @@ async function postProductImg() {
   let productImgElement = document.querySelector("#product-img-box img");
 
   imgInput.addEventListener("change", (e) => {
-    
     if (!productImgElement) {
       productImgElement = document.createElement("img");
       productImgBox.append(productImgElement);
@@ -37,7 +36,8 @@ async function postProductImg() {
     }
 
     apiProductImgName(imgInput).then((data)=>{
-      productImgName = data["filename"];
+      productImgName = `${API_URL}/${data["filename"]}`;
+      console.log(productImgName)
       imgInput.setAttribute("data-state", 1);
       btnActive();
     })
@@ -54,16 +54,13 @@ async function apiProductImgName(imgInput) {
       body: formData
     })
   
-  return await response.json();
-    
+  return await response.json(); 
 }
 
 //상품 상세 정보 api 
 async function apiProductData(productId) {
   const response = await fetch(`${API_URL}/product/detail/${productId}`, {
-    headers: {
-      "Authorization": "Bearer " + TOKEN
-    }
+    headers: { "Authorization": "Bearer " + TOKEN }
   });
   return await response.json();
 }
@@ -108,7 +105,7 @@ async function apiEditProduct(productName,storeLink,price) {
         "itemName": productName.value,
         "price": price,
         "link": storeLink.value,
-        "itemImage": `${API_URL}/${productImgName}`
+        "itemImage": `${productImgName}`
       }
     })
   });
@@ -128,7 +125,7 @@ async function apiUploadProduct(productName,storeLink,price) {
         "itemName": productName.value,
         "price": price,
         "link": storeLink.value,
-        "itemImage": `${API_URL}/${productImgName}`
+        "itemImage": `${productImgName}`
       }
     })
   });
@@ -165,7 +162,7 @@ async function postProductData() {
 
 function resetAndMove() {
   dataReset();
-  location.href ="./profile.html";
+  location.href = `${ORIGIN}/pages/profile.html`;
 }
 
 // 상품 정보 전송 후 데이터 리셋
@@ -250,8 +247,6 @@ function checkPriceValue() {
     priceInput.value = priceInput.value.replace(/[^\0-9]/g, '');
     priceInput.value = priceInput.value.replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '');
   });
-
-  // price.toLocaleString();
   // 입력 후 포커스를 잃으면 입력된 가격이 원단위로 표시됩니다.
   priceInput.addEventListener("blur", () => {
     priceInput.value = priceInput.value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -261,7 +256,6 @@ function checkPriceValue() {
 // input value 입력 전부 됐는지 체크 
 function inputValueCheck() {
   const inputs = document.querySelectorAll("form input");
-
   let valueState = true;
   let addState = 0;
 

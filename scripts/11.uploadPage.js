@@ -1,9 +1,6 @@
 import { API_URL, ACCOUNT_NAME, TOKEN, POST_ID, ORIGIN } from "./constants.js";
 
-let oldImgStorage = []; // 기존 이미지 src 저장소
 let currentImgStorage = []; // 현재 총 이미지 스토리지
-let newImgNames = ""; // 변환된 이미지이름(들) 저장소
-let oldImgNames = ""; // 받아온 변환된 이미지이름 문자열.
 let submitState = false;
 let uploadBtn;
 
@@ -12,7 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	const textarea = document.querySelector(".textarea-input");
 	textarea.addEventListener("input", textareaResize, false);
 	uploadBtn = document.querySelector("#save-btn");
-	checkNewOrEdit(POST_ID);
+	isEditPost(POST_ID);
 	addPreviewImg();
 	deleteImg();
 	clickUploadBtn();
@@ -25,12 +22,11 @@ function textareaResize() {
 	checkBtnActive();
 }
 
-// 수정인지 새글인지 판단
-function checkNewOrEdit(postId) {
-	if (postId) {
-		console.log(`postid 있음 : ${postId}`);
-		setPostData(postId);
-	}
+// 수정글이면 
+function isEditPost(postId) {
+  if(postId) {
+    setPostData(postId);
+  }
 }
 
 //프로필 사진 가져오기
@@ -65,25 +61,26 @@ async function apiPostData(postId) {
 	return await response.json();
 }
 
-async function setPostData() {
-	const textareaElement = document.querySelector(".textarea-input");
-	const postImgList = document.querySelector(".upload-img-list");
+async function setPostData(postId) {	
+	apiPostData(postId).then((postData) => {
+		const oldImgNames = postData.post.image;
 
-	apiPostData(POST_ID).then((postData) => {
-		textareaElement.value = postData.post.content;
-		oldImgNames = postData.post.image;
-
+		if (postData.post.content) {
+			const textareaElement = document.querySelector(".textarea-input");
+			textareaElement.value = postData.post.content;
+		}
 		// 기존 이미지 가져와서 달아주기.
 		if (oldImgNames) {
-			oldImgStorage = oldImgNames.split(',', 3); // 이미지 최대 3장 까지 : 현재 이미지 10장까지 올리는 사람이 있음
-			for (let image of oldImgStorage) {
-				currentImgStorage.push(image);
+			const oldImgStorage = oldImgNames.split(',', 3); // 이미지 최대 3장 까지 : 현재 이미지 10장까지 올리는 사람이 있음
+			const postImgList = document.querySelector(".upload-img-list");
+			for (let imgName of oldImgStorage) {
+				currentImgStorage.push(imgName);
 				let imgItem = `
               <li class="imgItem">
                 <button type="button" class="btn-close">
                   <img src="../images/x.png" alt="" class="x">
                 </button>
-                <img src="${image}" alt="" />
+                <img src="${imgName}" alt="" />
               </li>`;
 				postImgList.insertAdjacentHTML("beforeend", imgItem);
 			}
@@ -118,7 +115,6 @@ function handleFile(file) {
 	const postImgList = document.querySelector(".upload-img-list");
 	const reader = new FileReader();
 	reader.onload = (e) => {
-		//딥다이브 책에 나와있던거 참고해서 리팩하기.. fragnent 어쩌고
 		let imgItem = `
 			<li class="imgItem" file="${file}">
 				<button type="button" class="btn-close">
@@ -156,13 +152,11 @@ async function handleFilename(file) {
 		if (!changedFilename){
 			addRetryImgBtn();
 		} else {
-			console.log("파일이름 가져오기 성공")
 			currentImgStorage.push(`${API_URL}/${changedFilename}`);
 		} 
 	})
 	.catch((err) => {
 		console.log(err);
-		// addRetryImgBtn();
 	})
 }
 
@@ -184,7 +178,6 @@ async function apiGetFilename(file) {
 	}catch(err){
 		console.log(err)
 	}
-	
 }
 
 // 게시물 수정 api
@@ -246,24 +239,18 @@ async function handlePost() {
 			.then((data) => {
 				if (data) {
 					resetAndMove();
-				}
-			})
+				}})
 			.catch((err) => console.log(err));
 	} else {
 		// 새 게시물 업로드이면
 		apiUploadPost()
 			.then((data) => {
 				if (data) {
-					resetAndMove();
-				}
-			})
+					dataReset();
+					loacation.href = `${ORIGIN}/pages${pageName}`;
+				}})
 			.catch((err) => console.log(err));
 	}
-}
-
-function resetAndMove() {
-	dataReset();
-	href("/profile.html");
 }
 
 function dataReset() {
@@ -291,13 +278,6 @@ function removeAllChildNodes(parent) {
 	}
 }
 
-function href(pageName) {
-	const routeTag = document.createElement("a");
-	routeTag.id = "routeTag";
-	routeTag.href = `${ORIGIN}/pages${pageName}`;
-	document.querySelector(".container").appendChild(routeTag);
-	document.querySelector("#routeTag").click();
-}
 //업로드 유효 검사
 function checkBtnActive() {
 	const textareaElement = document.querySelector(".textarea-input");
