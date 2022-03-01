@@ -37,7 +37,8 @@ async function postProductImg() {
     }
 
     apiProductImgName(imgInput).then((data)=>{
-      productImgName = data["filename"];
+      productImgName = `${API_URL}/${data["filename"]}`;
+      console.log(productImgName)
       imgInput.setAttribute("data-state", 1);
       btnActive();
     })
@@ -108,7 +109,7 @@ async function apiEditProduct(productName,storeLink,price) {
         "itemName": productName.value,
         "price": price,
         "link": storeLink.value,
-        "itemImage": `${API_URL}/${productImgName}`
+        "itemImage": `${productImgName}`
       }
     })
   });
@@ -128,7 +129,7 @@ async function apiUploadProduct(productName,storeLink,price) {
         "itemName": productName.value,
         "price": price,
         "link": storeLink.value,
-        "itemImage": `${API_URL}/${productImgName}`
+        "itemImage": `${productImgName}`
       }
     })
   });
@@ -165,7 +166,7 @@ async function postProductData() {
 
 function resetAndMove() {
   dataReset();
-  location.href ="./profile.html";
+  // location.href ="./profile.html";
 }
 
 // 상품 정보 전송 후 데이터 리셋
