@@ -2,7 +2,6 @@ import { API_URL, ACCOUNT_NAME, TOKEN, POST_ID, ORIGIN } from "./constants.js";
 
 let oldImgStorage = []; // 기존 이미지 src 저장소
 let currentImgStorage = []; // 현재 총 이미지 스토리지
-let newImgNames = ""; // 변환된 이미지이름(들) 저장소
 let oldImgNames = ""; // 받아온 변환된 이미지이름 문자열.
 let submitState = false;
 let uploadBtn;
@@ -28,7 +27,6 @@ function textareaResize() {
 // 수정인지 새글인지 판단
 function checkNewOrEdit(postId) {
 	if (postId) {
-		console.log(`postid 있음 : ${postId}`);
 		setPostData(postId);
 	}
 }
@@ -118,7 +116,6 @@ function handleFile(file) {
 	const postImgList = document.querySelector(".upload-img-list");
 	const reader = new FileReader();
 	reader.onload = (e) => {
-		//딥다이브 책에 나와있던거 참고해서 리팩하기.. fragnent 어쩌고
 		let imgItem = `
 			<li class="imgItem" file="${file}">
 				<button type="button" class="btn-close">
@@ -156,13 +153,11 @@ async function handleFilename(file) {
 		if (!changedFilename){
 			addRetryImgBtn();
 		} else {
-			console.log("파일이름 가져오기 성공")
 			currentImgStorage.push(`${API_URL}/${changedFilename}`);
 		} 
 	})
 	.catch((err) => {
 		console.log(err);
-		// addRetryImgBtn();
 	})
 }
 
@@ -184,7 +179,6 @@ async function apiGetFilename(file) {
 	}catch(err){
 		console.log(err)
 	}
-	
 }
 
 // 게시물 수정 api
@@ -246,8 +240,7 @@ async function handlePost() {
 			.then((data) => {
 				if (data) {
 					resetAndMove();
-				}
-			})
+				}})
 			.catch((err) => console.log(err));
 	} else {
 		// 새 게시물 업로드이면
@@ -255,8 +248,7 @@ async function handlePost() {
 			.then((data) => {
 				if (data) {
 					resetAndMove();
-				}
-			})
+				}})
 			.catch((err) => console.log(err));
 	}
 }
