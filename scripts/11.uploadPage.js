@@ -239,7 +239,8 @@ async function handlePost() {
 		apiEditPost()
 			.then((data) => {
 				if (data) {
-					resetAndMove();
+					dataReset();
+					document.location.href = `${ORIGIN}/pages/profile.html`;
 				}})
 			.catch((err) => console.log(err));
 	} else {
@@ -247,15 +248,11 @@ async function handlePost() {
 		apiUploadPost()
 			.then((data) => {
 				if (data) {
-					resetAndMove();
+					dataReset();
+					document.location.href = `${ORIGIN}/pages/profile.html`;
 				}})
 			.catch((err) => console.log(err));
 	}
-}
-
-function resetAndMove() {
-	dataReset();
-	href("/profile.html");
 }
 
 function dataReset() {
@@ -283,13 +280,6 @@ function removeAllChildNodes(parent) {
 	}
 }
 
-function href(pageName) {
-	const routeTag = document.createElement("a");
-	routeTag.id = "routeTag";
-	routeTag.href = `${ORIGIN}/pages${pageName}`;
-	document.querySelector(".container").appendChild(routeTag);
-	document.querySelector("#routeTag").click();
-}
 //업로드 유효 검사
 function checkBtnActive() {
 	const textareaElement = document.querySelector(".textarea-input");
