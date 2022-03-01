@@ -1,4 +1,4 @@
-import { API_URL, TOKEN, PRODUCT_ID } from "./constants.js";
+import { API_URL, TOKEN, PRODUCT_ID, ORIGIN } from "./constants.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   checkNewOrEdit(PRODUCT_ID);
@@ -166,7 +166,7 @@ async function postProductData() {
 
 function resetAndMove() {
   dataReset();
-  // location.href ="./profile.html";
+  location.href = `${ORIGIN}/pages/profile.html`;
 }
 
 // 상품 정보 전송 후 데이터 리셋
