@@ -1,8 +1,6 @@
 import { API_URL, ACCOUNT_NAME, TOKEN, POST_ID, ORIGIN } from "./constants.js";
 
-let oldImgStorage = []; // 기존 이미지 src 저장소
 let currentImgStorage = []; // 현재 총 이미지 스토리지
-let oldImgNames = ""; // 받아온 변환된 이미지이름 문자열.
 let submitState = false;
 let uploadBtn;
 
@@ -63,25 +61,26 @@ async function apiPostData(postId) {
 	return await response.json();
 }
 
-async function setPostData() {
-	const textareaElement = document.querySelector(".textarea-input");
-	const postImgList = document.querySelector(".upload-img-list");
+async function setPostData(postId) {	
+	apiPostData(postId).then((postData) => {
+		const oldImgNames = postData.post.image;
 
-	apiPostData(POST_ID).then((postData) => {
-		textareaElement.value = postData.post.content;
-		oldImgNames = postData.post.image;
-
+		if (postData.post.content) {
+			const textareaElement = document.querySelector(".textarea-input");
+			textareaElement.value = postData.post.content;
+		}
 		// 기존 이미지 가져와서 달아주기.
 		if (oldImgNames) {
-			oldImgStorage = oldImgNames.split(',', 3); // 이미지 최대 3장 까지 : 현재 이미지 10장까지 올리는 사람이 있음
-			for (let image of oldImgStorage) {
-				currentImgStorage.push(image);
+			const oldImgStorage = oldImgNames.split(',', 3); // 이미지 최대 3장 까지 : 현재 이미지 10장까지 올리는 사람이 있음
+			const postImgList = document.querySelector(".upload-img-list");
+			for (let imgName of oldImgStorage) {
+				currentImgStorage.push(imgName);
 				let imgItem = `
               <li class="imgItem">
                 <button type="button" class="btn-close">
                   <img src="../images/x.png" alt="" class="x">
                 </button>
-                <img src="${image}" alt="" />
+                <img src="${imgName}" alt="" />
               </li>`;
 				postImgList.insertAdjacentHTML("beforeend", imgItem);
 			}
