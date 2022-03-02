@@ -72,21 +72,26 @@ async function setPostData(postId) {
 		// 기존 이미지 가져와서 달아주기.
 		if (oldImgNames) {
 			const oldImgStorage = oldImgNames.split(',', 3); // 이미지 최대 3장 까지 : 현재 이미지 10장까지 올리는 사람이 있음
-			const postImgList = document.querySelector(".upload-img-list");
 			for (let imgName of oldImgStorage) {
 				currentImgStorage.push(imgName);
-				let imgItem = `
-              <li class="imgItem">
-                <button type="button" class="btn-close">
-                  <img src="../images/x.png" alt="" class="x">
-                </button>
-                <img src="${imgName}" alt="" />
-              </li>`;
-				postImgList.insertAdjacentHTML("beforeend", imgItem);
+				addImgItem(imgName);
 			}
 		}
 		checkBtnActive();
 	});
+}
+
+function addImgItem(imgName) {
+	const postImgList = document.querySelector(".upload-img-list");
+	let imgItem = `
+	<li class="imgItem">
+		<button type="button" class="btn-close">
+			<img src="../images/x.png" alt="" class="x">
+		</button>
+		<img src="${imgName}" alt="" />
+	</li>`;
+
+	postImgList.insertAdjacentHTML("beforeend", imgItem);
 }
 
 // 새로 선택한 이미지 미리보기 처리
@@ -112,17 +117,9 @@ function isFullImgList(itemList) {
 }
 
 function handleFile(file) {
-	const postImgList = document.querySelector(".upload-img-list");
 	const reader = new FileReader();
 	reader.onload = (e) => {
-		let imgItem = `
-			<li class="imgItem" file="${file}">
-				<button type="button" class="btn-close">
-					<img src="../images/x.png" alt="" class="x">
-				</button>
-				<img src="${e.target.result}" alt="" / >
-			</li>`;
-		postImgList.insertAdjacentHTML("beforeend", imgItem);
+		addImgItem(e.target.result);
 		checkBtnActive();
 	}
 	reader.readAsDataURL(file);
@@ -267,7 +264,6 @@ function dataReset() {
 		if (item.getAttribute("type") == "file") {
 			const imgList = document.querySelector(".upload-img-list");
 			removeAllChildNodes(imgList);
-			oldImgStorage = [];
 			currentImgStorage = [];
 		}
 	});
