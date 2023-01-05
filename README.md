@@ -1,6 +1,6 @@
 # 감귤마켓 : **멋쟁이사자처럼 프론트엔드 1기** 팀 프로젝트
 
-## 감귤S2 : [장효순](https://github.com/sooonlog), [강지승](https://github.com/jiseung-kang), [한진실](https://github.com/truthone), [주현호](https://github.com/hyjoo1226)
+## 감귤S2 : [장효순](https://github.com/sooonlog), [강지승](https://github.com/jiseung-kang), [한정아](https://github.com/truthone), [주현호](https://github.com/hyjoo1226)
 
 **SNS 클론코딩** : [감귤마켓](http://146.56.183.55:3000/)  
 **결과물** : [감귤S2](https://jiseung-kang.github.io/ggul-market/)
@@ -61,7 +61,7 @@
         </td>
       </tr>
       <tr>
-        <td>한진실</td>
+        <td>한정아</td>
         <td>
           상품,게시글,채팅목록 디자인 구현
         </td>
